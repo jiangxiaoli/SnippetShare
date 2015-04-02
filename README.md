@@ -1,5 +1,4 @@
 # SnippetShare
-SJSU CMPE 275, Spring 2015, Team 6 project
 ==============
 
 > This is a team project for CMPE275 (Spring 2015)
