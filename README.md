@@ -27,7 +27,7 @@ Team Member
 * Xiaoli Jiang <jiangxiaoli1104@gmail.com>
 * Rucha Brahmankar <rucha.b@gmail.com>
 * Yulin Ye <yulinye.yy@gmail.com>
-* Decheng Deng
+* Decheng Deng <dengdechen@gmail.com>
 
 License
 ----
