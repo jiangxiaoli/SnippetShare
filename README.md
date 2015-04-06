@@ -9,7 +9,7 @@
 
 Directory
 -----------
- - Design: Product documentation Link
+ - dbscript: database sql
  - src:	source code
 
 Tech
@@ -17,9 +17,11 @@ Tech
 This work uses a number of open source projects to work properly:
 
 * [Spring] - Spring helps development teams everywhere build simple, portable,  fast and flexible JVM-based systems and applications.
+* [Maven] - Apache Maven is a software project management and comprehension tool.
 * [Hibernate] -  Idiomatic persistence for Java and relational databases.
 * [jUnit] - JUnit is a simple framework to write repeatable tests. It is an instance of the xUnit architecture for unit testing frameworks.
-* [jQuery] - The Write Less, Do More, JavaScript Library. 
+* [Angular] - AngularJS is an open-source web application JavaScript framework for developing single page application (SPA).
+* [jQuery] - Jquery is the Write Less, Do More, JavaScript Library.
 * [bootstrap] - The most popular front-end framework for developing responsive, mobile first projects on the web.
 
 Team Member
@@ -35,7 +37,9 @@ License
 MIT
 
 [Spring]:https://spring.io
+[Maven]:https://maven.apache.org/
 [Hibernate]:http://hibernate.org/orm/
+[Angular]:https://angularjs.org/
 [jQuery]:http://jquery.com
 [bootstrap]:http://getbootstrap.com/
 [jUnit]: http://junit.org/
