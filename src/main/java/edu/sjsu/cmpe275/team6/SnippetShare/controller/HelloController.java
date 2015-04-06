@@ -1,4 +1,4 @@
-package edu.sjsu.cmpe275.team6.SnippetShare;
+package edu.sjsu.cmpe275.team6.SnippetShare.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

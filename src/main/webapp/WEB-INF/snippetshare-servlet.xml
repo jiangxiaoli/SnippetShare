@@ -1,9 +1,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="edu.sjsu.cmpe275.team6.SnippetShare"/>
 
@@ -11,5 +15,14 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--to include js or css file in jsp, mapping routes-->
+    <mvc:resources mapping="/" location="/" />
+
+    <!-- Allows for mapping the DispatcherServlet to "/" by forwarding static resource
+   requests to the container's default Servlet -->
+    <mvc:default-servlet-handler/>
+
+    <mvc:annotation-driven />
 
 </beans>
