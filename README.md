@@ -27,7 +27,7 @@ This work uses a number of open source projects to work properly:
 Team Member
 --------------
 * Xiaoli Jiang <jiangxiaoli1104@gmail.com>
-* Rucha Brahmankar <rucha.b@gmail.com>
+* Rucha katakwar <rucha.b@gmail.com>
 * Yulin Ye <yulinye.yy@gmail.com>
 * Decheng Deng <dengdechen@gmail.com>
 
