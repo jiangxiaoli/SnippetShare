@@ -2,7 +2,7 @@
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
-*.iml
+**/*.iml
 
 ## Directory-based project format:
 .idea/
@@ -47,6 +47,12 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
+<<<<<<< HEAD
 target
 SnippetShare.iml
 *.project
+=======
+
+
+target
+>>>>>>> parent of f499f1c... .gitignore file
