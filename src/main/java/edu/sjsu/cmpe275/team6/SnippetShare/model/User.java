@@ -1,37 +1,49 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+
+
 /**
  * Created by Corn on 4/6/15.
- * 
-userid (primary key, unique, auto increment)
-username (unique)
-pwd
-email (unique)
-profilepic
-
+ * @author Rucha
  */
-
+@Entity
+@Table(name = "user",uniqueConstraints={@UniqueConstraint(columnNames={"username","pwd","email"})})
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userid")
+	private int userid;
 	
-	private String userid;
+	
+	@Column(name ="username",nullable = false)
 	private String username;
+	
+	@Column(name ="pwd",nullable = false)
 	private String pwd;
+	
+	@Column(name ="email",nullable = false)
 	private String email;
 	
-	public User(String userid, String username, String pwd, String email) {
-		super();
-		this.userid = userid;
+	@Column(name ="profilepic")
+	private String profilepic;
+
+	public User(String username, String pwd, String email,String profilepic) {
 		this.username = username;
 		this.pwd = pwd;
 		this.email = email;
+		this.profilepic = profilepic;
 	}
 
-	public String getUserid() {
+	public int getUserid() {
 		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -58,8 +70,12 @@ public class User {
 		this.email = email;
 	}
 	
-	
-	
-	
-	
+	public String getProfilepic() {
+		return profilepic;
+	}
+
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
+
 }
