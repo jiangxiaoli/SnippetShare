@@ -47,12 +47,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
-<<<<<<< HEAD
 target
 SnippetShare.iml
 *.project
-=======
-
-
-target
->>>>>>> parent of f499f1c... .gitignore file
