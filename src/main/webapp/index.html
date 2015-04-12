@@ -2,12 +2,52 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="css/style.css"/>
-</head>
-<body>
-<h2>Home page test</h2>
+    <title>SnippetShare</title>
 
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="vendor/bootstrap/flatty.bootstrap.min.css">
+
+    <!--custom styling-->
+    <link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ng-app="snippetShare">
+
+    <div ng-include='"templates/header.html"'></div>
+    <div ng-view></div>
+    <div ng-include='"templates/footer.html"'></div>
+
+
+    <!--load js libs-->
+    <!--jquery-->
+    <script src="vendor/jquery-1.11.2.min.js"></script>
+
+    <!--bootstrap-->
+    <script src="vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!--angularjs-->
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+
+    <!--app-->
+    <script src="javascript/app.js"></script>
+    <script src="javascript/route.js"></script>
+
+    <!--controllers-->
+    <!--users controllers-->
+    <script src="javascript/controllers/users/users-index-controller.js"></script>
+    <script src="javascript/controllers/users/users-show-controller.js"></script>
+    <script src="javascript/controllers/users/users-create-controller.js"></script>
+    <!--boards controllers-->
+    <script src="javascript/controllers/boards/boards-index-controller.js"></script>
+    <script src="javascript/controllers/boards/boards-show-controller.js"></script>
+
+
+    <!--services-->
+    <script src=""></script>
+
+    <!--directives-->
+    <script src=""></script>
 
 
 </body>

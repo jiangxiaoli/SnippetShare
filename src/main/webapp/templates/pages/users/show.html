@@ -1,0 +1,33 @@
+
+<h4>user detail</h4>
+
+<div class="jumbotron">
+    <div>
+        <h2>{{showCtrl.user.id}}</h2>
+        <p>{{showCtrl.user.firstname}}</p>
+        <p>{{showCtrl.user.lastname}}</p>
+        <p>{{showCtrl.user.email}}</p>
+        <p>{{showCtrl.user.description}}</p>
+
+        <h4>Address</h4>
+        <p>{{showCtrl.user.address.street}}</p>
+        <p>{{showCtrl.user.address.city}}</p>
+        <p>{{showCtrl.user.address.state}}</p>
+        <p>{{showCtrl.user.address.zip}}</p>
+
+        <!--<h4>Sponsor</h4>-->
+        <!--<a ng-href="#/sponsors/{{showCtrl.user.sponsor.sponsor_id}}">-->
+            <!--<p>{{showCtrl.user.sponsor.name}}</p>-->
+        <!--</a>-->
+
+        <!--&lt;!&ndash;how to deal with nested object&ndash;&gt;-->
+        <!--<h4>Opponents</h4>-->
+        <!--<div>-->
+            <!--<a ng-repeat="opponent in showCtrl.user.opponents" ng-href="#/users/{{opponent.user_id}}">-->
+                <!--<p>{{opponent.user_id}}</p>-->
+                <!--<p>{{opponent.firstname}}</p>-->
+                <!--<p>{{opponent.lastname}}</p>-->
+            <!--</a>-->
+        <!--</div>-->
+    </div>
+</div>
