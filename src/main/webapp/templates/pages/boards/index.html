@@ -1,0 +1,11 @@
+<h4>Boards index</h4>
+
+<div class="jumbotron">
+    <h4>Boards list</h4>
+    <a ng-repeat="board in indexCtrl.boards" ng-href="#/boards/{{board.id}}">
+        <div class="well">
+            <h3>{{board.id}}</h3>
+            <h4>{{board.name}}</h4>
+        </div>
+    </a>
+</div>
