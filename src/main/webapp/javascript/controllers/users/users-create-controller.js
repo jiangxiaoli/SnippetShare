@@ -1,21 +1,26 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("UsersCreateController", function ($http) {
-        var controller = this;
-        this.saveUser = function (user) {
+    .controller("UsersCreateController", function ($scope, User, $location) {
+        $scope.isSubmitting = false;
 
-            //handel errors
-            controller.errors = null;
-            //$http({ method:"POST", url: "/players", data: user })
-            //    .success(function (data) {
-            //        console.log("in success");
-            //        console.log(data);
-            //    })
-            //    .catch(function (user) {
-            //        console.log("in error");
-            //        console.log(user);
-            //        controller.errors.user.error;
-            //    });
+        $scope.saveUser = function (user) {
+            $scope.isSubmitting = true;
+
+            User.create(user)
+                .success(function(data, status, headers, config) {
+                    console.log("in create success");
+                    console.log(data);
+                    console.log(status);
+                    $location.path("/users");
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("in error");
+                    console.log(data);
+                    console.log(status);
+                }).finally(function () {
+                    $scope.isSubmitting = false;
+                });
+
         }
     });
