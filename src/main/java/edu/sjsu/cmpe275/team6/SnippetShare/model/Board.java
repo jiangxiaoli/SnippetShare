@@ -1,5 +1,8 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,21 +34,46 @@ public class Board {
 	@Column(name = "category")
 	private String category;
 	
-	@Column(name = "public")
-	private boolean publicAccess;
+	@Column(name = "isPublic")
+	private boolean isPublic;
 	
 	//One user can have many boards
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner")
 	private User owner;
 	
-	public Board(int bid, String title, String category, boolean publicAccess) {
+	@Column(name = "createdAt")
+	private Timestamp createdAt;
+	
+	@Column(name = "updatedAt")
+	private Timestamp updatedAt;
+	
+	
+	@ManyToMany
+	@JoinTable(
+			name="access",
+			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
+			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
+	private List<User> members;
+	
+	@ManyToMany
+	@JoinTable(
+			name="request",
+			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
+			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
+	private List<User> requestors;
+	
+	public Board(String title, String category, boolean isPublic,
+			Timestamp createdAt, Timestamp updatedAt) {
 		
 		this.title = title;
 		this.category = category;
-		this.publicAccess = publicAccess;
-		
+		this.isPublic = isPublic;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
+
+
 
 	public int getBid() {
 		return bid;
@@ -66,12 +96,12 @@ public class Board {
 		this.category = category;
 	}
 
-	public boolean isPublicAccess() {
-		return publicAccess;
+	public boolean getIsPublic() {
+		return isPublic;
 	}
 
-	public void setPublicAccess(boolean publicAccess) {
-		this.publicAccess = publicAccess;
+	public void setIsPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 
 	public User getOwner(){
@@ -81,6 +111,40 @@ public class Board {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public List<User> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<User> members) {
+		this.members = members;
+	}
+
+	public List<User> getRequestors() {
+		return requestors;
+	}
+
+	public void setRequestors(List<User> requestors) {
+		this.requestors = requestors;
+	}
+	
+	
 	
 	
 	
