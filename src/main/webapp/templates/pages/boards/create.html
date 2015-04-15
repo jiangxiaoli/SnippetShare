@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="">
+
+        <h3>Create a new Board</h3>
+        <div class="">
+            <form>
+                <fieldset class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" type="text" name="title" ng-model="board.title" required/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Category</label>
+                    <input class="form-control" type="text" name="lastname" ng-model="board.lastname" required/>
+                </fieldset>
+
+
+                <fieldset class="form-group">
+                    <label>Sponsor</label>
+                    <select ng-model="board.category">
+                        <options>Cat1</options>
+                        <options>Cat2</options>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Is Public?</label>
+                    <input class="form-control" type="checkbox" name="isPublic" ng-model="board.isPublic" required/>
+                </fieldset>
+
+                <input type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}" class="btn btn-default" ng-click="saveBoard(board)" ng-disabled="isSubmitting">
+            </form>
+        </div>
+    </div>
+
+</div>
