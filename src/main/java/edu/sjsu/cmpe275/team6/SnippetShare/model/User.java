@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 =======
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
