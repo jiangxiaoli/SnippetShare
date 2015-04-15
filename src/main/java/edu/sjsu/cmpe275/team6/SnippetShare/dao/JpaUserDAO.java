@@ -29,7 +29,7 @@ public class JpaUserDAO implements UserDAO {
             return true;
         } catch (RuntimeException e) {
             tx.rollback();
-            return false;
+            throw e;
         } finally {
             manager.close();
         }

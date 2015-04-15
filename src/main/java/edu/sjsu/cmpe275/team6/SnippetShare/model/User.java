@@ -15,21 +15,21 @@ import javax.persistence.UniqueConstraint;
  * @author Rucha
  */
 @Entity
-@Table(name = "user",uniqueConstraints={@UniqueConstraint(columnNames={"username","pwd","email"})})
+@Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "userid")
 	private int userid;
 	
 	
-	@Column(name ="username",nullable = false)
+	@Column(name ="username",nullable = false,unique = true)
 	private String username;
 	
 	@Column(name ="pwd",nullable = false)
 	private String pwd;
 	
-	@Column(name ="email",nullable = false)
+	@Column(name ="email",nullable = false,unique = true)
 	private String email;
 	
 	@Column(name ="profilepic")
