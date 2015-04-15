@@ -19,7 +19,7 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <!--<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>-->
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
             </props>

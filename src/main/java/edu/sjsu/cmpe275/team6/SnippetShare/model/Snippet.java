@@ -1,7 +1,9 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 
-import java.util.Date;
+
+
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,24 +38,28 @@ public class Snippet {
 	private String language;
 	
 	//can we have created time and updated time??
-	@Column(name = "time")
-	private Date createdAt;
+	@Column(name = "createdAt")
+	private Timestamp createdAt;
+	
+	@Column(name = "updatedAt")
+	private Timestamp updatedAt;
 	
 	//One user can have many snippets
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner")
-    private User owner;
+    @JoinColumn(name = "author")
+    private User author;
 		
    //One board can have many snippets
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "bid")
     private Board board;
 	
-	public Snippet(String title, String content, String url) {
-	
+	public Snippet(String title, String content, String url,Timestamp createdAt,Timestamp updatedAt) {
 		this.title = title;
 		this.content = content;
 		this.url = url;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public int getSid() {
@@ -92,21 +98,29 @@ public class Snippet {
 		this.language = language;
 	}
 
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
 	
-	public User getOwner() {
-		return owner;
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	public Board getBoard() {

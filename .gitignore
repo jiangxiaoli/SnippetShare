@@ -49,4 +49,6 @@ crashlytics-build.properties
 
 target
 SnippetShare.iml
-*.project
+.project
+
+bin/
