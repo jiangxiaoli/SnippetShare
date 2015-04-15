@@ -1,15 +1,14 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("UsersIndexController", function ($http) {
-        var controller = this;
+    .controller("UsersIndexController", function ($scope, User) {
 
         //request GET all players from server
-        //$http({method: "GET", url:"/users"})
-        //    .success(function (data) {
-        //        console.log("get users success");
-        //        console.log(data);
-        //        controller.users = data;
-        //    });
+        User.all()
+            .success(function (data) {
+                console.log("get all users success");
+                console.log(data);
+                $scope.players = data;
+            });
 
     });
