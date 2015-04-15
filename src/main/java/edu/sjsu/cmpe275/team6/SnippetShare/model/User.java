@@ -12,7 +12,11 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 	@Id
+<<<<<<< HEAD
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+=======
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+>>>>>>> e30e70bed109b29db19ef04ee28a798638a553d8
     @Column(name = "userid")
 	private int userid;
 	
