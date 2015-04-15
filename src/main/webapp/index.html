@@ -5,7 +5,7 @@
     <title>SnippetShare</title>
 
     <!--bootstrap css-->
-    <link rel="stylesheet" href="vendor/bootstrap/flatty.bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.css">
 
     <!--custom styling-->
     <link rel="stylesheet" href="css/style.css"/>
@@ -13,20 +13,25 @@
 </head>
 <body ng-app="snippetShare">
 
+
     <div ng-include='"templates/header.html"'></div>
     <div ng-view></div>
     <div ng-include='"templates/footer.html"'></div>
-    
+
+
+
+
     <!--load js libs-->
     <!--jquery-->
     <script src="vendor/jquery-1.11.2.min.js"></script>
 
-    <!--bootstrap-->
-    <script src="vendor/bootstrap/bootstrap.min.js"></script>
-
     <!--angularjs-->
     <script src="vendor/angular.js"></script>
     <script src="vendor/angular-route.js"></script>
+
+    <!--ui-bootstrap-->
+    <!--<script src="vendor/bootstrap/bootstrap.min.js"></script>-->
+    <script src="vendor/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
 
     <!--app-->
     <script src="javascript/app.js"></script>
