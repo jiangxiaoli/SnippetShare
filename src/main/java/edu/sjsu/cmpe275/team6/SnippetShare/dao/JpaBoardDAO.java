@@ -60,12 +60,12 @@ public class JpaBoardDAO implements BoardDAO{
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            board.setTitle(board1.getTitle());
-            board.setCategory(board1.getCategory());
-            board.setIsPublic(board1.getIsPublic());
-            board.setMembers(board1.getMembers());
-            board.setRequestors(board1.getRequestors());
-            board.setUpdatedAt(new Timestamp(System.currentTimeMillis())); //set the updated date to current time and date
+            board1.setTitle(board.getTitle());
+            board1.setCategory(board.getCategory());
+            board1.setIsPublic(board.getIsPublic());
+            board1.setMembers(board.getMembers());
+            board1.setRequestors(board.getRequestors());
+            board1.setUpdatedAt(new Timestamp(System.currentTimeMillis())); //set the updated date to current time and date
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
