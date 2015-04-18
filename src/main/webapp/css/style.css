@@ -1,7 +1,7 @@
 
 
 
-/*********** to working with navbar fixed top ***********/
+/*********** to working with navbar fixed top & footer***********/
 
 /*stick footer*/
 html {
@@ -11,18 +11,24 @@ html {
 body {
     padding-top: 60px;
     /* Margin bottom by footer height */
-    margin-bottom: 170px;
+    margin-bottom: 220px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 170px;
+    height: 200px;
     background-color: #464545;
-    margin-top: 10px;
 }
 
+.container {
+    margin-top: 40px;
+}
+
+.footer-container {
+    margin-top: 10px;
+}
 
 /*********** navbar styling ***********/
 .list-unstyled li{
@@ -110,4 +116,10 @@ body {
 
 blockquote {
     text-align: left;
+}
+
+/*********** Sign up styling ***********/
+.sign-form {
+    margin-left: 40px;
+    margin-right: 40px;
 }
