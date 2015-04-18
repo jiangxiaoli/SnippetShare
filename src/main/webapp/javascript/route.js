@@ -5,32 +5,35 @@ angular.module("snippetShare")
     .config(function ($routeProvider) {
         $routeProvider
             .when("/",{
-                templateUrl: "templates/pages/users/index.html"
+                templateUrl: "templates/pages/landing.html"
+            })
+            .when("/login",{
+                templateUrl: "templates/pages/users/login.html"
+                //controller: "UsersLoginController"
+            })
+            .when("/signup",{
+                templateUrl: "templates/pages/users/signup.html",
+                controller: "UsersCreateController"
             })
             .when("/users",{
                 templateUrl: "templates/pages/users/index.html",
-                controller: "UsersIndexController",
-                controllerAs: "indexCtrl"
+                controller: "UsersIndexController"
             })
             .when("/users/:id",{
                 templateUrl: "templates/pages/users/show.html",
-                controller: "UsersShowController",
-                controllerAs: "showCtrl"
+                controller: "UsersShowController"
             })
-            .when("/users/new",{
-                templateUrl: "templates/pages/users/create.html",
-                controller: "UsersCreateController",
-                controllerAs: "createCtrl"
-            })
+            //.when("/users/new",{
+            //    templateUrl: "templates/pages/users/create.html",
+            //    controller: "UsersCreateController"
+            //})
             .when("/boards",{
                 templateUrl: "templates/pages/boards/index.html",
-                controller: "BoardsIndexController",
-                controllerAs: "indexCtrl"
+                controller: "BoardsIndexController"
             })
             .when("/boards/:id",{
                 templateUrl: "templates/pages/boards/show.html",
-                controller: "BoardsShowController",
-                controllerAs: "showCtrl"
+                controller: "BoardsShowController"
             })
             .otherwise({ redirectTo:'/'});
 
