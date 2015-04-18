@@ -1,7 +1,30 @@
+
+
+
+/*********** to working with navbar fixed top ***********/
+
+/*stick footer*/
+html {
+    position: relative;
+    min-height: 100%;
+}
 body {
-    /*background-color: lightgrey;*/
+    padding-top: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 170px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 170px;
+    background-color: #464545;
+    margin-top: 10px;
 }
 
+
+/*********** navbar styling ***********/
 .list-unstyled li{
     padding-left: 0;
     list-style: none;
@@ -9,17 +32,82 @@ body {
     margin-right: 20px;
 }
 
-/*.navbar {*/
-    /*font-size: 15px;*/
-/*}*/
-
-/*.navbar-brand {*/
-    /*font-size: 20px;*/
-/*}*/
+.navbar,
+.navbar-brand {
+    font-weight: bold;
+}
 
 .board-list {
     float: left;
     width: 180px;
     height: 150px;
     margin: 20px;
+}
+
+/*********** Landing Page ***********/
+.header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #464545;
+    margin-top: -20px;
+}
+
+.text-vertical-center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.text-vertical-center h2 {
+    /*color: #FFFFFF;*/
+    margin: 10px;
+    padding: 0;
+    /*font-size: 4.5em;*/
+    font-weight: 700;
+}
+
+.text-vertical-center h3 {
+    /*font-weight: bold;*/
+}
+
+/*How it works panner*/
+.bg-blue {
+    background-color: #375a7f;
+    margin: 0;
+    width: 100%;
+}
+
+.content {
+    /*width: 90%;*/
+    margin: 40px;
+    text-align: center;
+}
+
+.upperhead {
+    margin-bottom: 3%;
+    border-bottom: 1px solid #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+    display: inline-block;
+    padding-bottom: 5px;
+    font-weight: 600;
+    margin-top: 3%;
+}
+.panelTitle,
+.panelIcon {
+    margin: 30px;
+}
+
+.panelTitle {
+    color: #1abc9c;
+}
+
+.step h5 {
+    margin: 10px;
+}
+
+blockquote {
+    text-align: left;
 }
