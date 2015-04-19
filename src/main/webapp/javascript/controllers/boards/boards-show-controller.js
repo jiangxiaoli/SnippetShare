@@ -11,6 +11,11 @@ angular.module("snippetShare")
             updatedAt: "",
             description:"board for sharing",
             numOfSnippets: 3,
+            owner:{
+                userid: 1,
+                username: "Xiaoli",
+                userAvatarId: 10
+            },
             members:[
                 {
                     userid: 3,
