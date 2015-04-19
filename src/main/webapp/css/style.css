@@ -1,5 +1,15 @@
+/************ Theme color scheme  ***************/
+/*default: #303030 */
+/*primary: #375A75 */
+/*success: #00BC8C*/
+/*info: #3498DB */
+/*warning: #F39C12 */
+/*danger: #E74C3C */
 
 
+
+/*ui.bootstrap justification*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /*********** to working with navbar fixed top & footer***********/
 
@@ -45,11 +55,18 @@ body {
 
 .board-list {
     float: left;
-    width: 180px;
-    height: 150px;
-    margin: 20px;
+    width: 250px;
+    min-height: 170px;
+    margin: 10px;
+    background-color: #464545;
+    position: relative;
 }
-
+.align-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 /*********** Landing Page ***********/
 .header {
     display: table;
@@ -122,4 +139,30 @@ blockquote {
 .sign-form {
     margin-left: 40px;
     margin-right: 40px;
+}
+
+/************** Badge styling **************/
+
+.badge-default {
+    background-color: #303030;
+}
+
+.badge-primary {
+    background-color: #375A75;
+}
+
+.badge-danger {
+    background-color: #E74C3C;
+}
+
+.badge-warning {
+    background-color: #F39C12;
+}
+
+.badge-success {
+    background-color: #00BC8C;
+}
+
+.badge-info {
+    background-color: #269abc;
 }

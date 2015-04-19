@@ -3,6 +3,9 @@
 angular.module("snippetShare")
     .controller("UsersShowController", function ($routeParams, User, $scope) {
 
+        //define categories
+        $scope.categories = ['cat1', 'cat2', 'cat3', 'cat4'];
+
         //test data for user with :id
         $scope.user = {
             userid: 1,
@@ -10,13 +13,13 @@ angular.module("snippetShare")
             email: "xiaoli@gmail.com",
             pwd:"1234",
             profilepic: "software engineering student",
-            userAvatarId: 1,
+            userAvatarId: 10,
             boards: [
                 {
                     bid: 1,
                     title: "board 1",
                     category: "cat1",
-                    isPublic: true,
+                    isPublic: false,
                     createdAt: "",
                     updatedAt: "",
                     description:"board for coding",
@@ -48,26 +51,20 @@ angular.module("snippetShare")
                     isPublic: true,
                     createdAt: "",
                     updatedAt: "",
-                    description:"board for sharing",
+                    description:"board for sharing, board for sharing, board for sharing, board for sharing",
                     numOfSnippets: 3,
-                    members:[
-                        {
-                            userid: 3,
-                            username: "Tom",
-                            userAvatarId: 4
-                        }
-                    ],
-                    requestors:[
-                        {
-                            userid: 4,
-                            username: "Jerry",
-                            userAvatarId: 5
-                        }
-                    ]
+                    members:[],
+                    requestors:[]
                 }
             ]
         };
 
+        $scope.showDesc = false;
+        //hover show board description
+        $scope.hover = function(board) {
+            // Shows/hides the delete button on hover
+            return board.showDesc = ! board.showDesc;
+        };
 
         //request GET all users from server
         //User.find($routeParams.id)
