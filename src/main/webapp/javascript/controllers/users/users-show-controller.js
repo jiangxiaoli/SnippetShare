@@ -51,7 +51,50 @@ angular.module("snippetShare")
                     isPublic: true,
                     createdAt: "",
                     updatedAt: "",
-                    description:"board for sharing, board for sharing, board for sharing, board for sharing",
+                    description:"board for sharing, board for sharing, board for sharing, " +
+                    "board for sharing, this is a good baord, really groood, very nice nice",
+                    numOfSnippets: 3,
+                    members:[],
+                    requestors:[]
+                },
+                {
+                    bid: 3,
+                    title: "board 3",
+                    category: "cat1",
+                    isPublic: false,
+                    createdAt: "",
+                    updatedAt: "",
+                    description:"board for coding",
+                    numOfSnippets: 5,
+                    members:[
+                        {
+                            userid: 2,
+                            username: "Alice",
+                            userAvatarId: 3
+                        },
+                        {
+                            userid: 3,
+                            username: "Tom",
+                            userAvatarId: 4
+                        }
+                    ],
+                    requestors:[
+                        {
+                            userid: 4,
+                            username: "Jerry",
+                            userAvatarId: 5
+                        }
+                    ]
+                },
+                {
+                    bid: 4,
+                    title: "board 4",
+                    category: "cat2",
+                    isPublic: true,
+                    createdAt: "",
+                    updatedAt: "",
+                    description:"board for sharing, board for sharing, board for sharing, " +
+                    "board for sharing, this is a good baord, really groood, very nice nice",
                     numOfSnippets: 3,
                     members:[],
                     requestors:[]

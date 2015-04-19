@@ -46,7 +46,7 @@
 
                         <!--hover to show description-->
                         <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
-                        <h5 class="board-desc">{{board.description}}</h5>
+                        <h5 class="board-desc">{{board.description | limit55char}}</h5>
 
                         <div class="align-bottom">
                             <div class="col-xs-6">

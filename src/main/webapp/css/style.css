@@ -49,6 +49,11 @@ body {
     text-align: right;
 }
 
+.contenct-inline {
+    display: inline;
+}
+
+
 /*********** navbar styling ***********/
 .list-unstyled li{
     padding-left: 0;
@@ -65,7 +70,7 @@ body {
 .board-list {
     float: left;
     width: 250px;
-    min-height: 170px;
+    min-height: 150px;
     margin: 10px;
     background-color: #464545;
     position: relative;
