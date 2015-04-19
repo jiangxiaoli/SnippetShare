@@ -6,7 +6,7 @@ angular.module("snippetShare")
             bid: 2,
             title: "board 2",
             category: "cat2",
-            isPublic: true,
+            isPublic: false,
             createdAt: "",
             updatedAt: "",
             description:"board for sharing",
@@ -35,14 +35,14 @@ angular.module("snippetShare")
                     sid: 1,
                     title: "snippet 1",
                     content: "<html></html>",
-                    url:"",
+                    url:"http://xxx.com/s1.html",
                     language:"html",
                     author: {
                         userid: 3,
                         username: "Tom",
                         userAvatarId: 5
                     },
-                    createdAt: "",
+                    createdAt: 1400956671914,
                     updatedAt: "",
                     numOfComments: 2
                 },
@@ -57,7 +57,7 @@ angular.module("snippetShare")
                         username: "Tom",
                         userAvatarId: 5
                     },
-                    createdAt: "",
+                    createdAt: 1400956671914,
                     updatedAt: "",
                     numOfComments: 1
                 },
@@ -72,12 +72,79 @@ angular.module("snippetShare")
                         username: "Jerry",
                         userAvatarId: 6
                     },
-                    createdAt: "",
+                    createdAt: 1400956671914,
                     updatedAt: "",
                     numOfComments: 0
                 }
             ]
         };
+
+
+        //$scope.board = {
+        //    bid: 2,
+        //    title: "board 2",
+        //    category: "cat2",
+        //    isPublic: true,
+        //    createdAt: "",
+        //    updatedAt: "",
+        //    description:"board for sharing",
+        //    numOfSnippets: 3,
+        //    owner:{
+        //        userid: 1,
+        //        username: "Xiaoli",
+        //        userAvatarId: 10
+        //    },
+        //    members:[],
+        //    requestors:[],
+        //    snippets:[
+        //        {
+        //            sid: 1,
+        //            title: "snippet 1",
+        //            content: "<html></html>",
+        //            url:"",
+        //            language:"html",
+        //            author: {
+        //                userid: 3,
+        //                username: "Tom",
+        //                userAvatarId: 5
+        //            },
+        //            createdAt: "",
+        //            updatedAt: "",
+        //            numOfComments: 2
+        //        },
+        //        {
+        //            sid: 2,
+        //            title: "snippet 3",
+        //            content: "var s=1;",
+        //            url:"",
+        //            language:"javascript",
+        //            author: {
+        //                userid: 3,
+        //                username: "Tom",
+        //                userAvatarId: 5
+        //            },
+        //            createdAt: "",
+        //            updatedAt: "",
+        //            numOfComments: 1
+        //        },
+        //        {
+        //            sid: 3,
+        //            title: "snippet 3",
+        //            content: "<html></html>",
+        //            url:"",
+        //            language:"html",
+        //            author: {
+        //                userid: 4,
+        //                username: "Jerry",
+        //                userAvatarId: 6
+        //            },
+        //            createdAt: "",
+        //            updatedAt: "",
+        //            numOfComments: 0
+        //        }
+        //    ]
+        //};
+
 
 
         //request GET a board from server
