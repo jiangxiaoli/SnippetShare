@@ -7,9 +7,18 @@
             </div>
 
             <div class="col-xs-10">
-                <h5>Name: {{user.username}} </h5>
-                <h5>Email: {{user.email}}</h5>
-                <h5>Description: {{user.profilepic}}</h5>
+                <div class="row">
+                    <label class="col-sm-2 align-right text-success text-bold">Name:</label>
+                    <p class="col-md-10"> {{user.username}} </p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 align-right text-success text-bold">Email:</label>
+                    <p class="col-md-10"> {{user.email}} </p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 align-right text-success text-bold">Description:</label>
+                    <p class="col-md-10"> {{user.profilepic}} </p>
+                </div>
             </div>
         </div>
 
