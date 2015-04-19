@@ -18,9 +18,6 @@
     <div ng-view></div>
     <div ng-include='"templates/footer.html"'></div>
 
-
-
-
     <!--load js libs-->
     <!--jquery-->
     <script src="vendor/jquery-1.11.2.min.js"></script>
@@ -28,6 +25,13 @@
     <!--angularjs-->
     <script src="vendor/angular.js"></script>
     <script src="vendor/angular-route.js"></script>
+
+    <!--angularjs plugins-->
+    <!--<script src="vendor/ace/ace.js"></script>-->
+    <!--<script src="vendor/ace/ui-ace.js"></script>-->
+    <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
+
 
     <!--ui-bootstrap-->
     <!--<script src="vendor/bootstrap/bootstrap.min.js"></script>-->
@@ -52,9 +56,13 @@
     <!--snippet controller-->
     <script src="javascript/controllers/snippets/snippets-show-controller.js"></script>
 
+    <!--ace controller-->
+    <script src="javascript/controllers/AceCtrl.js"></script>
+
     <!--services-->
     <script src="javascript/services/user.js"></script>
     <script src="javascript/services/board.js"></script>
+    <script src="javascript/services/snippet.js"></script>
 
     <!--directives-->
     <script src=""></script>

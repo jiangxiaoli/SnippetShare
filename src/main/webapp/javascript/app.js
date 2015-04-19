@@ -2,4 +2,4 @@
 
 
 //include ngRoute in app module, whole app get access to this service
-angular.module('snippetShare', ['ngRoute', 'ui.bootstrap']);
+angular.module('snippetShare', ['ngRoute', 'ui.bootstrap', 'ui.ace']);

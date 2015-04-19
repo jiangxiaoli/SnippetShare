@@ -14,14 +14,14 @@ angular.module("snippetShare")
                 username: "Jerry",
                 userAvatarId: 6
             },
-            createdAt: "",
+            createdAt: 1400956671914,
             updatedAt: "",
             numOfComments: 2,
             comments: [
                 {
                     cid: 1,
                     content: "a useful snippet",
-                    createdAt: "",
+                    createdAt: 1400956671914,
                     author: {
                         userid: 1,
                         username: "xiaoli",
@@ -32,7 +32,7 @@ angular.module("snippetShare")
                 {
                     cid: 2,
                     content: "a useful snippet!!!!",
-                    createdAt: "",
+                    createdAt: 1400956671914,
                     author: {
                         userid: 2,
                         username: "Alice",
