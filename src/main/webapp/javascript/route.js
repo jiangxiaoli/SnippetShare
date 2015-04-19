@@ -7,6 +7,8 @@ angular.module("snippetShare")
             .when("/",{
                 templateUrl: "templates/pages/landing.html"
             })
+
+            /*********** user routes *************/
             .when("/login",{
                 templateUrl: "templates/pages/users/login.html",
                 //controller: "UsersLoginController"
@@ -27,6 +29,8 @@ angular.module("snippetShare")
             //    templateUrl: "templates/pages/users/edit.html",
             //    controller: "UsersEditController"
             //})
+
+            /*********** boards routes *************/
             .when("/boards",{
                 templateUrl: "templates/pages/boards/index.html",
                 controller: "BoardsIndexController"
@@ -47,6 +51,18 @@ angular.module("snippetShare")
                 templateUrl: "templates/pages/boards/requests.html"//,
                 //controller: "BoardsEditController"
             })
+
+             /*********** snippet routes *************/
+            .when("/snippets/:id",{
+                templateUrl: "templates/pages/snippets/show.html",
+                controller: "SnippetShowController"
+            })
+            .when("/editsnippets/:id",{
+                templateUrl: "templates/pages/snippets/edit.html",
+                //controller: "SnippetEditController"
+            })
+
+
             .otherwise({ redirectTo:'/'});
 
     });

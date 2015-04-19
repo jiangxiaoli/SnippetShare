@@ -58,6 +58,10 @@ body {
     margin-top: 0px;
 }
 
+.height25 {
+    height: 25px;
+}
+
 /*********** navbar styling ***********/
 .list-unstyled li{
     padding-left: 0;
@@ -196,3 +200,6 @@ blockquote {
 .snippet-card:hover {
     background-color: rgba(0, 188, 140, 0.15);
 }
+
+/***************** ACE format ******************/
+.ace_editor { height: 500px; }
