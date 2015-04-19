@@ -6,10 +6,9 @@
 /*warning: #F39C12 */
 /*danger: #E74C3C */
 
-
-
-/*ui.bootstrap justification*/
+/*****************ui.bootstrap justification***********/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 
 /*********** to working with navbar fixed top & footer***********/
 
@@ -38,6 +37,16 @@ body {
 
 .footer-container {
     margin-top: 10px;
+}
+
+
+/**************  common use  ************/
+.text-bold {
+    font-weight: bold;
+}
+
+.align-right {
+    text-align: right;
 }
 
 /*********** navbar styling ***********/
