@@ -1,15 +1,86 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("BoardsShowController", function ($http, $routeParams) {
-        var controller = this;
+    .controller("BoardsShowController", function ($scope, Board, $routeParams) {
+        $scope.board = {
+            bid: 2,
+            title: "board 2",
+            category: "cat2",
+            isPublic: true,
+            createdAt: "",
+            updatedAt: "",
+            description:"board for sharing",
+            numOfSnippets: 3,
+            members:[
+                {
+                    userid: 3,
+                    username: "Tom",
+                    userAvatarId: 5
+                }
+            ],
+            requestors:[
+                {
+                    userid: 4,
+                    username: "Jerry",
+                    userAvatarId: 6
+                }
+            ],
+            snippets:[
+                {
+                    sid: 1,
+                    title: "snippet 1",
+                    content: "<html></html>",
+                    url:"",
+                    language:"html",
+                    author: {
+                        userid: 3,
+                        username: "Tom",
+                        userAvatarId: 5
+                    },
+                    createdAt: "",
+                    updatedAt: "",
+                    numOfComments: 2
+                },
+                {
+                    sid: 2,
+                    title: "snippet 3",
+                    content: "var s=1;",
+                    url:"",
+                    language:"javascript",
+                    author: {
+                        userid: 3,
+                        username: "Tom",
+                        userAvatarId: 5
+                    },
+                    createdAt: "",
+                    updatedAt: "",
+                    numOfComments: 1
+                },
+                {
+                    sid: 3,
+                    title: "snippet 3",
+                    content: "<html></html>",
+                    url:"",
+                    language:"html",
+                    author: {
+                        userid: 4,
+                        username: "Jerry",
+                        userAvatarId: 6
+                    },
+                    createdAt: "",
+                    updatedAt: "",
+                    numOfComments: 0
+                }
+            ]
+        };
 
-        //request GET all players from server
-        //$http({method: "GET", url:"/boards/" + $routeParams.id})
+
+        //request GET a board from server
+        //Board.find($routeParams.id)
         //    .success(function (data) {
         //        console.log("get board "+ $routeParams.id+ " success");
         //        console.log(data);
-        //        controller.board = data;
+        //        $scope.board = data;
         //    });
 
     });

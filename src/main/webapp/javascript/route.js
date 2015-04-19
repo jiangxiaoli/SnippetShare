@@ -8,7 +8,7 @@ angular.module("snippetShare")
                 templateUrl: "templates/pages/landing.html"
             })
             .when("/login",{
-                templateUrl: "templates/pages/users/login.html"
+                templateUrl: "templates/pages/users/login.html",
                 //controller: "UsersLoginController"
             })
             .when("/signup",{
@@ -23,9 +23,9 @@ angular.module("snippetShare")
                 templateUrl: "templates/pages/users/show.html",
                 controller: "UsersShowController"
             })
-            //.when("/users/new",{
-            //    templateUrl: "templates/pages/users/create.html",
-            //    controller: "UsersCreateController"
+            //.when("/editusers/:id",{
+            //    templateUrl: "templates/pages/users/edit.html",
+            //    controller: "UsersEditController"
             //})
             .when("/boards",{
                 templateUrl: "templates/pages/boards/index.html",

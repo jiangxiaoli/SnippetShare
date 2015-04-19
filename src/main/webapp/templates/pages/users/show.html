@@ -1,27 +1,54 @@
+<div class="container-fluid">
 
-<h4>user detail</h4>
+    <div class="well">
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="/snippetshare/images/user-avatar/11.png" alt="user avatar" height="80px" class=""/>
+            </div>
 
-<div class="jumbotron">
-    <div>
-        <h2>{{user.id}}</h2>
-        <p>{{user.firstname}}</p>
-        <p>{{user.lastname}}</p>
-        <p>{{user.email}}</p>
+            <div class="col-sm-10">
+                <h5>name: {{user.firstname}} {{user.lastname}}</h5>
+                <h5>email: {{user.email}}</h5>
+                <h5>description: {{user.description}}</h5>
+            </div>
+        </div>
 
-        <h4>Address</h4>
-        <p>{{user.address.street}}</p>
-        <p>{{user.address.city}}</p>
-        <p>{{user.address.state}}</p>
-        <p>{{user.address.zip}}</p>
+    </div>
 
-        <h4>Boards</h4>
+    <div class="container-fluid">
         <div>
-            <a ng-repeat="board in user.boards" ng-href="#/boards/{{board.id}}">
-                <p>{{board.title}}</p>
-                <p>{{board.createAt}}</p>
-                <p>{{board.updateAt}}</p>
-                <!--....-->
-            </a>
+            <h3>My Boards</h3>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">All</a></li>
+                <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Cat1</a></li>
+                <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Cat2</a></li>
+                <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Cat3</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="home">
+                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+                </div>
+            </div>
+
+
+            <div>
+                <div class="jumbotron board-list">
+                    <a class="btn btn-warning" href="">New</a>
+                </div>
+
+
+                <div class="jumbotron board-list" ng-repeat="board in user.boards" ng-href="#/boards/{{board.id}}">
+                    <p>{{board.title}}</p>
+                    <p>{{board.createAt}}</p>
+                    <p>{{board.updateAt}}</p>
+                    <!--....-->
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
