@@ -27,7 +27,6 @@ This work uses a number of open source projects to work properly:
 Notes
 -----------
 To use ACE editor properly, please go to:
-
 ``` /src/main/webapp ``
 
 then install ace:
