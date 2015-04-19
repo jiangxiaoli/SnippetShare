@@ -1,24 +1,94 @@
 <div class="container-fluid">
-    <h4>Board detail</h4>
+    <h4>Board Details</h4>
 
-    <div class="jumbotron">
-        <div>
-            <h2>{{board.id}}</h2>
-            <p>{{board.title}}</p>
-            <p>{{board.category}}</p>
-            <p>{{board.description}}</p>
+    <div class="well">
+        <div class="row">
+            <div class="col-sm-10">
+                <h5 class="contenct-inline">
+                    <span class="label label-warning">{{board.category}}</span>
+                    <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </h5>
+                <h3 class="contenct-inline">{{board.title}}</h3>
 
-            <h4>Snippets</h4>
-            <div>
-                <a ng-repeat="snippet in board.snippets" ng-href="#/snippets/{{snippet.id}}">
-                    <p>{{snippet.title}}</p>
-                    <p>{{snippet.createAt}}</p>
-                    <p>{{snippet.updateAt}}</p>
-                    <!--....-->
+                <!--show only when current user == owner-->
+                <a class="btn btn-success btn-sm" ng-href="#/editboards/{{board.bid}}">Edit
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+
+
+                <!--show only when current user is the member of the borad -->
+                <a class="btn btn-warning btn-sm" ng-href="#/boardsmembers/{{board.bid}}">Members
+                    <span class="badge">{{board.members.length}}</span>
                 </a>
+
+                <!--show only when current user is the owner of the borad -->
+                <a class="btn btn-danger btn-sm" ng-href="#/boardsrequests/{{board.bid}}">Requests
+                    <span class="badge">{{board.requestors.length}}</span>
+                </a>
+
+                <!--show only when current user is the NOT member of the borad -->
+                <!--<a class="btn btn-danger btn-sm" ng-href="#/request">Send Request</a>-->
+
+
+                <h4>{{board.description}}</h4>
+            </div>
+
+            <div class="col-sm-2 text-center">
+                <h4><span class="label label-info">Owner</span></h4>
+                <img src="/snippetshare/images/user-avatar/{{board.owner.userAvatarId}}.png" alt="user avatar" height="60px"/>
+                <h5 class="margin-top-zero"><a ng-href="#/users/{{board.owner.userid}}">{{board.owner.username}}</a></h5>
             </div>
 
         </div>
     </div>
+
+    <div class="container">
+
+        <!--show only when current user is member or owner-->
+        <a class="btn btn-success btn-md pull-right" ng-href="#/">Create New Snippet</a>
+        <h3>Snippets</h3>
+
+        <div >
+            <div class="well snippet-card" ng-repeat="snippet in board.snippets" >
+
+                <div class="row">
+                    <div class="col-xs-10">
+                        <div class="pull-right">
+                            <h5><span class="label label-info">Created At:</span>
+                                   {{snippet.createdAt | date:'dd-MM-yyyy'}}
+                                     <span class="badge badge-info">
+                                         <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                            {{snippet.numOfComments}}
+                                     </span>
+                            </h5>
+                        </div>
+
+                        <h5 class="contenct-inline">
+                            <span class="label label-warning">{{snippet.language}}</span>
+
+                        </h5>
+                        <h4 class="contenct-inline">
+                            <a ng-href="#/snippets/{{snippet.sid}}">{{snippet.title}}</a>
+                               <a ng-show="snippet.url != ''" ng-href="{{snippet.url}}" class="glyphicon glyphicon-save" aria-hidden="true"></a>
+                        </h4>
+
+                        <div class="snippet-content">
+                            <h5>{{snippet.content}}</h5>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <h5><span class="label label-info">Author</span></h5>
+                        <img src="/snippetshare/images/user-avatar/{{snippet.author.userAvatarId}}.png" alt="user avatar" height="40px"/>
+                        <h5 class="margin-top-zero"><a ng-href="#/users/{{snippet.author.userid}}">{{snippet.author.username}}</a></h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
 
 </div>

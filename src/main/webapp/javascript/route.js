@@ -35,6 +35,18 @@ angular.module("snippetShare")
                 templateUrl: "templates/pages/boards/show.html",
                 controller: "BoardsShowController"
             })
+            .when("/editboards/:id",{
+                templateUrl: "templates/pages/boards/edit.html",
+                controller: "BoardsEditController"
+            })
+            .when("/boardsmembers/:id",{
+                templateUrl: "templates/pages/boards/members.html"//,
+                //controller: "BoardsEditController"
+            })
+            .when("/boardsrequests/:id",{
+                templateUrl: "templates/pages/boards/requests.html"//,
+                //controller: "BoardsEditController"
+            })
             .otherwise({ redirectTo:'/'});
 
     });

@@ -51,8 +51,12 @@ body {
 
 .contenct-inline {
     display: inline;
+    margin-right: 10px;
 }
 
+.margin-top-zero {
+    margin-top: 0px;
+}
 
 /*********** navbar styling ***********/
 .list-unstyled li{
@@ -179,4 +183,16 @@ blockquote {
 
 .badge-info {
     background-color: #269abc;
+}
+
+
+/****************** snippet list styling **********************/
+.snippet-content {
+    border: dashed 3px #464545 ;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.snippet-card:hover {
+    background-color: rgba(0, 188, 140, 0.15);
 }
