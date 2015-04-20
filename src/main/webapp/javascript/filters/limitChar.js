@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module("snippetShare")
-    .filter('limit55char', function () {
-        return function (item) {
+    .filter('limitChar', function () {
+        return function (item, limit) {
             var filtered = "";
-            if(item.length > 56) {
-                filtered = item.slice(0, 55);
+            if(item.length > limit+1) {
+                filtered = item.slice(0, limit);
                 filtered = filtered + "...";
                 return filtered;
             } else {

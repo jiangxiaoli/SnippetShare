@@ -1,15 +1,43 @@
 <div class="container">
-    <h4>User index</h4>
+    <h3>Browse All Boards in SnippetShare</h3>
 
-    <div class="jumbotron">
-        <h4>Users list</h4>
-        <a ng-repeat="user in users" ng-href="#/users/{{user.id}}">
-            <div class="well">
-                <h3>{{user.id}}</h3>
-                <h4>{{user.firstname}} , {{user.lastname}}</h4>
-                <h4>{{user.email}}</h4>
-            </div>
-        </a>
+    <div class="container-fluid">
+
+        <tabset>
+            <tab ng-repeat="category in categories" heading="{{category}}">
+                <div class="well" ng-repeat="user in users | hasCategory: category">
+
+                    <div class="row">
+                        <div class="col-xs-2 text-center">
+                            <img src="/snippetshare/images/user-avatar/{{user.userAvatarId}}.png" alt="user avatar" height="60px"/>
+                            <h5 class="margin-top-zero"><a ng-href="#/users/{{user.userid}}">{{user.username}}</a></h5>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <div class="well board-list board-list-small" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
+                                 ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
+
+                                <h4 class="pull-right">
+                                    <span class="label label-warning pull-right">{{board.category}}</span>
+                                    <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
+                                </h4>
+
+                                <!--if board is private , don't show link, show request botton when hover-->
+                                <a ng-href="#/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
+
+                                <!--hover to show description-->
+                                <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
+                                <h5 class="board-desc">{{board.description | limitChar:15}}</h5>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </tab>
+        </tabset>
+
     </div>
-</div>
 
+</div>

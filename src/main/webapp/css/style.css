@@ -203,3 +203,10 @@ blockquote {
 
 /***************** ACE format ******************/
 .ace_editor { height: 500px; }
+
+
+/******************** board list small ***********************/
+.board-list-small {
+    width: 150px;
+    height: 120px;
+}

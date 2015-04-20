@@ -29,40 +29,6 @@
             <h3>My Boards</h3>
 
             <tabset>
-                <tab heading="All">
-                    <div class="jumbotron board-list">
-                        <!--ng-click event for create a new board-->
-                        <a class="btn btn-warning" href="">New Board</a>
-                    </div>
-
-                    <div class="well board-list" ng-repeat="board in user.boards |orderBy:'board.createdAt'"
-                         ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
-
-                        <h4 class="pull-right">
-                            <span class="label label-warning pull-right">{{board.category}}</span>
-                              <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
-                        </h4>
-                        <a ng-href="#/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
-
-                        <!--hover to show description-->
-                        <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
-                        <h5 class="board-desc">{{board.description | limit55char}}</h5>
-
-                        <div class="align-bottom">
-                            <div class="col-xs-6">
-                                <h6 class="text-info">
-                                    Snippets <span class="badge badge-info">{{board.numOfSnippets}}</span>
-                                </h6>
-                            </div>
-                            <div class="col-xs-6">
-                                <h6 class="text-danger pull-right" ng-show="board.requestors.length !=0">
-                                    Requests <span class="badge badge-danger">{{board.requestors.length}}</span>
-                                </h6>
-                            </div>
-                        </div>
-
-                    </div>
-                </tab>
 
                 <tab ng-repeat="category in categories" heading="{{category}}">
                     <div class="jumbotron board-list">
@@ -76,11 +42,13 @@
                             <span class="label label-warning pull-right">{{board.category}}</span>
                             <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
                         </h4>
+
+                        <!--if board is private , don't show link, show request botton when hover-->
                         <a ng-href="#/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
 
                         <!--hover to show description-->
                         <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
-                        <h5 class="board-desc">{{board.description}}</h5>
+                        <h5 class="board-desc">{{board.description | limitChar:55}}</h5>
 
                         <div class="align-bottom">
                             <div class="col-xs-6">
