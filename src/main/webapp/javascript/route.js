@@ -35,6 +35,10 @@ angular.module("snippetShare")
                 templateUrl: "templates/pages/boards/index.html",
                 controller: "BoardsIndexController"
             })
+            .when("/createboards",{
+                templateUrl: "templates/pages/boards/create.html",
+                controller: "BoardsCreateController"
+            })
             .when("/boards/:id",{
                 templateUrl: "templates/pages/boards/show.html",
                 controller: "BoardsShowController"
