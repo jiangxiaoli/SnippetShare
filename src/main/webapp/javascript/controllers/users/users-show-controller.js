@@ -4,7 +4,7 @@ angular.module("snippetShare")
     .controller("UsersShowController", function ($routeParams, User, $scope) {
 
         //define categories
-        $scope.categories = ['cat1', 'cat2', 'cat3', 'cat4'];
+        $scope.categories = ['All', 'cat1', 'cat2', 'cat3', 'cat4'];
 
         //test data for user with :id
         $scope.user = {
