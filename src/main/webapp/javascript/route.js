@@ -5,33 +5,68 @@ angular.module("snippetShare")
     .config(function ($routeProvider) {
         $routeProvider
             .when("/",{
-                templateUrl: "templates/pages/users/index.html"
+                templateUrl: "templates/pages/landing.html"
+            })
+
+            /*********** user routes *************/
+            .when("/login",{
+                templateUrl: "templates/pages/users/login.html",
+                //controller: "UsersLoginController"
+            })
+            .when("/signup",{
+                templateUrl: "templates/pages/users/signup.html",
+                controller: "UsersCreateController"
             })
             .when("/users",{
                 templateUrl: "templates/pages/users/index.html",
-                controller: "UsersIndexController",
-                controllerAs: "indexCtrl"
+                controller: "UsersIndexController"
             })
             .when("/users/:id",{
                 templateUrl: "templates/pages/users/show.html",
-                controller: "UsersShowController",
-                controllerAs: "showCtrl"
+                controller: "UsersShowController"
             })
-            .when("/users/new",{
-                templateUrl: "templates/pages/users/create.html",
-                controller: "UsersCreateController",
-                controllerAs: "createCtrl"
-            })
+            //.when("/editusers/:id",{
+            //    templateUrl: "templates/pages/users/edit.html",
+            //    controller: "UsersEditController"
+            //})
+
+            /*********** boards routes *************/
             .when("/boards",{
                 templateUrl: "templates/pages/boards/index.html",
-                controller: "BoardsIndexController",
-                controllerAs: "indexCtrl"
+                controller: "BoardsIndexController"
+            })
+            .when("/createboards",{
+                templateUrl: "templates/pages/boards/create.html",
+                controller: "BoardsCreateController"
             })
             .when("/boards/:id",{
                 templateUrl: "templates/pages/boards/show.html",
-                controller: "BoardsShowController",
-                controllerAs: "showCtrl"
+                controller: "BoardsShowController"
             })
+            .when("/editboards/:id",{
+                templateUrl: "templates/pages/boards/edit.html",
+                controller: "BoardsEditController"
+            })
+            .when("/boardsmembers/:id",{
+                templateUrl: "templates/pages/boards/members.html"//,
+                //controller: "BoardsEditController"
+            })
+            .when("/boardsrequests/:id",{
+                templateUrl: "templates/pages/boards/requests.html"//,
+                //controller: "BoardsEditController"
+            })
+
+             /*********** snippet routes *************/
+            .when("/snippets/:id",{
+                templateUrl: "templates/pages/snippets/show.html",
+                controller: "SnippetShowController"
+            })
+            .when("/editsnippets/:id",{
+                templateUrl: "templates/pages/snippets/edit.html",
+                //controller: "SnippetEditController"
+            })
+
+
             .otherwise({ redirectTo:'/'});
 
     });

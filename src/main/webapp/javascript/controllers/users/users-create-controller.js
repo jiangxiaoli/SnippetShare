@@ -9,7 +9,7 @@ angular.module("snippetShare")
 
             User.create(user)
                 .success(function(data, status, headers, config) {
-                    console.log("in create success");
+                    console.log("in create user success");
                     console.log(data);
                     console.log(status);
                     $location.path("/users");

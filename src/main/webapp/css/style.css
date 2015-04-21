@@ -1,3 +1,212 @@
+/************ Theme color scheme  ***************/
+/*default: #303030 */
+/*primary: #375A75 */
+/*success: #00BC8C*/
+/*info: #3498DB */
+/*warning: #F39C12 */
+/*danger: #E74C3C */
+
+/*****************ui.bootstrap justification***********/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
+/*********** to working with navbar fixed top & footer***********/
+
+/*stick footer*/
+html {
+    position: relative;
+    min-height: 100%;
+}
 body {
-    background-color: lightgrey;
+    padding-top: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 250px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 200px;
+    background-color: #464545;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.footer-container {
+    margin-top: 10px;
+}
+
+
+/**************  common use  ************/
+.text-bold {
+    font-weight: bold;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.contenct-inline {
+    display: inline;
+    margin-right: 10px;
+}
+
+.margin-top-zero {
+    margin-top: 0px;
+}
+
+.height25 {
+    height: 25px;
+}
+
+/*********** navbar styling ***********/
+.list-unstyled li{
+    padding-left: 0;
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+}
+
+.navbar,
+.navbar-brand {
+    font-weight: bold;
+}
+
+.board-list {
+    float: left;
+    width: 250px;
+    min-height: 150px;
+    margin: 10px;
+    background-color: #464545;
+    position: relative;
+}
+.align-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+/*********** Landing Page ***********/
+.header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #464545;
+    margin-top: -20px;
+}
+
+.text-vertical-center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.text-vertical-center h2 {
+    /*color: #FFFFFF;*/
+    margin: 10px;
+    padding: 0;
+    /*font-size: 4.5em;*/
+    font-weight: 700;
+}
+
+.text-vertical-center h3 {
+    /*font-weight: bold;*/
+}
+
+/*How it works panner*/
+.bg-blue {
+    background-color: #375a7f;
+    margin: 0;
+    width: 100%;
+}
+
+.content {
+    /*width: 90%;*/
+    margin: 40px;
+    text-align: center;
+}
+
+.upperhead {
+    margin-bottom: 3%;
+    border-bottom: 1px solid #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+    display: inline-block;
+    padding-bottom: 5px;
+    font-weight: 600;
+    margin-top: 3%;
+}
+.panelTitle,
+.panelIcon {
+    margin: 30px;
+}
+
+.panelTitle {
+    color: #1abc9c;
+}
+
+.step h5 {
+    margin: 10px;
+}
+
+blockquote {
+    text-align: left;
+}
+
+/*********** Sign up styling ***********/
+.sign-form {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+/************** Badge styling **************/
+
+.badge-default {
+    background-color: #303030;
+}
+
+.badge-primary {
+    background-color: #375A75;
+}
+
+.badge-danger {
+    background-color: #E74C3C;
+}
+
+.badge-warning {
+    background-color: #F39C12;
+}
+
+.badge-success {
+    background-color: #00BC8C;
+}
+
+.badge-info {
+    background-color: #269abc;
+}
+
+
+/****************** snippet list styling **********************/
+.snippet-content {
+    border: dashed 3px #464545 ;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.snippet-card:hover {
+    background-color: rgba(0, 188, 140, 0.15);
+}
+
+/***************** ACE format ******************/
+.ace_editor { height: 500px; }
+
+
+/******************** board list small ***********************/
+.board-list-small {
+    width: 150px;
+    height: 120px;
 }

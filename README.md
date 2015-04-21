@@ -24,12 +24,20 @@ This work uses a number of open source projects to work properly:
 * [jQuery] - Jquery is the Write Less, Do More, JavaScript Library.
 * [bootstrap] - The most popular front-end framework for developing responsive, mobile first projects on the web.
 
+Notes
+-----------
+To use ACE editor properly, please go to:
+``` /src/main/webapp ``
+
+then install ace:
+``` bower install angular-ui-ace\#bower ```
+
 Team Member
 --------------
 * Xiaoli Jiang <jiangxiaoli1104@gmail.com>
 * Rucha katakwar <rucha.b@gmail.com>
 * Yulin Ye <yulinye.yy@gmail.com>
-* Decheng Deng <dengdechen@gmail.com>
+* Dechen Deng <dengdechen@gmail.com>
 
 License
 ----

@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("BoardsIndexController", function ($http) {
+    .controller("BoardsIndexController", function ($scope, Board) {
         var controller = this;
 
-        //request GET all sponsors from server
-        //$http({method: "GET", url:"/boards"})
+        //request GET all boards from server
+        //Board.all()
         //    .success(function (data) {
         //        console.log("get boards success");
         //        console.log(data);
-        //        controller.boards = data;
+        //        $scope.boards = data;
         //    });
 
     });

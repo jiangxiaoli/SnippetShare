@@ -1,33 +1,73 @@
+<div class="container-fluid">
 
-<h4>user detail</h4>
+    <div class="well">
+        <div class="row">
+            <div class="col-xs-2">
+                <img src="/snippetshare/images/user-avatar/{{user.userAvatarId}}.png" alt="user avatar" height="80px" class="pull-right"/>
+            </div>
 
-<div class="jumbotron">
-    <div>
-        <h2>{{showCtrl.user.id}}</h2>
-        <p>{{showCtrl.user.firstname}}</p>
-        <p>{{showCtrl.user.lastname}}</p>
-        <p>{{showCtrl.user.email}}</p>
-        <p>{{showCtrl.user.description}}</p>
+            <div class="col-xs-10">
+                <div class="row">
+                    <label class="col-sm-2 align-right text-success text-bold">Name:</label>
+                    <p class="col-md-10"> {{user.username}} </p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 align-right text-success text-bold">Email:</label>
+                    <p class="col-md-10"> {{user.email}} </p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 align-right text-success text-bold">Description:</label>
+                    <p class="col-md-10"> {{user.profilepic}} </p>
+                </div>
+            </div>
+        </div>
 
-        <h4>Address</h4>
-        <p>{{showCtrl.user.address.street}}</p>
-        <p>{{showCtrl.user.address.city}}</p>
-        <p>{{showCtrl.user.address.state}}</p>
-        <p>{{showCtrl.user.address.zip}}</p>
+    </div>
 
-        <!--<h4>Sponsor</h4>-->
-        <!--<a ng-href="#/sponsors/{{showCtrl.user.sponsor.sponsor_id}}">-->
-            <!--<p>{{showCtrl.user.sponsor.name}}</p>-->
-        <!--</a>-->
+    <div class="container-fluid">
+        <div>
+            <h3>My Boards</h3>
 
-        <!--&lt;!&ndash;how to deal with nested object&ndash;&gt;-->
-        <!--<h4>Opponents</h4>-->
-        <!--<div>-->
-            <!--<a ng-repeat="opponent in showCtrl.user.opponents" ng-href="#/users/{{opponent.user_id}}">-->
-                <!--<p>{{opponent.user_id}}</p>-->
-                <!--<p>{{opponent.firstname}}</p>-->
-                <!--<p>{{opponent.lastname}}</p>-->
-            <!--</a>-->
-        <!--</div>-->
+            <tabset>
+
+                <tab ng-repeat="category in categories" heading="{{category}}">
+                    <div class="jumbotron board-list">
+                        <!--ng-click event for create a new board-->
+                        <a class="btn btn-warning" href="#/createboards">New Board</a>
+                    </div>
+                    <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
+                         ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
+
+                        <h4 class="pull-right">
+                            <span class="label label-warning pull-right">{{board.category}}</span>
+                            <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
+                        </h4>
+
+                        <!--if board is private , don't show link, show request botton when hover-->
+                        <a ng-href="#/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
+
+                        <!--hover to show description-->
+                        <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
+                        <h5 class="board-desc">{{board.description | limitChar:55}}</h5>
+
+                        <div class="align-bottom">
+                            <div class="col-xs-6">
+                                <h6 class="text-info">
+                                    Snippets <span class="badge badge-info">{{board.numOfSnippets}}</span>
+                                </h6>
+                            </div>
+                            <div class="col-xs-6">
+                                <h6 class="text-danger pull-right" ng-show="board.requestors.length !=0">
+                                    Requests <span class="badge badge-danger">{{board.requestors.length}}</span>
+                                </h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </tab>
+            </tabset>
+
+        </div>
     </div>
 </div>
+
