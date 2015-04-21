@@ -1,0 +1,16 @@
+{
+  "name": "SnippetShare",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ace": "~1.1.9",
+    "angular-ui-ace": "~0.2.3"
+  }
+}
