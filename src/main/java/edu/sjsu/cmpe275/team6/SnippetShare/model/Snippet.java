@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 
 @Entity
@@ -42,6 +43,10 @@ public class Snippet {
 	@ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
 	@JoinColumn(name = "bid")
     private Board board;
+
+    @Column(name = "comments")
+    @OneToMany(mappedBy = "snippet")
+    private ArrayList<Comment> comments;
 	
 	public Snippet(String title, String content, String url,Timestamp createdAt,Timestamp updatedAt) {
 		this.title = title;
@@ -119,4 +124,8 @@ public class Snippet {
 	public void setBoard(Board board) {
 		this.board = board;
 	}
+
+    public int getNumberOfComments(){
+        return comments.size();
+    }
 }

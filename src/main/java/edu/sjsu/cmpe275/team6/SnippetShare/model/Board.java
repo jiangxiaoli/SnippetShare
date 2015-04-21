@@ -2,6 +2,7 @@ package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -25,6 +26,8 @@ public class Board {
 	
 	@Column(name = "isPublic")
 	private boolean isPublic;
+
+
 	
 	//One user can have many boards
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -51,6 +54,10 @@ public class Board {
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> requestors;
+
+    @Column(name = "snippets")
+    @OneToMany(mappedBy = "board")
+    private ArrayList<Snippet> snippets;
 	
 	public Board(String title, String category, boolean isPublic,
 			Timestamp createdAt, Timestamp updatedAt) {
@@ -132,10 +139,15 @@ public class Board {
 	public void setRequestors(List<User> requestors) {
 		this.requestors = requestors;
 	}
+
+    public int getNumberOfRequests(){
+        return requestors.size();
+    }
+
+    public int getNumberOfSnippets(){
+        return snippets.size();
+    }
 	
-	
-	
-	
-	
+
 	
 }

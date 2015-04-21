@@ -26,8 +26,8 @@ public class User {
 	@Column(name ="email",nullable = false,unique = true)
 	private String email;
 	
-	@Column(name ="profilepic")
-	private String profilepic;
+	@Column(name ="userAvatarId")
+	private int userAvatarId;
 
     @Column(name = "snippet")
     @OneToMany(mappedBy = "author")
@@ -37,11 +37,11 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private ArrayList<Board> boards;
 
-	public User(String username, String pwd, String email,String profilepic) {
+	public User(String username, String pwd, String email,int userAvatarId) {
 		this.username = username;
 		this.pwd = pwd;
 		this.email = email;
-		this.profilepic = profilepic;
+		this.userAvatarId = userAvatarId;
 	}
 
 	public int getUserid() {
@@ -72,12 +72,12 @@ public class User {
 		this.email = email;
 	}
 	
-	public String getProfilepic() {
-		return profilepic;
+	public int getUserAvatarId() {
+		return userAvatarId;
 	}
 
-	public void setProfilepic(String profilepic) {
-		this.profilepic = profilepic;
+	public void setUserAvatarId(int userAvatarId) {
+		this.userAvatarId = userAvatarId;
 	}
 
     public ArrayList<Snippet> getSnippets() {
