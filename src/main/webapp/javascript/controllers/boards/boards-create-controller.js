@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("UsersCreateController", function ($scope, User, $location) {
+    .controller("BoardsCreateController", function ($scope, Board, $location) {
         $scope.isSubmitting = false;
 
-        $scope.saveUser = function (user) {
+        $scope.saveBoard = function (board) {
             $scope.isSubmitting = true;
 
-            User.create(user)
+            Board.create(board)
                 .success(function(data, status, headers, config) {
-                    console.log("in create user success");
+                    console.log("in create board success");
                     console.log(data);
                     console.log(status);
-                    $location.path("/users");
+                    $location.path("/boards");
                 })
                 .error(function(data, status, headers, config) {
-                    console.log("in error");
+                    console.log("in create board error");
                     console.log(data);
                     console.log(status);
                 }).finally(function () {

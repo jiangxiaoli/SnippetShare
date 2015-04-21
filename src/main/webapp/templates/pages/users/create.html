@@ -1,5 +1,63 @@
-<h3>Create a new User</h3>
+<div class="container">
+    <div class="">
 
-<form action="">
+        <h3>Create a new User</h3>
+        <div class="">
+            <form>
+                <fieldset class="form-group">
+                    <label>first name</label>
+                    <input class="form-control" type="text" name="firstname" ng-model="user.firstname" required/>
+                </fieldset>
 
-</form>
+                <fieldset class="form-group">
+                    <label>last name</label>
+                    <input class="form-control" type="text" name="lastname" ng-model="user.lastname" required/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>email</label>
+                    <input class="form-control" type="email" name="email" ng-model="user.email" required/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password" ng-model="user.password" required/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Confirm Password</label>
+                    <!--need to validate if the password is the same -->
+                    <input class="form-control" type="password" required/>
+                </fieldset>
+
+
+
+                <!--<fieldset class="form-group">-->
+                    <!--<label>Description</label>-->
+                    <!--<textarea class="form-control" name="description" ng-model="user.description"></textarea>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-group">-->
+                    <!--<label for="street">Street</label>-->
+                    <!--<input class="form-control" type="text" id="street" name="street" ng-model="user.street">-->
+                <!--</fieldset>-->
+                <!--<fieldset class="form-group">-->
+                    <!--<label for="city">City</label>-->
+                    <!--<input class="form-control" type="text" id="city" name="city" ng-model="user.city">-->
+                <!--</fieldset>-->
+                <!--<fieldset class="form-group">-->
+                    <!--<label for="state">State</label>-->
+                    <!--<input class="form-control" type="text" id="state" name="state" ng-model="user.state">-->
+                <!--</fieldset>-->
+                <!--<fieldset class="form-group">-->
+                    <!--<label for="zip">zip</label>-->
+                    <!--<input class="form-control" type="text" id="zip" name="zip" ng-model="user.zip">-->
+                <!--</fieldset>-->
+
+
+                <input type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}" class="btn btn-default" ng-click="saveUser(user)" ng-disabled="isSubmitting">
+            </form>
+        </div>
+    </div>
+
+</div>
