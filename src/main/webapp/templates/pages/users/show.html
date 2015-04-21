@@ -33,7 +33,7 @@
                 <tab ng-repeat="category in categories" heading="{{category}}">
                     <div class="jumbotron board-list">
                         <!--ng-click event for create a new board-->
-                        <a class="btn btn-warning" href="">New Board</a>
+                        <a class="btn btn-warning" href="#/createboards">New Board</a>
                     </div>
                     <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
                          ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
