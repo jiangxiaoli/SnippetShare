@@ -59,15 +59,12 @@ public class JpaUserDAO implements UserDAO {
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            if(user.getUsername() != null) {
-                user1.setUsername(user.getUsername());
-            }
-            if(user.getPwd() != null){
-                user1.setPwd(user.getPwd());
-            }
-            if(user.getProfilepic() != null){
-                user1.setProfilepic(user.getProfilepic());
-            }
+            user1.setUsername(user.getUsername());
+            user1.setPwd(user.getPwd());
+            user1.setEmail(user.getEmail());
+            user1.setBoards(user.getBoards());
+            user1.setUserAvatarId(user.getUserAvatarId());
+            user1.setSnippets(user.getSnippets());
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();

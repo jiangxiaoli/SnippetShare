@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
@@ -30,11 +27,11 @@ public class UserController {
             @RequestParam(value="username", required = true) String username,
             @RequestParam(value="pwd", required = true) String pwd,
             @RequestParam(value="email", required = true) String email,
-            @RequestParam(value="profilepic", required = false) String profilepic,
+            @RequestParam(value="userAvatarId", required = false) int userAvatarId,
 
             ModelMap model) {
 
-        User user = new User(username, pwd, email, profilepic);
+        User user = new User(username, pwd, email, userAvatarId);
         Gson gson = new Gson();
 
         try {
@@ -46,6 +43,29 @@ public class UserController {
         }
 
     }
+
+    //2. GET get a user
+    @RequestMapping(value = "/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> showPlayer(@PathVariable int userid) {
+       User user = userDAO.findByUserId(userid);
+
+        //gson to build and map user class
+        Gson gson = new Gson();
+       // GsonBuilder gsonBuilder = new GsonBuilder();
+      //  Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
+
+        if(user != null){
+            System.out.println("Show user details::" + user.getUserid());
+            String result = gson.toJson(user);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        }else{
+            //user not found
+            String result = gson.toJson("User-" + userid + " not found");
+            return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 
 }
