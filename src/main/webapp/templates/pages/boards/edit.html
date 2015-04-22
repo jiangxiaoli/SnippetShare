@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="">
+
+        <h3>Edit Board: {{board.title}}</h3>
+        <h3>Board ID: {{board.bid}}</h3>
+        <div class="">
+            <form novalidate name="boardCreateForm">
+                <fieldset class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" type="text" name="title" value="{{board.title}}" ng-model="board.title" required/>
+                    <span style="color:red" ng-show="boardCreateForm.board.title.$dirty && boardCreateForm.board.title.$invalid"></span>
+                    <span ng-show="boardCreateForm.board.title.$error.required">title is required.</span>
+                    <!--validation failed-->
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Category</label>
+                    <select ng-init="board.category = {{board.category}}" class="form-control height25" ng-options="category for category in categories" ng-model="board.category"></select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Is Public?</label>
+                    <input type="checkbox" name="isPublic" value="{{board.isPublic}}" ng-model="board.isPublic"/>
+
+                    <!--how to set default value?-->
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>description</label>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" ng-model="board.description">{{board.description}}</textarea>
+                </fieldset>
+
+                <input type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}" class="btn btn-default" ng-click="updateBoard(board)"
+                       ng-disabled="boardCreateForm.board.title.$invalid || isSubmitting">
+            </form>
+        </div>
+    </div>
+
+</div>
