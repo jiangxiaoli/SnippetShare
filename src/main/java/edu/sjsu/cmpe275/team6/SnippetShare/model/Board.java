@@ -2,7 +2,6 @@ package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -55,9 +54,9 @@ public class Board {
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> requestors;
 
-    @Column(name = "snippets")
-    @OneToMany(mappedBy = "board")
-    private ArrayList<Snippet> snippets;
+//    @Column(name = "snippets")
+//    @OneToMany(mappedBy = "board")
+//    private ArrayList<Snippet> snippets;
 	
 	public Board(String title, String category, boolean isPublic,
 			Timestamp createdAt, Timestamp updatedAt) {
@@ -144,9 +143,9 @@ public class Board {
         return requestors.size();
     }
 
-    public int getNumberOfSnippets(){
-        return snippets.size();
-    }
+//    public int getNumberOfSnippets(){
+//        return snippets.size();
+//    }
 	
 
 	

@@ -27,15 +27,19 @@ public class UserController {
             @RequestParam(value="username", required = true) String username,
             @RequestParam(value="pwd", required = true) String pwd,
             @RequestParam(value="email", required = true) String email,
-            @RequestParam(value="userAvatarId", required = false) int userAvatarId,
-
+            @RequestParam(value="userAvatarId", required = false) String userAvatarId,
             ModelMap model) {
+        User user = new User(username, pwd, email);
+        if(userAvatarId.isEmpty()) user.setUserAvatarId("0");
+        else
+        user.setUserAvatarId(userAvatarId);
 
-        User user = new User(username, pwd, email, userAvatarId);
+
+
         Gson gson = new Gson();
-
         try {
             userDAO.insert(user);
+
             return new ResponseEntity<String>(gson.toJson(user), HttpStatus.OK);
         } catch(Exception e) {
             System.out.println("fail to create player");
@@ -48,12 +52,14 @@ public class UserController {
     @RequestMapping(value = "/{userid}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> showPlayer(@PathVariable int userid) {
-       User user = userDAO.findByUserId(userid);
+        User user = userDAO.findByUserId(userid);
+        System.out.println("I am here");
+        System.out.println(user.toString());
 
         //gson to build and map user class
         Gson gson = new Gson();
-       // GsonBuilder gsonBuilder = new GsonBuilder();
-      //  Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
+        // GsonBuilder gsonBuilder = new GsonBuilder();
+        //  Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
 
         if(user != null){
             System.out.println("Show user details::" + user.getUserid());
