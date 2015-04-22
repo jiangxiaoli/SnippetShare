@@ -24,7 +24,6 @@ import java.util.List;
 public class UserController {
     ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
     UserDAO userDAO = (UserDAO) context.getBean("userDAO");
-    BoardDAO boardDAO =(BoardDAO) context.getBean("boardDAO");
 
     //1. POST Create a user
     @RequestMapping(method = RequestMethod.POST)
@@ -40,21 +39,6 @@ public class UserController {
         if (userAvatarId == null) user.setUserAvatarId("1");
         else user.setUserAvatarId(userAvatarId);
         user.setAboutMe(aboutMe);
-
-//        //add board to the user
-//        List<Board> boardList = new ArrayList<Board>();
-//
-//        if(bid!=0){
-//            Board board = boardDAO.findByBoardId(bid);
-//            if(board!=null){
-//               boardList.add(board);
-//                user.setBoards(boardList);
-//            }else{
-//                System.out.println("Board-"+bid+" not found!");
-//                String result = new Gson().toJson("Board-"+ bid +" not found!");
-//                return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
-//            }
-//        }
 
         Gson gson = new Gson();
         try {
@@ -78,7 +62,7 @@ public class UserController {
         Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
 
         if (user != null) {
-            System.out.println("Show user details::" + user.toString());
+            System.out.println("Show user details::" + user.getUsername());
             String result = gson.toJson(user);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } else {
@@ -107,7 +91,7 @@ public class UserController {
             user.setUserAvatarId(userAvatarId);
             user.setAboutMe(aboutMe);
 
-            System.out.println("User-" + user.toString());
+            System.out.println("User-" + user.getUsername());
 
             //gson to build and map user class
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -144,7 +128,7 @@ public class UserController {
         if(users != null){
 
             for(User user: users) {
-                System.out.println("Show user details::" + user.toString());
+                System.out.println("Show user details::" + user.getUsername());
 
             }
 

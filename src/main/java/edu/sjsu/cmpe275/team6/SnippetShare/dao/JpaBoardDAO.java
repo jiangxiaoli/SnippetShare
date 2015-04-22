@@ -23,8 +23,9 @@ public class JpaBoardDAO implements BoardDAO{
     public boolean insert(Board board) {
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
-        board.setCreatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
-        board.setUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
+        java.util.Date date= new java.util.Date();
+        board.setCreatedAt(date.getTime());
+        board.setUpdatedAt(date.getTime());
         try {
             tx.begin();
             manager.persist(board);
@@ -50,7 +51,7 @@ public class JpaBoardDAO implements BoardDAO{
             return board;
         } catch (RuntimeException e) {
             tx.rollback();
-            return null;
+            throw e;
         } finally {
             manager.close();
         }
@@ -68,7 +69,8 @@ public class JpaBoardDAO implements BoardDAO{
             board1.setIsPublic(board.getIsPublic());
             board1.setMembers(board.getMembers());
             board1.setRequestors(board.getRequestors());
-            board1.setUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime())); //set the updated date to current time and date
+            java.util.Date date= new java.util.Date();
+            board.setUpdatedAt(date.getTime());
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
@@ -98,18 +100,16 @@ public class JpaBoardDAO implements BoardDAO{
                 return false; //board not found
             }
         }catch (RuntimeException e) {
-        tx.rollback();
-        throw e;
-    } finally {
-        manager.close();
-    }
-
-
+            tx.rollback();
+            throw e;
+        } finally {
+            manager.close();
+        }
     }
 
     @Override
-    public List<Board> allBoards() {
-        String query = "SELECT b FROM Board b"; //select all row from the table
+    public List<Board> allBoards(int ownerid) {
+        String query = "SELECT b FROM Board b WHERE owner = "+ ownerid; //select all row from the table
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {

@@ -13,8 +13,8 @@ import java.util.List;
 public class Board {
 	
 	@Id
-	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
-	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
+	@TableGenerator(name="board", initialValue=0, allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="board")
     @Column(name = "bid")
 	private int bid;
 	
@@ -37,10 +37,10 @@ public class Board {
 	private User owner;
 	
 	@Column(name = "createdAt")
-	private Timestamp createdAt;
+	private long createdAt;
 	
 	@Column(name = "updatedAt")
-	private Timestamp updatedAt;
+	private long updatedAt;
 
     //added to retrieve snippets
     @Column(name = "snippet")
@@ -61,13 +61,8 @@ public class Board {
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> requestors;
-
-//    @Column(name = "snippets")
-//    @OneToMany(mappedBy = "board")
-//    private ArrayList<Snippet> snippets;
 	
 	public Board(String title, String category, boolean isPublic) {
-		
 		this.title = title;
 		this.category = category;
 		this.isPublic = isPublic;
@@ -109,22 +104,26 @@ public class Board {
 	}
 
 	public void setOwner(User owner) {
+
 		this.owner = owner;
+		if (!owner.getBoards().contains(this)) {
+			owner.getBoards().add(this);
+		}
 	}
 
-	public Timestamp getCreatedAt() {
+	public long getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Timestamp createdAt) {
+	public void setCreatedAt(long createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Timestamp getUpdatedAt() {
+	public long getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Timestamp updatedAt) {
+	public void setUpdatedAt(long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -144,6 +143,14 @@ public class Board {
 		this.requestors = requestors;
 	}
 
+	public List<Snippet> getSnippets() {
+		return snippets;
+	}
+
+	public void setSnippets(List<Snippet> snippets) {
+		this.snippets = snippets;
+	}
+
     public int getNumberOfRequests(){
         return requestors.size();
     }
@@ -156,11 +163,13 @@ public class Board {
         this.description = description;
     }
 
-        public int getNumberOfSnippets(){
+	public int getNumberOfSnippets(){
         return snippets.size();
     }
 
     public String toString(){
-        return this.bid + "," + this.getTitle()+"," + this.category;
+        return this.bid + "," + this.getTitle()+","
+				+ this.category +"," + this.isPublic + "," + this.getOwner()
+				+ this.createdAt+ "," + this.updatedAt;
     }
 }
