@@ -1,19 +1,8 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /*
  * @author Rucha
@@ -36,6 +25,8 @@ public class Board {
 	
 	@Column(name = "isPublic")
 	private boolean isPublic;
+
+
 	
 	//One user can have many boards
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -47,21 +38,25 @@ public class Board {
 	
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt;
-	
-	
-	@ManyToMany
+
+    //when board is deleted delete the access and requests related with the baord,cascadeType = remove
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="access",
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> members;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="request",
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> requestors;
+
+//    @Column(name = "snippets")
+//    @OneToMany(mappedBy = "board")
+//    private ArrayList<Snippet> snippets;
 	
 	public Board(String title, String category, boolean isPublic,
 			Timestamp createdAt, Timestamp updatedAt) {
@@ -143,10 +138,15 @@ public class Board {
 	public void setRequestors(List<User> requestors) {
 		this.requestors = requestors;
 	}
+
+    public int getNumberOfRequests(){
+        return requestors.size();
+    }
+
+//    public int getNumberOfSnippets(){
+//        return snippets.size();
+//    }
 	
-	
-	
-	
-	
+
 	
 }

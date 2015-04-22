@@ -1,19 +1,8 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 
-
-
+import javax.persistence.*;
 import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 @Entity
@@ -45,14 +34,18 @@ public class Snippet {
 	private Timestamp updatedAt;
 	
 	//One user can have many snippets
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
     @JoinColumn(name = "author")
     private User author;
 		
    //One board can have many snippets
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
 	@JoinColumn(name = "bid")
     private Board board;
+
+//    @Column(name = "comments")
+//    @OneToMany(mappedBy = "snippet")
+//    private ArrayList<Comment> comments;
 	
 	public Snippet(String title, String content, String url,Timestamp createdAt,Timestamp updatedAt) {
 		this.title = title;
@@ -130,4 +123,8 @@ public class Snippet {
 	public void setBoard(Board board) {
 		this.board = board;
 	}
+
+//    public int getNumberOfComments(){
+//        return comments.size();
+//    }
 }

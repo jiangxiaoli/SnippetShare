@@ -6,4 +6,10 @@
        <bean id="userDAO" class="edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaUserDAO">
               <property name="entityManagerFactory" ref="myEmf" />
        </bean>
+    <bean id="boardDAO" class="edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaBoardDAO">
+        <property name="entityManagerFactory" ref="myEmf" />
+    </bean>
+    <bean id="snippetDAO" class="edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaSnippetDAO">
+        <property name="entityManagerFactory" ref="myEmf" />
+    </bean>
 </beans>
