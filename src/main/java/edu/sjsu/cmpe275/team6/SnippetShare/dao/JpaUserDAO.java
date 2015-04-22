@@ -52,6 +52,23 @@ public class JpaUserDAO implements UserDAO {
         }
     }
 
+    public User findByEmail(String email) {
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        try {
+            tx.begin();
+            User user = (User) manager.createQuery("SELECT u FROM user where user.email = :value1")
+                    .setParameter("value1", email).getSingleResult();
+            tx.commit();
+            return user;
+        } catch (RuntimeException e) {
+            tx.rollback();
+            return null;
+        } finally {
+            manager.close();
+        }
+    }
+
     @Override
     public void update(User user) {
         EntityManager manager = entityManagerFactory.createEntityManager();

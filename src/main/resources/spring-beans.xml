@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
        <bean id="userDAO" class="edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaUserDAO">
               <property name="entityManagerFactory" ref="myEmf" />
        </bean>
+
+       <!-- Entry point for REST service. -->
+       <!-- Security configuration for REST services. -->
+       <security:http pattern="/hello**"
+                      auto-config="true"
+             authentication-manager-ref="authenticationManager" entry-point-ref="restServicesEntryPoint"
+             create-session="stateless">
+              <security:custom-filter ref="restServicesFilter"
+                             before="PRE_AUTH_FILTER" />
+       </security:http>
+
+       <security:authentication-manager alias="authenticationManager">
+              <security:authentication-provider user-service-ref="CustomUserDetailsService">
+                     <!--<user-service>-->
+                     <!--<user name="mkyong" password="123456" authorities="ROLE_USER" />-->
+                     <!--</user-service>-->
+              </security:authentication-provider>
+       </security:authentication-manager>
+
+       <bean id="restServicesEntryPoint"
+             class="edu.sjsu.cmpe275.team6.SnippetShare.security.RestAuthenticationEntryPoint" />
+       <!-- Filter for REST services. -->
+       <bean id="restServicesFilter"
+             class="edu.sjsu.cmpe275.team6.SnippetShare.security.RestUsernamePasswordAuthenticationFilter">
+              <property name="postOnly" value="false" />
+              <property name="authenticationManager" ref="authenticationManager" />
+              <property name="authenticationSuccessHandler" ref="restServicesSuccessHandler" />
+       </bean>
+
+       <!-- A handler for successful REST service authentication. -->
+       <bean id="restServicesSuccessHandler"
+             class="edu.sjsu.cmpe275.team6.SnippetShare.security.RestAuthenticationSuccessHandler" />
 </beans>
