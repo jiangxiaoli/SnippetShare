@@ -1,16 +1,18 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.dao;
 
-import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by Corn on 4/6/15.
+ * Created by Rucha on 4/15/15.
  */
-public class JpaUserDAO implements UserDAO {
+public class JpaBoardDAO implements BoardDAO{
     private EntityManagerFactory entityManagerFactory;
 
     public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory){
@@ -18,13 +20,14 @@ public class JpaUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean insert(User user) {
-        //handle email unique exception
+    public boolean insert(Board board) {
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
+        board.setCreatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
+        board.setUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
         try {
             tx.begin();
-            manager.persist(user);
+            manager.persist(board);
             tx.commit();
             return true;
         } catch (RuntimeException e) {
@@ -33,17 +36,18 @@ public class JpaUserDAO implements UserDAO {
         } finally {
             manager.close();
         }
+
     }
 
     @Override
-    public User findByUserId(int userid) {
+    public Board findByBoardId(int bid) {
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            User user = manager.find(User.class, userid);
+            Board board = manager.find(Board.class, bid);
             tx.commit();
-            return user;
+            return board;
         } catch (RuntimeException e) {
             tx.rollback();
             return null;
@@ -53,19 +57,18 @@ public class JpaUserDAO implements UserDAO {
     }
 
     @Override
-    public void update(User user) {
+    public void update(Board board) {
         EntityManager manager = entityManagerFactory.createEntityManager();
-        User user1 = manager.find(User.class, user.getUserid());
+        Board board1 = manager.find(Board.class, board.getBid());
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            user1.setUsername(user.getUsername());
-            user1.setPwd(user.getPwd());
-            user1.setEmail(user.getEmail());
-          //  user1.setBoards(user.getBoards());
-            user1.setUserAvatarId(user.getUserAvatarId());
-            user1.setAboutMe(user.getAboutMe());
-            //user1.setSnippets(user.getSnippets());
+            board1.setTitle(board.getTitle());
+            board1.setCategory(board.getCategory());
+            board1.setIsPublic(board.getIsPublic());
+            board1.setMembers(board.getMembers());
+            board1.setRequestors(board.getRequestors());
+            board1.setUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime())); //set the updated date to current time and date
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
@@ -73,52 +76,52 @@ public class JpaUserDAO implements UserDAO {
         } finally {
             manager.close();
         }
+
     }
 
     @Override
-    public boolean delete(int userid) {
-        EntityManager manager = entityManagerFactory.createEntityManager();
-        User user = manager.find(User.class, userid);
+    public boolean delete(int bid) {
+       EntityManager manager = entityManagerFactory.createEntityManager();
+        Board board = manager.find(Board.class,bid);
         EntityTransaction tx = manager.getTransaction();
-        try {
+        try{
             tx.begin();
-            if(user != null) {
-                System.out.println(user.getUserid()+", "+ user.getUsername());
-//                manager.refresh(user);//for cascading delete address
-                manager.remove(user);
-
-                //not delete opponents
-
+            if(board != null) {
+                System.out.println(board.getBid() + ", " + board.getTitle() + ", " + board.getOwner());
+                manager.refresh(board);//for cascading delete access and request
+                manager.remove(board);
                 tx.commit();
                 return true;
-            } else {
-                tx.commit();
-                return false; //user not found
             }
-        } catch (RuntimeException e) {
-            tx.rollback();
-            throw e;
-        } finally {
-            manager.close();
-        }
+        else{
+                tx.commit();
+                return false; //board not found
+            }
+        }catch (RuntimeException e) {
+        tx.rollback();
+        throw e;
+    } finally {
+        manager.close();
+    }
+
+
     }
 
     @Override
-    public List<User> allUsers() {
-        String query = "SELECT u FROM User as u"; //select all row from the table
+    public List<Board> allBoards() {
+        String query = "SELECT b FROM Board b"; //select all row from the table
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            List<User> listUsers = manager.createQuery(query).getResultList();
+            List<Board> listBoards = manager.createQuery(query).getResultList();
             tx.commit();
-            return listUsers; //return empty list, list.size() == 0
+            return listBoards; //return empty list, list.size() == 0
         } catch (RuntimeException e) {
             tx.rollback();
             throw e;
         } finally {
             manager.close();
         }
-
     }
 }

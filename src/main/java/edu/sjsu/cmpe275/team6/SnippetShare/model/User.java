@@ -1,13 +1,7 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
+import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -32,15 +26,28 @@ public class User {
 	@Column(name ="email",nullable = false,unique = true)
 	private String email;
 	
-	@Column(name ="profilepic")
-	private String profilepic;
+	@Column(name ="userAvatarId")
+	private String userAvatarId;
 
-	public User(String username, String pwd, String email,String profilepic) {
+    @Column(name = "aboutMe")
+    private String aboutMe;
+
+//    @Column(name = "snippet")
+//    @OneToMany(mappedBy = "author")
+//    private ArrayList<Snippet> snippets;
+//
+   @Column(name = "board")
+    @OneToMany(mappedBy = "owner")
+    private List<Board> boards;
+
+	public User(String username, String pwd, String email) {
 		this.username = username;
 		this.pwd = pwd;
 		this.email = email;
-		this.profilepic = profilepic;
+
 	}
+//added in order to work the findByUserId
+    public User(){}
 
 	public int getUserid() {
 		return userid;
@@ -70,12 +77,39 @@ public class User {
 		this.email = email;
 	}
 	
-	public String getProfilepic() {
-		return profilepic;
+	public String getUserAvatarId() {
+		return userAvatarId;
 	}
 
-	public void setProfilepic(String profilepic) {
-		this.profilepic = profilepic;
+	public void setUserAvatarId(String userAvatarId) {
+		this.userAvatarId = userAvatarId;
 	}
 
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    //    public ArrayList<Snippet> getSnippets() {
+//        return snippets;
+//    }
+//
+//    public void setSnippets(ArrayList<Snippet> snippets) {
+//        this.snippets = snippets;
+//    }
+//
+    public List<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
+    }
+
+    public String toString(){
+      return (this.getUserid() + "," + this.getUsername() + "," + this.getEmail()+","+this.getBoards());
+    }
 }

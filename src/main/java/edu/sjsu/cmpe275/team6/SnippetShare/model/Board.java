@@ -1,19 +1,8 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /*
  * @author Rucha
@@ -36,6 +25,10 @@ public class Board {
 	
 	@Column(name = "isPublic")
 	private boolean isPublic;
+
+     //adding description column to the board
+    @Column(name = "description")
+    private String description;
 	
 	//One user can have many boards
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -47,39 +40,45 @@ public class Board {
 	
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt;
-	
-	
-	@ManyToMany
+
+    //added to retrieve snippets
+    @Column(name = "snippet")
+    @OneToMany(mappedBy = "board")
+    private List<Snippet> snippets;
+
+    //when board is deleted delete the access and requests related with the baord,cascadeType = remove
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="access",
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> members;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="request",
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> requestors;
+
+//    @Column(name = "snippets")
+//    @OneToMany(mappedBy = "board")
+//    private ArrayList<Snippet> snippets;
 	
-	public Board(String title, String category, boolean isPublic,
-			Timestamp createdAt, Timestamp updatedAt) {
+	public Board(String title, String category, boolean isPublic) {
 		
 		this.title = title;
 		this.category = category;
 		this.isPublic = isPublic;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 	}
 
-
+    //add default constructor always to make get work
+    public Board(){}
 
 	public int getBid() {
 		return bid;
 	}
 
-	
 	public String getTitle() {
 		return title;
 	}
@@ -143,10 +142,24 @@ public class Board {
 	public void setRequestors(List<User> requestors) {
 		this.requestors = requestors;
 	}
-	
-	
-	
-	
-	
-	
+
+    public int getNumberOfRequests(){
+        return requestors.size();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+        public int getNumberOfSnippets(){
+        return snippets.size();
+    }
+
+    public String toString(){
+        return this.bid + "," + this.getTitle()+"," + this.category;
+    }
 }
