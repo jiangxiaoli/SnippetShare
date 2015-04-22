@@ -3,7 +3,6 @@ package edu.sjsu.cmpe275.team6.SnippetShare.model;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * Created by Corn on 4/6/15.
  * @author Rucha
@@ -12,7 +11,8 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
     @Column(name = "userid")
 	private int userid;
 	

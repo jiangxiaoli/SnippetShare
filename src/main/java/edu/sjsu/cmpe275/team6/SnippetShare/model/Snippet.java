@@ -10,7 +10,8 @@ import java.sql.Timestamp;
 public class Snippet {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
 	@Column(name = "sid")
 	private int sid;
 	

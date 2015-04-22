@@ -13,7 +13,8 @@ import java.util.List;
 public class Board {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
     @Column(name = "bid")
 	private int bid;
 	
