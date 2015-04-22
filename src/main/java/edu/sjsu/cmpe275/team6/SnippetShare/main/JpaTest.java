@@ -1,9 +1,12 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.main;
 
+import edu.sjsu.cmpe275.team6.SnippetShare.dao.BoardDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +16,10 @@ public class JpaTest {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
         UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+        BoardDAO boardDAO = (BoardDAO) context.getBean("boardDAO");
 
                     /**********User DAO test*********/
-        User user = new User("Rucha","test1","rucha.b@gmail.com");
+        User user = new User("Rucha","test1","rucha.b@gmail.com");//insert board to this user
         userDAO.insert(user);
         User user1 = new User("Abc","test1","test1@gmail.com");
         userDAO.insert(user1);
@@ -44,12 +48,27 @@ public class JpaTest {
             System.out.println(u2.toString());
         }
 
-        User u4 = userDAO.findByUserId(22);
-        if(u4!=null)
-            System.out.println(u4.toString());
-        else
-            System.out.println("User not found");
+
         /**************Board DAO test**************/
+
+        Board board = new Board("Board1","cat1",true);
+        boardDAO.insert(board);
+        List<Board> boardList = new ArrayList<Board>();
+        boardList.add(board);
+        user.setBoards(boardList);
+
+        Board board1 = boardDAO.findByBoardId(2);
+        if(board1!=null)
+            System.out.println(board1.toString());
+        else
+            System.out.println("Board not found");
+
+//after inserting the board,testing the get user
+
+            System.out.println(user.toString());
+
+
+
 
     }
 }

@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -35,9 +36,9 @@ public class User {
 //    @OneToMany(mappedBy = "author")
 //    private ArrayList<Snippet> snippets;
 //
-//    @Column(name = "board")
-//    @OneToMany(mappedBy = "owner")
-//    private ArrayList<Board> boards;
+   @Column(name = "board")
+    @OneToMany(mappedBy = "owner")
+    private List<Board> boards;
 
 	public User(String username, String pwd, String email) {
 		this.username = username;
@@ -100,14 +101,15 @@ public class User {
 //        this.snippets = snippets;
 //    }
 //
-//    public ArrayList<Board> getBoards() {
-//        return boards;
-//    }
-//
-//    public void setBoards(ArrayList<Board> boards) {
-//        this.boards = boards;
-//    }
+    public List<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
+    }
+
     public String toString(){
-      return (this.getUserid() + "," + this.getUsername() + "," + this.getEmail());
+      return (this.getUserid() + "," + this.getUsername() + "," + this.getEmail()+","+this.getBoards());
     }
 }

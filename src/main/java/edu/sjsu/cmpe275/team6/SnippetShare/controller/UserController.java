@@ -4,7 +4,9 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
+import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.UserAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -58,9 +60,9 @@ public class UserController {
         System.out.println(user.toString());
 
         //gson to build and map user class
-        Gson gson = new Gson();
-        // GsonBuilder gsonBuilder = new GsonBuilder();
-        //  Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
+     //   Gson gson = new Gson();
+         GsonBuilder gsonBuilder = new GsonBuilder();
+         Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
 
         if (user != null) {
             System.out.println("Show user details::" + user.getUserid());
@@ -111,5 +113,7 @@ public class UserController {
 
 
     }
+
+
 }
 

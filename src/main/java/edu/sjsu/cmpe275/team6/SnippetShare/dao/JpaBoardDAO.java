@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class JpaBoardDAO implements BoardDAO{
     public boolean insert(Board board) {
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
+        board.setCreatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
+        board.setUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
         try {
             tx.begin();
             manager.persist(board);
@@ -65,7 +68,7 @@ public class JpaBoardDAO implements BoardDAO{
             board1.setIsPublic(board.getIsPublic());
             board1.setMembers(board.getMembers());
             board1.setRequestors(board.getRequestors());
-            board1.setUpdatedAt(new Timestamp(System.currentTimeMillis())); //set the updated date to current time and date
+            board1.setUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime())); //set the updated date to current time and date
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();

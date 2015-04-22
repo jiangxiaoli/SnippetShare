@@ -26,7 +26,9 @@ public class Board {
 	@Column(name = "isPublic")
 	private boolean isPublic;
 
-
+     //adding description column to the board
+    @Column(name = "description")
+    private String description;
 	
 	//One user can have many boards
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,6 +40,11 @@ public class Board {
 	
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt;
+
+    //added to retrieve snippets
+    @Column(name = "snippet")
+    @OneToMany(mappedBy = "board")
+    private List<Snippet> snippets;
 
     //when board is deleted delete the access and requests related with the baord,cascadeType = remove
 	@ManyToMany(cascade=CascadeType.ALL)
@@ -58,23 +65,20 @@ public class Board {
 //    @OneToMany(mappedBy = "board")
 //    private ArrayList<Snippet> snippets;
 	
-	public Board(String title, String category, boolean isPublic,
-			Timestamp createdAt, Timestamp updatedAt) {
+	public Board(String title, String category, boolean isPublic) {
 		
 		this.title = title;
 		this.category = category;
 		this.isPublic = isPublic;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 	}
 
-
+    //add default constructor always to make get work
+    public Board(){}
 
 	public int getBid() {
 		return bid;
 	}
 
-	
 	public String getTitle() {
 		return title;
 	}
@@ -143,10 +147,19 @@ public class Board {
         return requestors.size();
     }
 
-//    public int getNumberOfSnippets(){
-//        return snippets.size();
-//    }
-	
+    public String getDescription() {
+        return description;
+    }
 
-	
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+        public int getNumberOfSnippets(){
+        return snippets.size();
+    }
+
+    public String toString(){
+        return this.bid + "," + this.getTitle()+"," + this.category;
+    }
 }
