@@ -24,35 +24,41 @@ public class JpaSnippetDAO implements SnippetDAO {
     public boolean insert(Snippet snippet) {
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
-        boolean isMember = false;
-        Board board = snippet.getBoard();
-        List<User> members = board.getMembers();
-        //Only the owner or  member of the board can add snippet in the board
-        for (User u : members) {
-            if (snippet.getAuthor().equals(u)) {
-                isMember = true;
-                break;
-            }
-        }
-        if (isMember || board.getOwner().equals(snippet.getAuthor())) {
-            try {
-                tx.begin();
-                manager.persist(snippet);
-                tx.commit();
-                return true;
 
+        java.util.Date date= new java.util.Date();
+        snippet.setCreatedAt(date.getTime());
+        snippet.setUpdatedAt(date.getTime());
 
-            } catch (RuntimeException e) {
-                tx.rollback();
-                throw e;
-            } finally {
-                manager.close();
-            }
-        }
-        else{
-            System.out.println("Not a member of the board");
-            return false;
-        }
+//        boolean isMember = false;
+//        Board board = snippet.getBoard();
+//        List<User> members = board.getMembers();
+//        //Only the owner or  member of the board can add snippet in the board
+//        for (User u : members) {
+//            if (snippet.getAuthor().equals(u)) {
+//                isMember = true;
+//                break;
+//            }
+//        }
+//        if (isMember || board.getOwner().equals(snippet.getAuthor())) {
+//            try {
+//                tx.begin();
+//                manager.persist(snippet);
+//                tx.commit();
+//                return true;
+//
+//
+//            } catch (RuntimeException e) {
+//                tx.rollback();
+//                throw e;
+//            } finally {
+//                manager.close();
+//            }
+//        }
+//        else{
+//            System.out.println("Not a member of the board");
+//            return false;
+//        }
+        return false;
     }
 
     @Override
@@ -87,7 +93,8 @@ public class JpaSnippetDAO implements SnippetDAO {
             snippet1.setLanguage(snippet.getLanguage());
             snippet1.setTitle(snippet.getTitle());
             snippet1.setUrl(snippet.getUrl());
-            snippet1.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+            java.util.Date date= new java.util.Date();
+            snippet1.setUpdatedAt(date.getTime());
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();

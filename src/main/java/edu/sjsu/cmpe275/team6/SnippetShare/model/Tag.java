@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Tag {
 
 	@Id
-	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
 	@Column(name = "tid")
 	private int tid;

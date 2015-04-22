@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 	@Id
-	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
     @Column(name = "userid")
 	private int userid;
@@ -32,11 +32,9 @@ public class User {
     @Column(name = "aboutMe")
     private String aboutMe;
 
-//    @Column(name = "snippet")
-//    @OneToMany(mappedBy = "author")
-//    private ArrayList<Snippet> snippets;
-//
-   @Column(name = "board")
+    @OneToMany(mappedBy = "author")
+    private List<Snippet> snippets;
+
     @OneToMany(mappedBy = "owner")
     private List<Board> boards;
 
@@ -93,14 +91,14 @@ public class User {
         this.aboutMe = aboutMe;
     }
 
-    //    public ArrayList<Snippet> getSnippets() {
-//        return snippets;
-//    }
-//
-//    public void setSnippets(ArrayList<Snippet> snippets) {
-//        this.snippets = snippets;
-//    }
-//
+	public List<Snippet> getSnippets() {
+        return snippets;
+    }
+
+    public void setSnippets(List<Snippet> snippets) {
+        this.snippets = snippets;
+    }
+
     public List<Board> getBoards() {
         return boards;
     }
@@ -108,6 +106,13 @@ public class User {
     public void setBoards(List<Board> boards) {
         this.boards = boards;
     }
+
+	public void addBoard(Board board){
+		this.boards.add(board);
+		if(board.getOwner() != this) {
+			board.setOwner(this);
+		}
+	}
 
     public String toString(){
       return (this.getUserid() + "," + this.getUsername() + "," + this.getEmail()+","+this.getBoards());
