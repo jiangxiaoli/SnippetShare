@@ -16,14 +16,37 @@
 
 
                 <!--show only when current user is the member of the borad -->
-                <a class="btn btn-warning btn-sm" ng-href="#/boardsmembers/{{board.bid}}">Members
+                <!--click to open modal-->
+                <button class="btn btn-warning btn-sm">Members
                     <span class="badge">{{board.members.length}}</span>
-                </a>
+                </button>
+
+                <!--member modal  WIP-->
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title">I'm a modal!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li ng-repeat="member in members">
+                                <h5>{{memeber.username}}</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
+
+                <button class="btn btn-default" ng-click="open()">Open me!</button>
+
 
                 <!--show only when current user is the owner of the borad -->
-                <a class="btn btn-danger btn-sm" ng-href="#/boardsrequests/{{board.bid}}">Requests
+                <!--click to open modal-->
+                <buton class="btn btn-danger btn-sm">Requests
                     <span class="badge">{{board.requestors.length}}</span>
-                </a>
+                </buton>
 
                 <!--show only when current user is the NOT member of the borad -->
                 <!--<a class="btn btn-danger btn-sm" ng-href="#/request">Send Request</a>-->
@@ -44,7 +67,7 @@
     <div class="container">
 
         <!--show only when current user is member or owner-->
-        <a class="btn btn-success btn-md pull-right" ng-href="#/">Create New Snippet</a>
+        <a class="btn btn-success btn-md pull-right" ng-href="#/createSnippet">Create New Snippet</a>
         <h3>Snippets</h3>
 
         <div >

@@ -47,23 +47,19 @@ angular.module("snippetShare")
                 templateUrl: "templates/pages/boards/edit.html",
                 controller: "BoardsEditController"
             })
-            .when("/boardsmembers/:id",{
-                templateUrl: "templates/pages/boards/members.html"//,
-                //controller: "BoardsEditController"
-            })
-            .when("/boardsrequests/:id",{
-                templateUrl: "templates/pages/boards/requests.html"//,
-                //controller: "BoardsEditController"
-            })
 
              /*********** snippet routes *************/
             .when("/snippets/:id",{
                 templateUrl: "templates/pages/snippets/show.html",
-                controller: "SnippetShowController"
+                controller: "SnippetsShowController"
             })
-            .when("/editsnippets/:id",{
+            .when("/createSnippet/",{
+                templateUrl: "templates/pages/snippets/create.html",
+                controller: "SnippetsCreateController"
+            })
+            .when("/editSnippets/:id",{
                 templateUrl: "templates/pages/snippets/edit.html",
-                //controller: "SnippetEditController"
+                controller: "SnippetsEditController"
             })
 
 

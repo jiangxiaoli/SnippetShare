@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("SnippetShowController", function ($scope, Snippet, $routeParams) {
+    .controller("SnippetsShowController", function ($scope, Snippet, $routeParams) {
 
         $scope.snippet = {
             sid: 1,
