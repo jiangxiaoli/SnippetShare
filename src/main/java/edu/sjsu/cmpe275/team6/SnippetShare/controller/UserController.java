@@ -24,25 +24,26 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> createUser(
-            @RequestParam(value="username", required = true) String username,
-            @RequestParam(value="pwd", required = true) String pwd,
-            @RequestParam(value="email", required = true) String email,
-            @RequestParam(value="userAvatarId", required = false) String userAvatarId,
+            @RequestParam(value = "username", required = true) String username,
+            @RequestParam(value = "pwd", required = true) String pwd,
+            @RequestParam(value = "email", required = true) String email,
+            @RequestParam(value = "userAvatarId", required = false) String userAvatarId,
+            @RequestParam(value = "aboutMe", required = false) String aboutMe,
             ModelMap model) {
         User user = new User(username, pwd, email);
-        if(userAvatarId.isEmpty()) user.setUserAvatarId("0");
+        System.out.println("In Controller,Avatar Id::" + user.getUserAvatarId());
+        if (userAvatarId == null) user.setUserAvatarId("1");
         else
-        user.setUserAvatarId(userAvatarId);
-
-
+            user.setUserAvatarId(userAvatarId);
+        user.setAboutMe(aboutMe);
 
         Gson gson = new Gson();
         try {
             userDAO.insert(user);
 
             return new ResponseEntity<String>(gson.toJson(user), HttpStatus.OK);
-        } catch(Exception e) {
-            System.out.println("fail to create player");
+        } catch (Exception e) {
+            System.out.println("fail to create user");
             return new ResponseEntity<String>(gson.toJson("userCreationError"), HttpStatus.BAD_REQUEST);
         }
 
@@ -61,18 +62,49 @@ public class UserController {
         // GsonBuilder gsonBuilder = new GsonBuilder();
         //  Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
 
-        if(user != null){
+        if (user != null) {
             System.out.println("Show user details::" + user.getUserid());
             String result = gson.toJson(user);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        }else{
+        } else {
             //user not found
             String result = gson.toJson("User-" + userid + " not found");
             return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
         }
     }
 
+    //3.Update the User
+
+    @RequestMapping(method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<String> updateUser(
+            @RequestParam(value = "username", required = true) String username,
+            @RequestParam(value = "pwd", required = true) String pwd,
+            @RequestParam(value = "email", required = true) String email,
+            @RequestParam(value = "userAvatarId", required = false) String userAvatarId,
+            @RequestParam(value = "aboutMe", required = false) String aboutMe,
+            @PathVariable int userid,
+            ModelMap model) {
+
+        User user = userDAO.findByUserId(userid);
+        Gson gson = new Gson();
+        try {
+            if(user!=null) {
+                userDAO.update(user);
+                String result = gson.toJson(user);
+                return new ResponseEntity<String>(result, HttpStatus.OK);
+            }
+            else {
+                //user not found
+                String result = gson.toJson("User-" + userid + " not found");
+                return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            System.out.println("fail to update user");
+            return new ResponseEntity<String>(gson.toJson("userUpdateError"), HttpStatus.BAD_REQUEST);
+        }
 
 
+    }
 }
 

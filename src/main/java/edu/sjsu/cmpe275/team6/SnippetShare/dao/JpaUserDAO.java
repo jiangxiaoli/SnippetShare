@@ -64,6 +64,7 @@ public class JpaUserDAO implements UserDAO {
             user1.setEmail(user.getEmail());
           //  user1.setBoards(user.getBoards());
             user1.setUserAvatarId(user.getUserAvatarId());
+            user1.setAboutMe(user.getAboutMe());
             //user1.setSnippets(user.getSnippets());
             tx.commit();
         } catch (RuntimeException e) {
