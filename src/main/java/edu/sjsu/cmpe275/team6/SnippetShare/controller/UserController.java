@@ -75,7 +75,7 @@ public class UserController {
 
     //3.Update the User
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/{userid}", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> updateUser(
             @RequestParam(value = "username", required = true) String username,
@@ -83,10 +83,15 @@ public class UserController {
             @RequestParam(value = "email", required = true) String email,
             @RequestParam(value = "userAvatarId", required = false) String userAvatarId,
             @RequestParam(value = "aboutMe", required = false) String aboutMe,
-            @PathVariable int userid,
-            ModelMap model) {
+            @PathVariable int userid) {
 
         User user = userDAO.findByUserId(userid);
+        user.setUsername(username);
+        user.setPwd(pwd);
+        user.setEmail(email);
+        user.setUserAvatarId(userAvatarId);
+        user.setAboutMe(aboutMe);
+
         Gson gson = new Gson();
         try {
             if(user!=null) {
