@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -32,13 +34,11 @@ public class UserController {
             @RequestParam(value = "pwd", required = true) String pwd,
             @RequestParam(value = "email", required = true) String email,
             @RequestParam(value = "userAvatarId", required = false) String userAvatarId,
-            @RequestParam(value = "aboutMe", required = false) String aboutMe,
-            ModelMap model) {
+            @RequestParam(value = "aboutMe", required = false) String aboutMe) {
         User user = new User(username, pwd, email);
         System.out.println("In Controller,Avatar Id::" + user.getUserAvatarId());
         if (userAvatarId == null) user.setUserAvatarId("1");
-        else
-            user.setUserAvatarId(userAvatarId);
+        else user.setUserAvatarId(userAvatarId);
         user.setAboutMe(aboutMe);
 
 //        //add board to the user
@@ -59,7 +59,6 @@ public class UserController {
         Gson gson = new Gson();
         try {
             userDAO.insert(user);
-
             return new ResponseEntity<String>(gson.toJson(user), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("fail to create user");
@@ -71,64 +70,92 @@ public class UserController {
     //2. GET get a user
     @RequestMapping(value = "/{userid}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> showPlayer(@PathVariable int userid) {
+    public ResponseEntity<String> showUser(@PathVariable int userid) {
         User user = userDAO.findByUserId(userid);
-        System.out.println("I am here");
-        System.out.println(user.toString());
 
         //gson to build and map user class
-     //   Gson gson = new Gson();
-         GsonBuilder gsonBuilder = new GsonBuilder();
-         Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
 
         if (user != null) {
-            System.out.println("Show user details::" + user.getUserid());
+            System.out.println("Show user details::" + user.toString());
             String result = gson.toJson(user);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } else {
             //user not found
-            String result = gson.toJson("User-" + userid + " not found");
+            String result = new Gson().toJson("User-" + userid + " not found");
             return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
         }
     }
 
     //3.Update the User
-
     @RequestMapping(value = "/{userid}", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> updateUser(
-            @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "pwd", required = true) String pwd,
-            @RequestParam(value = "email", required = true) String email,
+            @RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "pwd", required = false) String pwd,
+            @RequestParam(value = "email", required = false) String email,
             @RequestParam(value = "userAvatarId", required = false) String userAvatarId,
             @RequestParam(value = "aboutMe", required = false) String aboutMe,
             @PathVariable int userid) {
 
         User user = userDAO.findByUserId(userid);
-        user.setUsername(username);
-        user.setPwd(pwd);
-        user.setEmail(email);
-        user.setUserAvatarId(userAvatarId);
-        user.setAboutMe(aboutMe);
+        if(user != null) {
+            user.setUsername(username);
+            user.setPwd(pwd);
+            user.setEmail(email);
+            user.setUserAvatarId(userAvatarId);
+            user.setAboutMe(aboutMe);
 
-        Gson gson = new Gson();
-        try {
-            if(user!=null) {
+            System.out.println("User-" + user.toString());
+
+            //gson to build and map user class
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
+
+            try {
                 userDAO.update(user);
+                System.out.println("User-"+userid+" Updated!!");
+                user = userDAO.findByUserId(userid);
                 String result = gson.toJson(user);
                 return new ResponseEntity<String>(result, HttpStatus.OK);
+            } catch (Exception e){
+                String result = new Gson().toJson("Fail to update User-" + userid);
+                return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
             }
-            else {
-                //user not found
-                String result = gson.toJson("User-" + userid + " not found");
-                return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            System.out.println("fail to update user");
-            return new ResponseEntity<String>(gson.toJson("userUpdateError"), HttpStatus.BAD_REQUEST);
+
+        } else {
+            String result = new Gson().toJson("User-" + userid + " not found");
+            return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
         }
 
+    }
 
+    //4. GET get all users
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> showUsers() {
+        List<User> users = userDAO.allUsers();
+
+        //gson to build and map user class
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
+
+        if(users != null){
+
+            for(User user: users) {
+                System.out.println("Show user details::" + user.toString());
+
+            }
+
+            String result = gson.toJson(users);
+
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        }else{
+            //no user
+            String result = new Gson().toJson("No user found");
+            return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
+        }
     }
 
 

@@ -59,12 +59,23 @@ public class JpaUserDAO implements UserDAO {
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            user1.setUsername(user.getUsername());
-            user1.setPwd(user.getPwd());
-            user1.setEmail(user.getEmail());
-          //  user1.setBoards(user.getBoards());
-            user1.setUserAvatarId(user.getUserAvatarId());
-            user1.setAboutMe(user.getAboutMe());
+            if(user.getUsername() != null){
+                user1.setUsername(user.getUsername());
+            }
+            if(user.getEmail() != null) {
+                user1.setEmail(user.getEmail());
+            }
+            if(user.getPwd()!= null){
+                user1.setPwd(user.getPwd());
+            }
+            if(user.getUserAvatarId() != null) {
+                user1.setUserAvatarId(user.getUserAvatarId());
+            }
+            if(user.getAboutMe() != null){
+                user1.setAboutMe(user.getAboutMe());
+            }
+
+            //  user1.setBoards(user.getBoards());
             //user1.setSnippets(user.getSnippets());
             tx.commit();
         } catch (RuntimeException e) {
@@ -77,30 +88,8 @@ public class JpaUserDAO implements UserDAO {
 
     @Override
     public boolean delete(int userid) {
-        EntityManager manager = entityManagerFactory.createEntityManager();
-        User user = manager.find(User.class, userid);
-        EntityTransaction tx = manager.getTransaction();
-        try {
-            tx.begin();
-            if(user != null) {
-                System.out.println(user.getUserid()+", "+ user.getUsername());
-//                manager.refresh(user);//for cascading delete address
-                manager.remove(user);
-
-                //not delete opponents
-
-                tx.commit();
-                return true;
-            } else {
-                tx.commit();
-                return false; //user not found
-            }
-        } catch (RuntimeException e) {
-            tx.rollback();
-            throw e;
-        } finally {
-            manager.close();
-        }
+//        delete user is not supported
+        return false;
     }
 
     @Override
