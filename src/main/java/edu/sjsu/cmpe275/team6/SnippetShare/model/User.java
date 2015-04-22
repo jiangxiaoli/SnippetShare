@@ -28,6 +28,9 @@ public class User {
 	@Column(name ="userAvatarId")
 	private String userAvatarId;
 
+    @Column(name = "aboutMe")
+    private String aboutMe;
+
 //    @Column(name = "snippet")
 //    @OneToMany(mappedBy = "author")
 //    private ArrayList<Snippet> snippets;
@@ -81,7 +84,15 @@ public class User {
 		this.userAvatarId = userAvatarId;
 	}
 
-//    public ArrayList<Snippet> getSnippets() {
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    //    public ArrayList<Snippet> getSnippets() {
 //        return snippets;
 //    }
 //
