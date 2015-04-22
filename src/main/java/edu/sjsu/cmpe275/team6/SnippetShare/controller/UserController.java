@@ -5,6 +5,7 @@ package edu.sjsu.cmpe275.team6.SnippetShare.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import edu.sjsu.cmpe275.team6.SnippetShare.dao.BoardDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.UserAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
     UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+    BoardDAO boardDAO =(BoardDAO) context.getBean("boardDAO");
 
     //1. POST Create a user
     @RequestMapping(method = RequestMethod.POST)
@@ -38,6 +40,21 @@ public class UserController {
         else
             user.setUserAvatarId(userAvatarId);
         user.setAboutMe(aboutMe);
+
+//        //add board to the user
+//        List<Board> boardList = new ArrayList<Board>();
+//
+//        if(bid!=0){
+//            Board board = boardDAO.findByBoardId(bid);
+//            if(board!=null){
+//               boardList.add(board);
+//                user.setBoards(boardList);
+//            }else{
+//                System.out.println("Board-"+bid+" not found!");
+//                String result = new Gson().toJson("Board-"+ bid +" not found!");
+//                return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+//            }
+//        }
 
         Gson gson = new Gson();
         try {

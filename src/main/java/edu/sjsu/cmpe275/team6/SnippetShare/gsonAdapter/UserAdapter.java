@@ -39,9 +39,10 @@ public class UserAdapter implements JsonSerializer<User> {
                     userItemObj.addProperty("updatedAt", String.valueOf(b.getUpdatedAt()));
                     userItemObj.addProperty("description",b.getDescription());
                     userItemObj.addProperty("numberOfSnippets",b.getNumberOfSnippets());
+                    boardListArr.add(userItemObj); //add each item to board array
 
                 }
-                userObj.add("boards", boardListArr);
+                userObj.add("boards", boardListArr); //add board array to user obj
             }
 
         return userObj;
