@@ -2,11 +2,9 @@ package edu.sjsu.cmpe275.team6.SnippetShare.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.BoardDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.BoardAdapter;
-import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.UserAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 import org.springframework.context.ApplicationContext;
@@ -155,7 +153,6 @@ public class BoardController {
 
             for(Board board: boardList) {
                 System.out.println("Show board details::" + board.getBid());
-
             }
 
             String result = gson.toJson(boardList);
