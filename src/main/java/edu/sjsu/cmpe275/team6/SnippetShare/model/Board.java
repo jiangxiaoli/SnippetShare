@@ -167,9 +167,9 @@ public class Board {
         return snippets.size();
     }
 
-    public String toString(){
-        return this.bid + "," + this.getTitle()+","
-				+ this.category +"," + this.isPublic + "," + this.getOwner()
-				+ this.createdAt+ "," + this.updatedAt;
-    }
+//    public String toString(){
+//        return this.bid + "," + this.getTitle()+","
+//				+ this.category +"," + this.isPublic + "," + this.getOwner()
+//				+ this.createdAt+ "," + this.updatedAt;
+//    }
 }

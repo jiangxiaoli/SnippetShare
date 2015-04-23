@@ -114,7 +114,7 @@ public class User {
 		}
 	}
 
-    public String toString(){
-      return (this.getUserid() + "," + this.getUsername() + "," + this.getEmail()+","+this.getBoards());
-    }
+//    public String toString(){
+//      return (this.getUserid() + "," + this.getUsername() + "," + this.getEmail()+","+this.getBoards());
+//    }
 }

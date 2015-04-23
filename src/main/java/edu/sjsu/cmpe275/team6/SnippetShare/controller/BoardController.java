@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,11 +30,11 @@ public class BoardController {
     //1. POST Create a board
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> createUser(
+    public ResponseEntity<String> createBoard(
             @PathVariable int userid,
             @RequestParam(value = "title", required = true) String title,
             @RequestParam(value = "category", required = true) String category,
-            @RequestParam(value = "isPublic", required = true) Boolean isPublic,
+            @RequestParam(value = "isPublic", required = true) boolean isPublic,
             @RequestParam(value = "description", required = false) String description) {
 
         Board board = new Board(title, category, isPublic);
@@ -63,7 +64,7 @@ public class BoardController {
     //2. GET get a board
     @RequestMapping(value = "/{bid}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> showUser(@PathVariable int userid,
+    public ResponseEntity<String> showBoard(@PathVariable int userid,
                                            @PathVariable int bid) {
         try {
             Board board = boardDAO.findByBoardId(bid);
@@ -88,50 +89,59 @@ public class BoardController {
 
     }
 
-    //3.Update the User
-//    @RequestMapping(value = "/{userid}", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ResponseEntity<String> updateUser(
-//            @RequestParam(value = "username", required = false) String username,
-//            @RequestParam(value = "pwd", required = false) String pwd,
-//            @RequestParam(value = "email", required = false) String email,
-//            @RequestParam(value = "userAvatarId", required = false) String userAvatarId,
-//            @RequestParam(value = "aboutMe", required = false) String aboutMe,
-//            @PathVariable int userid) {
-//
-//        User user = userDAO.findByUserId(userid);
-//        if(user != null) {
-//            user.setUsername(username);
-//            user.setPwd(pwd);
-//            user.setEmail(email);
-//            user.setUserAvatarId(userAvatarId);
-//            user.setAboutMe(aboutMe);
-//
-//            System.out.println("User-" + user.getID());
-//
-//            //gson to build and map user class
-//            GsonBuilder gsonBuilder = new GsonBuilder();
-//            Gson gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
-//
-//            try {
-//                userDAO.update(user);
-//                System.out.println("User-"+userid+" Updated!!");
-//                user = userDAO.findByUserId(userid);
-//                String result = gson.toJson(user);
-//                return new ResponseEntity<String>(result, HttpStatus.OK);
-//            } catch (Exception e){
-//                String result = new Gson().toJson("Fail to update User-" + userid);
-//                return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
-//            }
-//
-//        } else {
-//            String result = new Gson().toJson("User-" + userid + " not found");
-//            return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
-//        }
-//
-//    }
-//
-//    //4. GET get all board
+    //3.Update the board
+    //PAY ATTENTION to switch between isPublic (false-true)
+    @RequestMapping(value = "/{bid}", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> updateBoard(
+            @PathVariable int userid,
+            @PathVariable int bid,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "isPublic", required = false) boolean isPublic,
+            @RequestParam(value = "description", required = false) String description) {
+
+        Board board = boardDAO.findByBoardId(bid);
+
+        if(board != null) {
+            board.setTitle(title);
+            board.setCategory(category);
+
+            if(isPublic){
+                //check if false-true, clean members and requestors
+                if(board.getIsPublic() == false && isPublic == true)
+                {
+                    board.setMembers(new ArrayList<User>());
+                    board.setRequestors(new ArrayList<User>());
+                }
+                board.setIsPublic(isPublic);
+            }
+
+            board.setDescription(description);
+
+            //gson to build and map board class
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.registerTypeAdapter(Board.class, new BoardAdapter()).create();
+
+            try {
+                boardDAO.update(board);
+                System.out.println("Board-"+bid+" Updated!!");
+                board = boardDAO.findByBoardId(bid);
+                String result = gson.toJson(board);
+                return new ResponseEntity<String>(result, HttpStatus.OK);
+            } catch (Exception e){
+                String result = new Gson().toJson("Fail to update Board-" + bid);
+                return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+            }
+
+        } else {
+            String result = new Gson().toJson("Board-" + bid + " not found");
+            return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    //4. GET get all board
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> showBoards(@PathVariable int userid) {
@@ -158,6 +168,32 @@ public class BoardController {
         }
     }
 
+    //5. delete a board
+    @RequestMapping(value = "/{bid}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<String> deleteBoard(@PathVariable int bid) {
+        Board board = boardDAO.findByBoardId(bid);
+
+        //gson to build and map player class
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.registerTypeAdapter(Board.class, new BoardAdapter()).create();
+
+        if(board != null){
+            try {
+                boardDAO.delete(bid);
+                System.out.println("board-"+bid+" deleted !!");
+                String result = gson.toJson(board);
+                return new ResponseEntity<String>(result, HttpStatus.OK);
+            } catch (RuntimeException e){
+                String result = new Gson().toJson("Fail to delete board- "+bid+"!");
+                return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+            }
+
+        } else {
+            String result = new Gson().toJson("Board-"+bid+" not found");
+            return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 }

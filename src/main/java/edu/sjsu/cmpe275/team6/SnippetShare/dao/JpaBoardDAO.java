@@ -64,13 +64,22 @@ public class JpaBoardDAO implements BoardDAO{
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            board1.setTitle(board.getTitle());
-            board1.setCategory(board.getCategory());
-            board1.setIsPublic(board.getIsPublic());
-            board1.setMembers(board.getMembers());
-            board1.setRequestors(board.getRequestors());
+            if(board.getTitle() != null) {
+                board1.setTitle(board.getTitle());
+            }
+            if(board.getCategory() != null) {
+                board1.setCategory(board.getCategory());
+            }
+            if(board.getIsPublic()) board1.setIsPublic(board.getIsPublic());
+
+            if(board.getDescription() != null) {
+                board1.setTitle(board.getDescription());
+            }
+
+//            board1.setMembers(board.getMembers());
+//            board1.setRequestors(board.getRequestors());
             java.util.Date date= new java.util.Date();
-            board.setUpdatedAt(date.getTime());
+            board1.setUpdatedAt(date.getTime());
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
@@ -89,8 +98,7 @@ public class JpaBoardDAO implements BoardDAO{
         try{
             tx.begin();
             if(board != null) {
-                System.out.println(board.getBid() + ", " + board.getTitle() + ", " + board.getOwner());
-                manager.refresh(board);//for cascading delete access and request
+//                manager.refresh(board);//for cascading delete access and request
                 manager.remove(board);
                 tx.commit();
                 return true;
