@@ -2,7 +2,7 @@ package edu.sjsu.cmpe275.team6.SnippetShare.model;
 
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.List;
 
 
 @Entity
@@ -10,49 +10,47 @@ import java.sql.Timestamp;
 public class Snippet {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
 	@Column(name = "sid")
 	private int sid;
-	
+
 	@Column(name = "title")
 	private String title;
-	
+
 	@Column(name = "content")
 	private String content;
-	
+
 	@Column(name = "url")
 	private String url;
-	
+
 	@Column(name = "language")
 	private String language;
-	
+
 	//can we have created time and updated time??
 	@Column(name = "createdAt")
-	private Timestamp createdAt;
-	
+	private long createdAt;
+
 	@Column(name = "updatedAt")
-	private Timestamp updatedAt;
-	
+	private long updatedAt;
+
 	//One user can have many snippets
     @ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
     @JoinColumn(name = "author")
     private User author;
-		
+
    //One board can have many snippets
 	@ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
 	@JoinColumn(name = "bid")
     private Board board;
 
-//    @Column(name = "comments")
-//    @OneToMany(mappedBy = "snippet")
-//    private ArrayList<Comment> comments;
-	
-	public Snippet(String title, String content, String url,Timestamp createdAt,Timestamp updatedAt) {
+    @Column(name = "comments")
+    @OneToMany(mappedBy = "snippet")
+    private List<Comment> comments;
+
+	public Snippet(String title, String content) {
 		this.title = title;
 		this.content = content;
-		this.url = url;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 	}
 
 	public int getSid() {
@@ -91,20 +89,19 @@ public class Snippet {
 		this.language = language;
 	}
 
-	public Timestamp getCreatedAt() {
+	public long getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Timestamp createdAt) {
+	public void setCreatedAt(long createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	
-	public Timestamp getUpdatedAt() {
+	public long getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Timestamp updatedAt) {
+	public void setUpdatedAt(long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -124,7 +121,12 @@ public class Snippet {
 		this.board = board;
 	}
 
-//    public int getNumberOfComments(){
-//        return comments.size();
-//    }
+    public int getNumberOfComments(){
+        return this.comments.size();
+    }
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) { this.comments = comments; }
 }

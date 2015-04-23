@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -22,6 +23,9 @@ public class JpaBoardDAO implements BoardDAO{
     public boolean insert(Board board) {
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
+        java.util.Date date= new java.util.Date();
+        board.setCreatedAt(date.getTime());
+        board.setUpdatedAt(date.getTime());
         try {
             tx.begin();
             manager.persist(board);
@@ -47,7 +51,7 @@ public class JpaBoardDAO implements BoardDAO{
             return board;
         } catch (RuntimeException e) {
             tx.rollback();
-            return null;
+            throw e;
         } finally {
             manager.close();
         }
@@ -60,12 +64,22 @@ public class JpaBoardDAO implements BoardDAO{
         EntityTransaction tx = manager.getTransaction();
         try {
             tx.begin();
-            board1.setTitle(board.getTitle());
-            board1.setCategory(board.getCategory());
-            board1.setIsPublic(board.getIsPublic());
-            board1.setMembers(board.getMembers());
-            board1.setRequestors(board.getRequestors());
-            board1.setUpdatedAt(new Timestamp(System.currentTimeMillis())); //set the updated date to current time and date
+            if(board.getTitle() != null) {
+                board1.setTitle(board.getTitle());
+            }
+            if(board.getCategory() != null) {
+                board1.setCategory(board.getCategory());
+            }
+            if(board.getIsPublic()) board1.setIsPublic(board.getIsPublic());
+
+            if(board.getDescription() != null) {
+                board1.setTitle(board.getDescription());
+            }
+
+//            board1.setMembers(board.getMembers());
+//            board1.setRequestors(board.getRequestors());
+            java.util.Date date= new java.util.Date();
+            board1.setUpdatedAt(date.getTime());
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
@@ -84,8 +98,7 @@ public class JpaBoardDAO implements BoardDAO{
         try{
             tx.begin();
             if(board != null) {
-                System.out.println(board.getBid() + ", " + board.getTitle() + ", " + board.getOwner());
-                manager.refresh(board);//for cascading delete access and request
+//                manager.refresh(board);//for cascading delete access and request
                 manager.remove(board);
                 tx.commit();
                 return true;
@@ -95,18 +108,16 @@ public class JpaBoardDAO implements BoardDAO{
                 return false; //board not found
             }
         }catch (RuntimeException e) {
-        tx.rollback();
-        throw e;
-    } finally {
-        manager.close();
-    }
-
-
+            tx.rollback();
+            throw e;
+        } finally {
+            manager.close();
+        }
     }
 
     @Override
-    public List<Board> allBoards() {
-        String query = "SELECT b FROM Board b"; //select all row from the table
+    public List<Board> allBoards(int ownerid) {
+        String query = "SELECT b FROM Board b WHERE owner = "+ ownerid; //select all row from the table
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {

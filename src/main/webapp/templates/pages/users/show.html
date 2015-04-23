@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                     <label class="col-sm-2 align-right text-success text-bold">Description:</label>
-                    <p class="col-md-10"> {{user.profilepic}} </p>
+                    <p class="col-md-10"> {{user.aboutMe}} </p>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <tab ng-repeat="category in categories" heading="{{category}}">
                     <div class="jumbotron board-list">
                         <!--ng-click event for create a new board-->
-                        <a class="btn btn-warning" href="#/createboards">New Board</a>
+                        <a class="btn btn-warning" href="#/users/{{user.userid}}/createboards">New Board</a>
                     </div>
                     <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
                          ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
@@ -44,7 +44,7 @@
                         </h4>
 
                         <!--if board is private , don't show link, show request botton when hover-->
-                        <a ng-href="#/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
+                        <a ng-href="#/users/{{user.userid}}/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
 
                         <!--hover to show description-->
                         <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->

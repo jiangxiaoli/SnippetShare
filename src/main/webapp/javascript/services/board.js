@@ -2,12 +2,13 @@
 
 angular.module("snippetShare")
     .factory("Board", function BoardFactory($http){
+        var rootUrl ="/snippetshare/users/";
         return {
-            all: function(){
-                return $http({method: "GET", url:"snippetshare/boards"});
+            all: function(userid){
+                return $http({method: "GET", url:rootUrl+userid+"/boards"});
             },
-            create: function(board){
-                return $http.post("snippetshare/boards", board, {
+            create: function(userid, board){
+                return $http.post(rootUrl+userid+"/boards", board, {
                     //transfer $http send data format to request param
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: function(board){
@@ -15,11 +16,11 @@ angular.module("snippetShare")
                     }
                 });
             },
-            find: function (id) {
-                return $http({method: "GET", url:"snippetshare/boards/" + id});
+            find: function (userid, bid) {
+                return $http({method: "GET", url:rootUrl+userid+"/boards/"+ bid});
             },
-            update: function (board, id) {
-                return $http.post("snippetshare/boards/"+id, board, {
+            update: function (userid, bid, board) {
+                return $http.post(rootUrl+userid+"/boards/"+bid, board, {
                     //transfer $http send data format to request param
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: function(board){
@@ -27,8 +28,8 @@ angular.module("snippetShare")
                     }
                 });
             },
-            remove: function (id) {
-                return $http({method: "DELETE", url:"snippetshare/boards/" + id});
+            remove: function (userid, bid) {
+                return $http({method: "DELETE", url:rootUrl+userid+"/boards/"+bid});
             }
 
         }

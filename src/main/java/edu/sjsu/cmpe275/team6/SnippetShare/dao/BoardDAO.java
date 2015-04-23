@@ -14,5 +14,5 @@ public interface BoardDAO {
     public Board findByBoardId(int bid);
     public void update(Board board);
     public boolean delete(int bid);
-    public List<Board> allBoards();
+    public List<Board> allBoards(int ownerid);
 }
