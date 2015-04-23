@@ -9,6 +9,10 @@ angular.module("snippetShare")
         $scope.saveBoard = function (board) {
             $scope.isSubmitting = true;
 
+            if(!board.isPublic) {
+                board.isPublic = false;
+            }
+
             console.log(board);
 
             //Board.create(board)
