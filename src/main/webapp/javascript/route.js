@@ -31,33 +31,33 @@ angular.module("snippetShare")
             //})
 
             /*********** boards routes *************/
-            .when("/boards",{
-                templateUrl: "templates/pages/boards/index.html",
-                controller: "BoardsIndexController"
-            })
-            .when("/createboards",{
+            //.when("/users/:userid/boards",{
+            //    templateUrl: "templates/pages/boards/index.html",
+            //    controller: "BoardsIndexController"
+            //})
+            .when("/users/:userid/createboards",{
                 templateUrl: "templates/pages/boards/create.html",
                 controller: "BoardsCreateController"
             })
-            .when("/boards/:id",{
+            .when("/users/:userid/boards/:bid",{
                 templateUrl: "templates/pages/boards/show.html",
                 controller: "BoardsShowController"
             })
-            .when("/editboards/:id",{
+            .when("/users/:userid/editboards/:bid",{
                 templateUrl: "templates/pages/boards/edit.html",
                 controller: "BoardsEditController"
             })
 
              /*********** snippet routes *************/
-            .when("/snippets/:id",{
+            .when("/boards/:bid/snippets/:id",{
                 templateUrl: "templates/pages/snippets/show.html",
                 controller: "SnippetsShowController"
             })
-            .when("/createSnippet/",{
+            .when("/boards/:bid/createSnippet/",{
                 templateUrl: "templates/pages/snippets/create.html",
                 controller: "SnippetsCreateController"
             })
-            .when("/editSnippets/:id",{
+            .when("/boards/:bid/editSnippets/:id",{
                 templateUrl: "templates/pages/snippets/edit.html",
                 controller: "SnippetsEditController"
             })

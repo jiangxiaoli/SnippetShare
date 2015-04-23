@@ -3,7 +3,7 @@
 angular.module("snippetShare")
     .filter('hasCategory', function () {
         return function (users, category) {
-            if(category == "All") return users;
+            if(category == "All" || !users) return users;
 
             var filtered = [];
             for(var i = 0; i< users.length; i++){
