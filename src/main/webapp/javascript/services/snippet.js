@@ -2,7 +2,7 @@
 
 angular.module("snippetShare")
     .factory("Snippet", function SnippetFactory($http){
-        var rootUrl ="/snippetshare/snippets/";
+        var rootUrl ="/snippets/";
         return {
             all: function(){
                 return $http({method: "GET", url:rootUrl});

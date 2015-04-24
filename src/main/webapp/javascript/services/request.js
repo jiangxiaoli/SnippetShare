@@ -2,7 +2,7 @@
 
 angular.module("snippetShare")
     .factory("Request", function RequestFactory($http){
-        var rootUrl ="/snippetshare/request/";
+        var rootUrl ="/request/";
         return {
             sendRequest: function(bid, userid){
                 return $http({method: "POST", url:rootUrl+bid+ "/" +userid});
