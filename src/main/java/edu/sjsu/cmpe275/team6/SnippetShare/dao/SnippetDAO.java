@@ -14,7 +14,7 @@ public interface SnippetDAO {
         public Snippet findBySnippetId(int sid);
         public void update(Snippet snippet);
         public boolean delete(int sid);
-        public List<Snippet> allSnippets();
+        public List<Snippet> allSnippets(int bid);
 
 
 }
