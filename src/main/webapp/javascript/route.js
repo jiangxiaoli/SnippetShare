@@ -31,10 +31,6 @@ angular.module("snippetShare")
             //})
 
             /*********** boards routes *************/
-            //.when("/users/:userid/boards",{
-            //    templateUrl: "templates/pages/boards/index.html",
-            //    controller: "BoardsIndexController"
-            //})
             .when("/users/:userid/createboards",{
                 templateUrl: "templates/pages/boards/create.html",
                 controller: "BoardsCreateController"
