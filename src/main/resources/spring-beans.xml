@@ -18,6 +18,10 @@
     <bean id="snippetDAO" class="edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaSnippetDAO">
         <property name="entityManagerFactory" ref="myEmf" />
     </bean>
+    
+    <bean id="commentDAO" class="edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaCommentDAO">
+        <property name="entityManagerFactory" ref="myEmf" />
+    </bean>
 
 
 </beans>

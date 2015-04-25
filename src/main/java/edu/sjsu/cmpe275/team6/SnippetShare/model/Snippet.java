@@ -53,6 +53,8 @@ public class Snippet {
 		this.content = content;
 	}
 
+	public Snippet() {}
+	
 	public int getSid() {
 		return sid;
 	}

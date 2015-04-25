@@ -36,6 +36,9 @@ public class Comment {
 		this.content = content;
 	}
 
+	public Comment() {}
+	
+	
 	public int getCid() {
 		return cid;
 	}

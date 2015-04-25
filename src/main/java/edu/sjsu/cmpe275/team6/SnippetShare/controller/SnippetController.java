@@ -77,7 +77,7 @@ public class SnippetController {
 	
     
     
-    //2. GET get a board
+    //2. GET get a snippet
     @RequestMapping(value = "/{sid}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> showSnippet(@PathVariable int bid,
@@ -152,7 +152,7 @@ public class SnippetController {
     //4. GET get all snippet in a board
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> showBoards(@PathVariable int bid) {
+    public ResponseEntity<String> showSnippets(@PathVariable int bid) {
         List<Snippet> snippetList = snippetDAO.allSnippets(bid);
 
         //gson to build and map user class
@@ -179,7 +179,7 @@ public class SnippetController {
     //5. delete a snippet
     @RequestMapping(value = "/{sid}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<String> deleteBoard(@PathVariable int bid, @PathVariable int sid) {
+    public ResponseEntity<String> deleteSnippet(@PathVariable int bid, @PathVariable int sid) {
         Snippet snippet = snippetDAO.findBySnippetId(sid);
 
         //gson to build and map player class
@@ -189,7 +189,7 @@ public class SnippetController {
         if(snippet != null){
             try {
                 snippetDAO.delete(sid);
-                System.out.println("soard-"+sid+" deleted !!");
+                System.out.println("snippet-"+sid+" deleted !!");
                 String result = gson.toJson(snippet);
                 return new ResponseEntity<String>(result, HttpStatus.OK);
             } catch (RuntimeException e){

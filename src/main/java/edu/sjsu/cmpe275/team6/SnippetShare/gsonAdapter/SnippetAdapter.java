@@ -41,6 +41,7 @@ public class SnippetAdapter implements JsonSerializer<Snippet> {
         boardObj.addProperty("title",snippet.getBoard().getTitle());
         boardObj.addProperty("category",snippet.getBoard().getCategory());
         boardObj.addProperty("description",snippet.getBoard().getDescription());
+        snippetObj.add("board",boardObj);
         
         //map for comments
         List<Comment> comments = snippet.getComments();
