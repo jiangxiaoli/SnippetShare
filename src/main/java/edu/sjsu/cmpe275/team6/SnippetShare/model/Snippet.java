@@ -47,6 +47,10 @@ public class Snippet {
     @Column(name = "comments")
     @OneToMany(mappedBy = "snippet")
     private List<Comment> comments;
+    
+    @Column(name = "tags")
+    @OneToMany(mappedBy = "snippet")
+    private List<Tag> tags;
 
 	public Snippet(String title, String content) {
 		this.title = title;
@@ -131,4 +135,14 @@ public class Snippet {
 		return comments;
 	}
 	public void setComments(List<Comment> comments) { this.comments = comments; }
+	
+	
+	public int getNumberOfTags(){
+        return this.tags.size();
+    }
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) { this.tags = tags; }
 }

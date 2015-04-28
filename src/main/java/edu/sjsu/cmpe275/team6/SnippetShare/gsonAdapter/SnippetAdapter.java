@@ -11,6 +11,7 @@ import com.google.gson.JsonSerializer;
 
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Comment;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Snippet;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.Tag;
 
 public class SnippetAdapter implements JsonSerializer<Snippet> {
 
@@ -66,6 +67,20 @@ public class SnippetAdapter implements JsonSerializer<Snippet> {
         		commentsList.add(commentItemObj);
         	}
         	snippetObj.add("comments", commentsList);
+        }
+        
+        
+        //map for tags
+        List<Tag> tags = snippet.getTags();
+        if(tags!=null){
+        	JsonArray tagsList = new JsonArray();
+        	for(Tag t : tags){
+        		JsonObject tagItemObj = new JsonObject();
+        		tagItemObj.addProperty("tid", t.getTid());
+        		tagItemObj.addProperty("content", t.getContent());
+        		tagsList.add(tagItemObj);
+        	}
+        	snippetObj.add("tags", tagsList);
         }
         
 		return snippetObj;
