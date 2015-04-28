@@ -29,19 +29,23 @@ public class SnippetAdapter implements JsonSerializer<Snippet> {
 		snippetObj.addProperty("numOfComments", snippet.getNumberOfComments());
 		
 		//map for author
-		JsonObject authorObj = new JsonObject();
-        authorObj.addProperty("userid", snippet.getAuthor().getUserid());
-        authorObj.addProperty("username", snippet.getAuthor().getUsername());
-        authorObj.addProperty("userAvatarId", snippet.getAuthor().getUserAvatarId());
-        snippetObj.add("author", authorObj);
+		if(snippet.getAuthor()!=null){
+			JsonObject authorObj = new JsonObject();
+	        authorObj.addProperty("userid", snippet.getAuthor().getUserid());
+	        authorObj.addProperty("username", snippet.getAuthor().getUsername());
+	        authorObj.addProperty("userAvatarId", snippet.getAuthor().getUserAvatarId());
+	        snippetObj.add("author", authorObj);
+		}
 		
         //map for board
+		if(snippet.getBoard()!=null){
         JsonObject boardObj = new JsonObject();
-        boardObj.addProperty("bid",snippet.getBoard().getBid());
-        boardObj.addProperty("title",snippet.getBoard().getTitle());
-        boardObj.addProperty("category",snippet.getBoard().getCategory());
-        boardObj.addProperty("description",snippet.getBoard().getDescription());
-        snippetObj.add("board",boardObj);
+	        boardObj.addProperty("bid",snippet.getBoard().getBid());
+	        boardObj.addProperty("title",snippet.getBoard().getTitle());
+	        boardObj.addProperty("category",snippet.getBoard().getCategory());
+	        boardObj.addProperty("description",snippet.getBoard().getDescription());
+	        snippetObj.add("board",boardObj);
+		}
         
         //map for comments
         List<Comment> comments = snippet.getComments();

@@ -98,6 +98,7 @@ public class SnippetController {
                 return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
             }
         } catch (RuntimeException e){
+        	e.printStackTrace();
             System.out.println("fail to get snippet");
             String result = new Gson().toJson("Fail to get snippet");
             return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
@@ -193,6 +194,7 @@ public class SnippetController {
                 String result = gson.toJson(snippet);
                 return new ResponseEntity<String>(result, HttpStatus.OK);
             } catch (RuntimeException e){
+            	e.getStackTrace();
                 String result = new Gson().toJson("Fail to delete snippet- "+sid+"!");
                 return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
             }

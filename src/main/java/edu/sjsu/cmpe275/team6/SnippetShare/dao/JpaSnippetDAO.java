@@ -114,6 +114,7 @@ public class JpaSnippetDAO implements SnippetDAO {
                 return false;
             }
         }catch(RuntimeException e){
+        	e.getStackTrace();
             tx.rollback();
             throw e;
         }finally{
