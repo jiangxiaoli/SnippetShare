@@ -1,9 +1,12 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.main;
 
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.BoardDAO;
+import edu.sjsu.cmpe275.team6.SnippetShare.dao.SnippetDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.Snippet;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
@@ -17,6 +20,18 @@ public class JpaTest {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
         UserDAO userDAO = (UserDAO) context.getBean("userDAO");
         BoardDAO boardDAO = (BoardDAO) context.getBean("boardDAO");
+        SnippetDAO snippetDAO = (SnippetDAO) context.getBean("snippetDAO");
+        
+        
+        /*********************Snippet DAO test*****************/
+//        Snippet snippet = new Snippet("aaaa","<a></a>");
+//        snippetDAO.insert(snippet);
+          Snippet snippet1 = snippetDAO.findBySnippetId(3);
+          snippet1.setContent("<html></html>");
+          snippetDAO.update(snippet1);
+        
+        
+        
 
                     /**********User DAO test*********/
 //        User user = new User("Rucha","test1","rucha.b@gmail.com");//insert board to this user
@@ -89,19 +104,19 @@ public class JpaTest {
 //            System.out.println("fail to create board");
 //        }
 
-        try {
-            System.out.println("find user");
-            System.out.println(userDAO.findByUserId(1).getUsername());
-        } catch (RuntimeException e) {
-            System.out.println("fail to find user");
-        }
-
-        try {
-            System.out.println("find board");
-            System.out.println(boardDAO.findByBoardId(1).getTitle());
-        } catch (RuntimeException e) {
-            System.out.println("fail to find board");
-        }
+//        try {
+//            System.out.println("find user");
+//            System.out.println(userDAO.findByUserId(1).getUsername());
+//        } catch (RuntimeException e) {
+//            System.out.println("fail to find user");
+//        }
+//
+//        try {
+//            System.out.println("find board");
+//            System.out.println(boardDAO.findByBoardId(1).getTitle());
+//        } catch (RuntimeException e) {
+//            System.out.println("fail to find board");
+//        }
 
     }
 }
