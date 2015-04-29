@@ -23,6 +23,7 @@ import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.CommentAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.SnippetAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Comment;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Snippet;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 
 
 @Controller
@@ -42,12 +43,15 @@ public class CommentController {
     @ResponseBody
     public ResponseEntity<String> createComment(
             @PathVariable int sid,
-            @RequestParam(value = "content", required = true) String content) {
+            @RequestParam(value = "content", required = true) String content,
+            @RequestParam(value = "userid", required = false) Integer userid) {
 
         Comment comment = new Comment(content);
 
         Snippet s = snippetDAO.findBySnippetId(sid);
         comment.setSnippet(s);
+        User user = userDAO.findByUserId(userid);
+        comment.setUser(user);
 
         //gson to build and map player class
         GsonBuilder gsonBuilder = new GsonBuilder();
