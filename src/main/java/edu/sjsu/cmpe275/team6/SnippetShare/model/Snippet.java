@@ -35,12 +35,12 @@ public class Snippet {
 	private long updatedAt;
 
 	//One user can have many snippets
-    @ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author")
     private User author;
 
    //One board can have many snippets
-	@ManyToOne(fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "bid")
     private Board board;
 

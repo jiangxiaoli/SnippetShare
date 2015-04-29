@@ -26,9 +26,10 @@ public class JpaTest {
         /*********************Snippet DAO test*****************/
 //        Snippet snippet = new Snippet("aaaa","<a></a>");
 //        snippetDAO.insert(snippet);
-          Snippet snippet1 = snippetDAO.findBySnippetId(3);
-          snippet1.setContent("<html></html>");
-          snippetDAO.update(snippet1);
+//          Snippet snippet1 = snippetDAO.findBySnippetId(3);
+//          snippet1.setContent("<html></html>");
+//          snippetDAO.update(snippet1);
+        snippetDAO.delete(4);
         
         
         
