@@ -6,6 +6,8 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+    <global-method-security secured-annotations="enabled" />
+
     <http auto-config="true">
         <intercept-url pattern="/hello**" access="ROLE_USER" />
     </http>

@@ -16,6 +16,13 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <bean class="edu.sjsu.cmpe275.team6.SnippetShare.interceptor.AuthInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--to include js or css file in jsp, mapping routes-->
     <mvc:resources mapping="/" location="/" />
 
