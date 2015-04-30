@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Comment {
 	
 	@Id
-	@TableGenerator(name="tab", initialValue=0, allocationSize=500)
+	@TableGenerator(name="tab", initialValue=1, allocationSize=500)
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
 	@Column(name = "cid")
 	private int cid;
