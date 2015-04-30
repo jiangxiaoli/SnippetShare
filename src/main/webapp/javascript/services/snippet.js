@@ -2,13 +2,13 @@
 
 angular.module("snippetShare")
     .factory("Snippet", function SnippetFactory($http){
-        var rootUrl ="/snippets/";
+        var rootUrl ="/boards/";
         return {
-            all: function(){
-                return $http({method: "GET", url:rootUrl});
+            all: function(bid){
+                return $http({method: "GET", url:rootUrl+ "/"+bid+"/snippets/"});
             },
-            create: function(snippet){
-                return $http.post(rootUrl, snippet, {
+            create: function(bid, snippet){
+                return $http.post(rootUrl+"/"+bid+"/snippets/", snippet, {
                     //transfer $http send data format to request param
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: function(snippet){
@@ -16,11 +16,11 @@ angular.module("snippetShare")
                     }
                 });
             },
-            find: function (id) {
-                return $http({method: "GET", url:rootUrl + id});
+            find: function (bid, id) {
+                return $http({method: "GET", url:rootUrl + "/"+bid+"/snippets/" + id});
             },
-            update: function (snippet, id) {
-                return $http.post(rootUrl+id, snippet, {
+            update: function (bid, id, snippet) {
+                return $http.post(rootUrl+"/"+bid+"/snippets/" + id, snippet, {
                     //transfer $http send data format to request param
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: function(snippet){
@@ -28,8 +28,8 @@ angular.module("snippetShare")
                     }
                 });
             },
-            remove: function (id) {
-                return $http({method: "DELETE", url:rootUrl + id});
+            remove: function (bid, id) {
+                return $http({method: "DELETE", url:rootUrl + "/"+bid+"/snippets/"+ id});
             }
 
         }
