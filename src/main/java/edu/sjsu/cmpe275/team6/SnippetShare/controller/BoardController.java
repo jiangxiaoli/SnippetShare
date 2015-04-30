@@ -7,8 +7,7 @@ import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.BoardAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,9 +20,18 @@ import java.util.List;
 @RequestMapping("/users/{userid}/boards")
 public class BoardController {
 
-    ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
-    BoardDAO boardDAO =(BoardDAO) context.getBean("boardDAO");
-    UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+    //ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
+   // BoardDAO boardDAO =(BoardDAO) context.getBean("boardDAO");
+  //  UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+
+    BoardDAO boardDAO;
+    UserDAO userDAO;
+
+    @Autowired
+    public BoardController(UserDAO userDAO,BoardDAO boardDAO){
+        this.userDAO = userDAO;
+        this.boardDAO = boardDAO;
+    }
 
     //1. POST Create a board
     @RequestMapping(method = RequestMethod.POST)

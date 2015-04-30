@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.dao;
 
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by Rucha on 4/15/15.
  */
+@Component
 public class JpaBoardDAO implements BoardDAO{
     private EntityManagerFactory entityManagerFactory;
 
