@@ -1,6 +1,56 @@
-<div class="container-fluid">
-    <h4>Create Snippet</h4>
+<div class="container">
+    <div class="">
+
+        <h3>Create a new Snippet</h3>
+        <div class="">
+            <form novalidate name="snippetCreateForm">
+                <fieldset class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" type="text" name="title" ng-model="snippet.title" required/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>URL</label>
+                    <input class="form-control" type="text" name="title" ng-model="snippet.url"/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Content</label>
+                    <!--ace input filed-->
+                    <!--snippet content with ui.ace editor-->
+                    <section ng-controller="SnippetCreateAceCtrl">
+
+                        <div class="row">
+                            <div class="col-xs-3">
+
+                                <!--select language here-->
+                                Language: <select class="form-control height25" ng-model="snippet.language" ng-options="m for m in modes" ng-change="modeChanged()"></select>
+
+                            </div>
+                            <div class="col-xs-3">
+                                Theme: <select class="form-control height25" ng-model="theme" ng-options="t for t in themes" ng-change="themeChanged()"></select>
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <!--<div ui-ace="aceOption" readonly>{{snippet.content}}</div>-->
+                        <!--<div ui-ace="aceOption" ng-model="snippet.content"></div>-->
+
+                        <input ui-ace="aceOption" class="form-control" type="text" name="content" ng-model="snippet.content" required/>
+                    </section>
+
+                </fieldset>
 
 
+                <!--for temp author input-->
+                <input class="form-control" type="text" name="userid" ng-model="snippet.userid"/>
+
+
+                <input type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}" class="btn btn-default" ng-click="saveSnippet(snippet)"
+                       ng-disabled="isSubmitting">
+            </form>
+        </div>
+    </div>
 
 </div>

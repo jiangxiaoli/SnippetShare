@@ -72,7 +72,7 @@
     <div class="container">
 
         <!--show only when current user is member or owner-->
-        <a class="btn btn-success btn-md pull-right" ng-href="#/createSnippet">Create New Snippet</a>
+        <a class="btn btn-success btn-md pull-right" ng-href="#/boards/{{board.bid}}/createSnippet">Create New Snippet</a>
         <h3>Snippets</h3>
 
         <div >
@@ -95,7 +95,7 @@
 
                         </h5>
                         <h4 class="contenct-inline">
-                            <a ng-href="#/snippets/{{snippet.sid}}">{{snippet.title}}</a>
+                            <a ng-href="#/boards/{{board.bid}}/snippets/{{snippet.sid}}">{{snippet.title}}</a>
                                <a ng-show="snippet.url != ''" ng-href="{{snippet.url}}" class="glyphicon glyphicon-save" aria-hidden="true"></a>
                         </h4>
 
