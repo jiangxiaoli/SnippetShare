@@ -5,16 +5,13 @@ package edu.sjsu.cmpe275.team6.SnippetShare.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import edu.sjsu.cmpe275.team6.SnippetShare.dao.BoardDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.UserAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +19,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
-    UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+   // ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
+   // UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+//added while writing the jUnit test cases
+    UserDAO userDAO;
 
+    @Autowired
+    public UserController(UserDAO userDAO){
+        this.userDAO = userDAO;
+
+    }
     //1. POST Create a user
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
