@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 	@Id
-	@TableGenerator(name="tab", initialValue=1, allocationSize=1)
+	@TableGenerator(name="tab", initialValue=0, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
     @Column(name = "userid")
 	private int userid;
