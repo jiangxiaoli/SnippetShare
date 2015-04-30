@@ -27,6 +27,8 @@ public class Tag {
 	
 		this.content = content;
 	}
+	
+	public Tag() {}
 
 	public int getTid() {
 		return tid;

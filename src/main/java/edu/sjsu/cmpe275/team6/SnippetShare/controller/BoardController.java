@@ -109,6 +109,12 @@ public class BoardController {
 
         Board board = boardDAO.findByBoardId(bid);
 
+
+        System.out.println("new title:" + title);
+
+        System.out.println("new desc:" + description);
+
+
         if(board != null) {
             board.setTitle(title);
             board.setCategory(category);
@@ -131,8 +137,11 @@ public class BoardController {
 
             try {
                 boardDAO.update(board);
-                System.out.println("Board-"+bid+" Updated!!");
+                System.out.println("Board-" + bid + " Updated!!");
                 board = boardDAO.findByBoardId(bid);
+
+                System.out.println("new board:" + board.getTitle() +", " + board.getDescription());
+
                 String result = gson.toJson(board);
                 return new ResponseEntity<String>(result, HttpStatus.OK);
             } catch (Exception e){

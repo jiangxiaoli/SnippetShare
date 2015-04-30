@@ -18,6 +18,8 @@ public class Snippet {
 	@Column(name = "title")
 	private String title;
 
+//	to specify a longtext data type in mysql
+	@Lob
 	@Column(name = "content")
 	private String content;
 

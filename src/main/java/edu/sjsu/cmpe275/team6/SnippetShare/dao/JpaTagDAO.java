@@ -79,8 +79,8 @@ public class JpaTagDAO implements TagDAO{
 	}
 
 	@Override
-	public List<Tag> allTags(int tid) {
-		String query = "SELECT t FROM Tag t WHERE tid = "+tid; //select all comments in a specific snippet
+	public List<Tag> allTags(int sid) {
+		String query = "SELECT t FROM Tag t WHERE sid = "+sid; //select all comments in a specific snippet
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {

@@ -75,7 +75,7 @@ public class JpaBoardDAO implements BoardDAO{
             if(board.getIsPublic()) board1.setIsPublic(board.getIsPublic());
 
             if(board.getDescription() != null) {
-                board1.setTitle(board.getDescription());
+                board1.setDescription(board.getDescription());
             }
 
 //            board1.setMembers(board.getMembers());
