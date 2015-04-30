@@ -103,7 +103,7 @@ public class JpaSnippetDAO implements SnippetDAO {
         try{
             tx.begin();
             if(snippet!=null){
-                System.out.println(snippet.getSid()+", "+snippet.getTitle()+", "+ snippet.getAuthor());
+                System.out.println(snippet.getSid()+", "+snippet.getTitle());
                 //manager.refresh(snippet); //for cascade delete
                 manager.remove(snippet);
                 tx.commit();

@@ -48,11 +48,14 @@ public class SnippetController {
             @RequestParam(value = "title", required = true) String title,
             @RequestParam(value = "content", required = true) String content,
             @RequestParam(value = "language", required = false) String language,
-            @RequestParam(value = "url", required = false) String url) {
+            @RequestParam(value = "url", required = false) String url,
+            @RequestParam(value = "userid", required = false) Integer userid) {
 
         Snippet snippet = new Snippet(title, content);
         snippet.setLanguage(language);
         snippet.setUrl(url);
+        User author = userDAO.findByUserId(userid);
+        snippet.setAuthor(author);
 
         Board b = boardDAO.findByBoardId(bid);
         snippet.setBoard(b);
@@ -113,10 +116,11 @@ public class SnippetController {
     public ResponseEntity<String> updateSnippet(
     		@PathVariable int bid,
             @PathVariable int sid,
-            @RequestParam(value = "title", required = true) String title,
-            @RequestParam(value = "content", required = true) String content,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "content", required = false) String content,
             @RequestParam(value = "language", required = false) String language,
-            @RequestParam(value = "url", required = false) String url) {
+            @RequestParam(value = "url", required = false) String url,
+            @RequestParam(value = "userid", required = false) Integer userid) {
 
         Snippet snippet = snippetDAO.findBySnippetId(sid);
 
@@ -125,6 +129,8 @@ public class SnippetController {
             snippet.setContent(content);
             snippet.setLanguage(language);
             snippet.setUrl(url);
+            User author = userDAO.findByUserId(userid);
+            snippet.setAuthor(author);
 
             //gson to build and map board class
             GsonBuilder gsonBuilder = new GsonBuilder();
