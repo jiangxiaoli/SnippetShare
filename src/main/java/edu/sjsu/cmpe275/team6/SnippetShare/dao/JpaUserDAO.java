@@ -5,6 +5,7 @@ import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -42,6 +43,24 @@ public class JpaUserDAO implements UserDAO {
         try {
             tx.begin();
             User user = manager.find(User.class, userid);
+            tx.commit();
+            return user;
+        } catch (RuntimeException e) {
+            tx.rollback();
+            return null;
+        } finally {
+            manager.close();
+        }
+    }
+
+    public User findByEmail(String email) {
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        try {
+            tx.begin();
+
+            TypedQuery<User> q = manager.createQuery("SELECT u FROM user u", User.class);
+            User user = q.getSingleResult();
             tx.commit();
             return user;
         } catch (RuntimeException e) {

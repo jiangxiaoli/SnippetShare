@@ -18,7 +18,7 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/*" />
+            <mvc:mapping path="/user**" />
             <bean class="edu.sjsu.cmpe275.team6.SnippetShare.interceptor.AuthInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
