@@ -1,12 +1,10 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.dao;
 
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -115,7 +113,7 @@ public class JpaUserDAO implements UserDAO {
 
     @Override
     public List<User> allUsers() {
-        String query = "SELECT u FROM User as u"; //select all row from the table
+        String query = "SELECT u FROM user as u"; //select all row from the table
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {

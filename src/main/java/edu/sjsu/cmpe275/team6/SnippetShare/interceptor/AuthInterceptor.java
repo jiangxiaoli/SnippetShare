@@ -1,9 +1,10 @@
 package edu.sjsu.cmpe275.team6.SnippetShare.interceptor;
 
-import com.auth0.jwt.JWTSigner;
+
 import com.auth0.jwt.JWTVerifier;
 import edu.sjsu.cmpe275.team6.SnippetShare.dao.JpaUserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.Cookie;
@@ -20,16 +21,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
     private static final String SECRET =  "my secret";
     private static JWTVerifier verifier = new JWTVerifier(SECRET);
+    JpaUserDAO userDAO;
 
-    public JpaUserDAO getUserDAO() {
-        return UserDAO;
+    @Autowired
+    public AuthInterceptor(JpaUserDAO userDAO){
+        this.userDAO = userDAO;
     }
-
-    public void setUserDAO(JpaUserDAO userDAO) {
-        UserDAO = userDAO;
-    }
-
-    public JpaUserDAO UserDAO;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -58,7 +55,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                     Map<String, Object> decoded = verifier.verify(token);
                     System.out.println("Auth token is verified. Email:"+decoded.get("email"));
 
-                    User user = UserDAO.findByEmail((String)decoded.get("email"));
+                    User user = userDAO.findByEmail((String)decoded.get("email"));
 
                     if(user != null) {
                         System.out.println("User is verified. Set request user and pass the execution to the handler.");

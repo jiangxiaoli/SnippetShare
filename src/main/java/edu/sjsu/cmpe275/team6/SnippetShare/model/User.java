@@ -16,10 +16,10 @@ public class User {
     @Column(name = "userid")
 	private int userid;
 	
-	
+
 	@Column(name ="username",nullable = false,unique = true)
 	private String username;
-	
+
 	@Column(name ="pwd",nullable = false)
 	private String pwd;
 	

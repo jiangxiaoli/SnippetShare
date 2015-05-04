@@ -27,4 +27,8 @@
         <property name="entityManagerFactory" ref="myEmf" />
     </bean>
 
+    <bean id="entityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name="entityManagerFactory" ref="myEmf"/>
+    </bean>
+
 </beans>

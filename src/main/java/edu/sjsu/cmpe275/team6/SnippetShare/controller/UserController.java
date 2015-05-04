@@ -50,6 +50,7 @@ public class UserController {
             return new ResponseEntity<String>(gson.toJson(user), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("fail to create user");
+            e.printStackTrace();
             return new ResponseEntity<String>(gson.toJson("userCreationError"), HttpStatus.BAD_REQUEST);
         }
 
