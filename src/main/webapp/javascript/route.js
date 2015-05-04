@@ -11,7 +11,7 @@ angular.module("snippetShare")
             /*********** user routes *************/
             .when("/login",{
                 templateUrl: "templates/pages/users/login.html",
-                //controller: "UsersLoginController"
+                controller: "UsersLoginController"
             })
             .when("/signup",{
                 templateUrl: "templates/pages/users/signup.html",

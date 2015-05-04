@@ -22,6 +22,7 @@ import com.auth0.jwt.JWTSigner;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,9 +59,12 @@ public class AuthController {
 
             HashMap<String, Object> claims = new HashMap<String, Object>();
             claims.put("email", email);
+            String expiry = String.valueOf(System.currentTimeMillis() + 1000*60*30);
+            claims.put("expiry", expiry);
             String authToken = signer.sign(claims);
+
             Cookie cookie = new Cookie("token",authToken);
-            cookie.setMaxAge(60*30);
+            cookie.setMaxAge(-1); // cookie never expire
             response.addCookie(cookie);
 
             String result = gson.toJson(user);
@@ -71,5 +75,28 @@ public class AuthController {
             String result = new Gson().toJson("No user found");
             return new ResponseEntity<String>(result, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping(value="/logout", method=RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> logout(
+            @RequestParam(value = "email", required = true) String email,
+            HttpServletResponse response
+    ) {
+
+        //gson to build and map user class
+            HashMap<String, Object> claims = new HashMap<String, Object>();
+            claims.put("email", email);
+            String expiry = String.valueOf(System.currentTimeMillis());
+            claims.put("expiry", expiry);
+            String authToken = signer.sign(claims);
+
+            Cookie cookie = new Cookie("token",authToken);
+            cookie.setMaxAge(0); // expire cookie immediately, e.g delete the cookie.
+            response.addCookie(cookie);
+
+            System.out.println("User logout: " + email);
+            String result = new Gson().toJson("logout success");
+            return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 }

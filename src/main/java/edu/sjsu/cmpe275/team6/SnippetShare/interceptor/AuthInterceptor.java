@@ -55,12 +55,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                     Map<String, Object> decoded = verifier.verify(token);
                     System.out.println("Auth token is verified. Email:"+decoded.get("email"));
 
+                    if(Long.parseLong((String) decoded.get("expiry"), 10) < new Long(System.currentTimeMillis())) {
+                        System.err.println("Auth token expired");
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                        return false;
+                    }
+
+                    System.out.println("Auth token expiration check OK");
                     User user = userDAO.findByEmail((String)decoded.get("email"));
 
                     if(user != null) {
                         System.out.println("User is verified. Set request user and pass the execution to the handler.");
                         request.setAttribute("user", user);
-                        authCookie.setMaxAge(60*30);
 
                         return true;
                     } else {

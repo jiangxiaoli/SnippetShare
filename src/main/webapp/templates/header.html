@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavBarController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -28,8 +28,9 @@
                 <!--</li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/login">Login </a></li>
-                <li><a href="#/signup">Sign Up </a></li>
+                <li><a href="#/login" ng-hide="user">Login </a></li>
+                <li><a href="#/signup" ng-hide="user">Sign Up </a></li>
+                <li><a ng-click="logoutUser(user)" ng-show="user">logout</a></li>
             </ul>
         </div>
     </div>

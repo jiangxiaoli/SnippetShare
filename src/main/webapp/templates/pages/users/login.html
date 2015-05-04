@@ -7,33 +7,25 @@
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" required>
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" ng-model="user.email" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password" required>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-lg-10">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember Me
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-danger" ng-show="errMsg">{{errMsg}}.</p>
 
                 <br/>
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="reset" class="btn btn-default">Cancel</button>
-                        <button type="submit" class="btn btn-success">Login</button>
+                        <button class="btn btn-success" ng-click="loginUser(user)">Login</button>
                     </div>
                 </div>
             </fieldset>

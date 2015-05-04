@@ -23,7 +23,23 @@ angular.module("snippetShare")
                     console.log("in create user success");
                     console.log(data);
                     console.log(status);
-                    $location.path("/users");
+
+                    var loginData = {
+                        email: data.email,
+                        password: data.pwd
+                    }
+                    User.login(loginData)
+                        .success(function(loginData, loginStatus) {
+                            console.log("in login success");
+                            User.currentUser = data;
+                            $location.path("/users");
+                        })
+                        .error(function(loginData, loginStatus, headers, config) {
+                            console.log("in error");
+                            console.log(loginData);
+                            console.log(loginStatus);
+                            $scope.errMsg = loginData;
+                        });
                 })
                 .error(function(data, status, headers, config) {
                     console.log("in error");
