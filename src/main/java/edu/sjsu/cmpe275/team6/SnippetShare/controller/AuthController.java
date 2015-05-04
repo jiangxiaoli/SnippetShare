@@ -8,6 +8,8 @@ import edu.sjsu.cmpe275.team6.SnippetShare.dao.UserDAO;
 import edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter.UserAdapter;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,12 +33,9 @@ public class AuthController {
 
     private static final String SECRET =  "my secret";
     private static JWTSigner signer = new JWTSigner(SECRET);
-    JpaUserDAO userDAO;
 
-    @Autowired
-    public AuthController(JpaUserDAO userDAO){
-        this.userDAO = userDAO;
-    }
+    ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
+    UserDAO userDAO = (UserDAO) context.getBean("userDAO");
 
 
     //Verify login info and set auth token cookie
@@ -56,11 +55,12 @@ public class AuthController {
         if(user != null && user.getPwd().equals(password)){
             System.out.println("Show user details::" + user.getUsername());
 
-            //
+
             HashMap<String, Object> claims = new HashMap<String, Object>();
             claims.put("email", email);
             String authToken = signer.sign(claims);
             Cookie cookie = new Cookie("token",authToken);
+            cookie.setMaxAge(60*30);
             response.addCookie(cookie);
 
             String result = gson.toJson(user);

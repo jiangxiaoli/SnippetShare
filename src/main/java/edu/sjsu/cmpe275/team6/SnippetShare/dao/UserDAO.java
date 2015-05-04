@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserDAO {
     public boolean insert(User user);
     public User findByUserId(int userid);
+    public User findByEmail(String email);
     public void update(User user);
     public boolean delete(int userid);
     public List<User> allUsers();

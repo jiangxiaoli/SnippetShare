@@ -59,8 +59,8 @@ public class JpaUserDAO implements UserDAO {
         try {
             tx.begin();
 
-            TypedQuery<User> q = manager.createQuery("SELECT u FROM user u", User.class);
-            User user = q.getSingleResult();
+            TypedQuery<User> q = manager.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+            User user = q.setParameter("email", email).getSingleResult();
             tx.commit();
             return user;
         } catch (RuntimeException e) {
@@ -113,7 +113,7 @@ public class JpaUserDAO implements UserDAO {
 
     @Override
     public List<User> allUsers() {
-        String query = "SELECT u FROM user as u"; //select all row from the table
+        String query = "SELECT u FROM User as u"; //select all row from the table
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         try {

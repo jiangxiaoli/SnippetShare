@@ -38,10 +38,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         if (cookies != null) {
             for(int i = 0; i < cookies.length; i++){
                 Cookie c =  cookies[i];
+                System.out.println("Get cookie: Name=" + c.getName() + ", Value=" + c.getValue() + ", Comment=" + c.getComment()
+                        + ", Domain=" + c.getDomain() + ", MaxAge=" + c.getMaxAge() + ", Path=" + c.getPath()
+                        + ", Version=" + c.getVersion());
                 if (c.getName().equals("token")) {
-                    System.out.println("Get cookie: Name=" + c.getName() + ", Value=" + c.getValue() + ", Comment=" + c.getComment()
-                            + ", Domain=" + c.getDomain() + ", MaxAge=" + c.getMaxAge() + ", Path=" + c.getPath()
-                            + ", Version=" + c.getVersion());
                     authCookie = c;
                 }
             }
@@ -60,6 +60,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                     if(user != null) {
                         System.out.println("User is verified. Set request user and pass the execution to the handler.");
                         request.setAttribute("user", user);
+                        authCookie.setMaxAge(60*30);
+
                         return true;
                     } else {
                         System.err.println("Invalid user!");
