@@ -30,6 +30,14 @@ angular.module("snippetShare")
             },
             remove: function (userid, bid) {
                 return $http({method: "DELETE", url:rootUrl+userid+"/boards/"+bid});
+            },
+            isReadableTo: function(board, user) {
+                if (board.isPublic) {
+                    return true;
+                }
+                var isOwner = _.findWhere(user.boards, {"bid": board.bid});
+                var isMember = _.findWhere(board.members, {"userid": user.userid});
+                return isOwner || isMember;
             }
 
         }

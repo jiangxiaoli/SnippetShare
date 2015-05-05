@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("UsersIndexController", function ($scope, User) {
-
+    .controller("UsersIndexController", function ($scope, User, Board, $modal) {
+        $scope.User = User;
+        $scope.Board = Board;
         $scope.categories = ['All', 'cat1', 'cat2', 'cat3', 'cat4'];
 
         //$scope.users = [
@@ -196,7 +197,31 @@ angular.module("snippetShare")
         //hover show board description
         $scope.hover = function(board) {
             // Shows/hides the delete button on hover
+            console.log("hover triggered");
             return board.showDesc = ! board.showDesc;
+        };
+
+        $scope.onClickRequest = function(board, user) {
+            console.log("click request. board/user:", board, user);
+            var modalInstance = $modal.open({
+                templateUrl: 'templates/pages/modals/board-access-request-modal.html',
+                controller: 'BoardAccessRequestCtrl',
+                size: "sm",
+                resolve: {
+                    items: function () {
+                        return board;
+                    },
+                    user: function () {
+                        return user;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (res) {
+                console.log("modal closed. res:", res);
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
         };
 
         //request GET all players from server
