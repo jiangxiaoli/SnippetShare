@@ -36,12 +36,17 @@ angular.module("snippetShare")
                     return true;
                 }
                 var isOwner = user.userid === board.ownerId;
-                var isMember = _.contains(board.memberIds, user.userid);
+                var isMember = _.findWhere(board.members, {"userid":user.userid});
+                return isOwner || isMember;
+            },
+            isWritableTo: function(board, user) {
+                var isOwner = user.userid === board.ownerId;
+                var isMember = _.findWhere(board.members, {"userid":user.userid});
                 return isOwner || isMember;
             },
             addRequestor: function(board, user) {
                 console.log("Board.addRequestor board/user", board, user);
-                if (board.requestorIds && board.requestorIds.length && _.contains(board.requestorIds, user.userid)) {
+                if (board.requestors && board.requestors.length && _.findWhere(board.requestors, {"userid": user.userid})) {
                     return $q.reject("user already in requestors");
                 } else if ( user.userid === board.ownerId) {
                     return $q.reject("owner can't request to access his/her own board");
@@ -54,8 +59,8 @@ angular.module("snippetShare")
                         method: "POST"
                     }).then(
                         function success(res){
-                            board.requestorIds = board.requestorIds || [];
-                            board.requestorIds.push(user.userid);
+                            board.requestors = board.requestors || [];
+                            board.requestors.push(user);
 
                             console.log("add requestor ssuccess. updated board:", board);
                             return board;
@@ -75,16 +80,15 @@ angular.module("snippetShare")
                     method: "PUT"
                 }).then(
                     function success(res){
-                        board.memberIds = board.memberIds || [];
-                        board.requestorIds = board.requestorIds || [];
+                        board.members = board.members || [];
+                        board.requestors = board.requestors || [];
 
-
-                        if (!_.contains(board.memberIds, user.userid)) {
-                            board.memberIds.push(user.userid);
+                        if (!_.findWhere(board.members, {"userid": user.userid})) {
+                            board.members.push(user);
                         }
 
-                        board.requestorIds = _.reject(board.requestorIds, function(requestorId) {
-                            return requestorId = user.userid;
+                        board.requestors = _.reject(board.requestors, function(requestor) {
+                            return requestor.userid === user.userid;
                         });
 
                         console.log("approve request ssuccess. updated board:", board);
@@ -103,10 +107,10 @@ angular.module("snippetShare")
                     method: "PUT"
                 }).then(
                     function success(res){
-                        board.requestorIds = board.requestorIds || [];
+                        board.requestors = board.requestors || [];
 
-                        board.requestorIds = _.reject(board.requestorIds, function(requestorId) {
-                            return requestorId = user.userid;
+                        board.requestors = _.reject(board.requestors, function(requestor) {
+                            return requestor.userid === user.userid;
                         });
 
                         console.log("deny request ssuccess. updated board:", board);
@@ -119,7 +123,7 @@ angular.module("snippetShare")
                 );
             },
             hasRequestor: function(board, user) {
-                return !!_.contains(board.requestorIds, user.userid);
+                return !!_.findWhere(board.requestors, {"userid": user.userid});
             }
         }
 

@@ -58,7 +58,7 @@ public class RequestController {
     @RequestMapping(value = "/approve", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<String> approveRequest(@PathVariable int bid, @PathVariable int userid) {
-
+        System.out.println("get approve request. bid/userid:"+bid+"/"+userid);
         Board board = boardDAO.findByBoardId(bid);
         User user = userDAO.findByUserId(userid);
 

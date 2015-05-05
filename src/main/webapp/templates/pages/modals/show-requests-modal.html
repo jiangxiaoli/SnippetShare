@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h3 class="modal-title">Pending requests</h3>
+</div>
+<div class="modal-body">
+    <p ng-show="requestors.length === 0">This board has no pending requests.</p>
+    <ul class="list-unstyled modal-list">
+        <li ng-repeat="requestor in requestors">
+            <a ng-href="#/users/{{requestor.userid}}">{{requestor.username}}</a>
+            <button class="btn btn-danger btn-xs pull-right" ng-click="denyRequest(requestor)">Deny</button>
+            <button class="btn btn-primary btn-xs pull-right" ng-click="approveRequest(requestor)">Accept</button>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="done()">Done</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

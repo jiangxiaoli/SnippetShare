@@ -210,3 +210,26 @@ blockquote {
     width: 200px;
     height: 120px;
 }
+
+.board-info {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+
+/******************** modal ***********************/
+.modal-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.modal-list li{
+    width: 100%;
+}
+
+.modal-list li .btn{
+    margin: 0px 8px;
+}
+
+

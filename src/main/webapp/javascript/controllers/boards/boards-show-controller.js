@@ -1,29 +1,9 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("BoardsShowController", function ($scope, Board, $routeParams, $modal, $location) {
+    .controller("BoardsShowController", function ($scope, Board, $routeParams, $modal, $location,User) {
 
-        //WIP - for model member
-        //$scope.open = function () {
-        //
-        //    var modalInstance = $modal.open({
-        //        templateUrl: 'myModalContent.html',
-        //        controller: 'ModalInstanceCtrl',
-        //        resolve: {
-        //            memebers: function () {
-        //                return $scope.board.memebers;
-        //            }
-        //        }
-        //    });
-        //
-        //    modalInstance.result.then(function (selectedItem) {
-        //        $scope.selected = selectedItem;
-        //    }, function () {
-        //        $log.info('Modal dismissed at: ' + new Date());
-        //    });
-        //};
-
-
+        $scope.isDeleting = false;
         //request GET a board from server
         Board.find($routeParams.userid, $routeParams.bid)
             .success(function (data) {
@@ -32,8 +12,58 @@ angular.module("snippetShare")
                 $scope.board = data;
             });
 
+        $scope.Board = Board;
+        $scope.User = User;
 
-        $scope.isDeleting = false;
+        $scope.onClickHandleRequests = function() {
+            console.log("click handle request. $scope.board:", $scope.board);
+            $modal.open({
+                templateUrl: 'templates/pages/modals/show-requests-modal.html',
+                controller: 'ShowRequestsModalCtrl',
+                resolve: {
+                    board: function() {
+                        return $scope.board;
+                    },
+                    requestors: function() {
+                        return $scope.board.requestors;
+                    }
+                }
+            });
+        }
+
+        $scope.onClickShowMembers = function() {
+            console.log("click show members. $scope.board:", $scope.board);
+            $modal.open({
+                templateUrl: 'templates/pages/modals/show-members-modal.html',
+                controller: 'ShowMembersModalCtrl',
+                resolve: {
+                    board: function() {
+                        return $scope.board;
+                    },
+                    members: function() {
+                        return $scope.board.members;
+                    }
+                }
+            });
+        }
+
+        $scope.onClickDeleteBoard = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'templates/pages/modals/board-delete-conf-modal.html',
+                controller: 'DeleteBoardConfModalCtrl',
+                resolve: {
+                    board: function() {
+                        return $scope.board;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(confirm) {
+                if(confirm) {
+                    $scope.deleteBoard();
+                }
+            })
+        }
 
         $scope.deleteBoard = function(){
             $scope.isDeleting = true;

@@ -48,14 +48,14 @@ public class Board {
     private List<Snippet> snippets;
 
     //when board is deleted delete the access and requests related with the baord,cascadeType = remove
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.REMOVE)
 	@JoinTable(
 			name="access",
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},
 			inverseJoinColumns={@JoinColumn(name="uid", referencedColumnName="userid")})
 	private List<User> members;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.REMOVE)
 	@JoinTable(
 			name="request",
 			joinColumns={@JoinColumn(name="bid", referencedColumnName="bid")},

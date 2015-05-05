@@ -206,7 +206,6 @@ angular.module("snippetShare")
             var modalInstance = $modal.open({
                 templateUrl: 'templates/pages/modals/board-access-request-modal.html',
                 controller: 'BoardAccessRequestCtrl',
-                size: "sm",
                 resolve: {
                     board: function() {
                         return board;

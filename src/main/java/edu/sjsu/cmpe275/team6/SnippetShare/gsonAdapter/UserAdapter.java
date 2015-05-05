@@ -30,36 +30,45 @@ public class UserAdapter implements JsonSerializer<User> {
             if (boards != null) {
                 JsonArray boardListArr = new JsonArray();
                 for (Board b : boards) {
-                    JsonObject userItemObj = new JsonObject();
-                    userItemObj.addProperty("bid",b.getBid());
-                    userItemObj.addProperty("ownerId",user.getUserid());
-                    userItemObj.addProperty("title",b.getTitle());
-                    userItemObj.addProperty("category",b.getCategory());
-                    userItemObj.addProperty("isPublic",b.getIsPublic());
-                    userItemObj.addProperty("createdAt", b.getCreatedAt());
-                    userItemObj.addProperty("updatedAt", b.getUpdatedAt());
-                    userItemObj.addProperty("description",b.getDescription());
-                    userItemObj.addProperty("numberOfSnippets",b.getNumberOfSnippets());
+                    JsonObject boardObj = new JsonObject();
+                    boardObj.addProperty("bid",b.getBid());
+                    boardObj.addProperty("ownerId",user.getUserid());
+                    boardObj.addProperty("title",b.getTitle());
+                    boardObj.addProperty("category",b.getCategory());
+                    boardObj.addProperty("isPublic",b.getIsPublic());
+                    boardObj.addProperty("createdAt", b.getCreatedAt());
+                    boardObj.addProperty("updatedAt", b.getUpdatedAt());
+                    boardObj.addProperty("description",b.getDescription());
+                    boardObj.addProperty("numberOfSnippets",b.getNumberOfSnippets());
 
+                    List<User> memebers = b.getMembers();
+                    if(memebers != null) {
+                        JsonArray membersList = new JsonArray();
+                        for (User u : memebers) {
+                            JsonObject memberObj = new JsonObject();
+                            memberObj.addProperty("userid", u.getUserid());
+                            memberObj.addProperty("username", u.getUsername());
+                            memberObj.addProperty("userAvatarId", u.getUserAvatarId());
+                            membersList.add(memberObj); //add each user to memeber array
+                        }
+                        boardObj.add("members", membersList); //add members array to board obj
+                    }
+
+                    //mapping requestors list
                     List<User> requestors = b.getRequestors();
-                    JsonArray requestorIdArr = new JsonArray();
-                    if (requestors != null) {
+                    if(requestors != null) {
+                        JsonArray requestorsList = new JsonArray();
                         for (User u : requestors) {
-                            requestorIdArr.add(new JsonPrimitive( u.getUserid()));
+                            JsonObject requestorObj = new JsonObject();
+                            requestorObj.addProperty("userid", u.getUserid());
+                            requestorObj.addProperty("username", u.getUsername());
+                            requestorObj.addProperty("userAvatarId", u.getUserAvatarId());
+                            requestorsList.add(requestorObj); //add each user to requestors array
                         }
+                        boardObj.add("requestors", requestorsList); //add requestors array to board obj
                     }
-                    userItemObj.add("requestorIds", requestorIdArr);
 
-                    List<User> members = b.getMembers();
-                    JsonArray memberIdArr = new JsonArray();
-                    if (members != null) {
-                        for (User u : members) {
-                            memberIdArr.add(new JsonPrimitive(u.getUserid()));
-                        }
-                    }
-                    userItemObj.add("memberIds", memberIdArr);
-
-                    boardListArr.add(userItemObj); //add each item to board array
+                    boardListArr.add(boardObj); //add each item to board array
 
                 }
                 userObj.add("boards", boardListArr); //add board array to user obj

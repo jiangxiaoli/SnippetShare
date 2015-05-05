@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title">Board members</h3>
+</div>
+<div class="modal-body">
+    <p ng-show="members.length === 0">This board has no member at this moment.</p>
+    <ul class="list-unstyled modal-list">
+        <li ng-repeat="member in members">
+            <a ng-href="#/users/{{member.userid}}">{{member.username}}</a>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="cancel()">OK</button>
+</div>
