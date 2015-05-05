@@ -6,6 +6,8 @@ angular.module("snippetShare")
         //define categories
         $scope.categories = ['All', 'cat1', 'cat2', 'cat3', 'cat4'];
 
+        $scope.User = User;
+
         //test data for user with :id
         //$scope.user = {
         //    userid: 1,

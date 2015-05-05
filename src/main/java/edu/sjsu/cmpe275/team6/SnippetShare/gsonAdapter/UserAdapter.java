@@ -32,6 +32,7 @@ public class UserAdapter implements JsonSerializer<User> {
                 for (Board b : boards) {
                     JsonObject userItemObj = new JsonObject();
                     userItemObj.addProperty("bid",b.getBid());
+                    userItemObj.addProperty("ownerId",user.getUserid());
                     userItemObj.addProperty("title",b.getTitle());
                     userItemObj.addProperty("category",b.getCategory());
                     userItemObj.addProperty("isPublic",b.getIsPublic());
@@ -39,6 +40,25 @@ public class UserAdapter implements JsonSerializer<User> {
                     userItemObj.addProperty("updatedAt", b.getUpdatedAt());
                     userItemObj.addProperty("description",b.getDescription());
                     userItemObj.addProperty("numberOfSnippets",b.getNumberOfSnippets());
+
+                    List<User> requestors = b.getRequestors();
+                    JsonArray requestorIdArr = new JsonArray();
+                    if (requestors != null) {
+                        for (User u : requestors) {
+                            requestorIdArr.add(new JsonPrimitive( u.getUserid()));
+                        }
+                    }
+                    userItemObj.add("requestorIds", requestorIdArr);
+
+                    List<User> members = b.getMembers();
+                    JsonArray memberIdArr = new JsonArray();
+                    if (members != null) {
+                        for (User u : members) {
+                            memberIdArr.add(new JsonPrimitive(u.getUserid()));
+                        }
+                    }
+                    userItemObj.add("memberIds", memberIdArr);
+
                     boardListArr.add(userItemObj); //add each item to board array
 
                 }

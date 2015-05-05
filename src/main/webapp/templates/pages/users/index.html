@@ -23,14 +23,16 @@
                                 </h4>
 
                                 <!--if board is private , don't show link, show request botton when hover-->
-                                <a ng-href="#/users/{{user.userid}}/boards/{{board.bid}}" ng-show="Board.isReadableTo(board, User.currentUser) "><h4>{{board.title}}</h4></a>
+                                <a ng-href="#/users/{{user.userid}}/boards/{{board.bid}}" ng-show="Board.isReadableTo(board, User.currentUser)"><h4>{{board.title}}</h4></a>
                                 <h4  ng-hide="Board.isReadableTo(board, User.currentUser)">{{board.title}}</h4>
 
                                 <!--hover to show description-->
                                 <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
                                 <h5 class="board-desc">{{board.description | limitChar:15}}</h5>
 
-                                <button class="btn btn-primary btn-xs center-block" ng-show="board.showDesc && !Board.isReadableTo(board, User.currentUser)" ng-click="onClickRequest(board, user)">Request</button>
+                                <button type="button" class="btn btn-primary btn-xs center-block" ng-show="board.showDesc && !Board.isReadableTo(board, User.currentUser) && !Board.hasRequestor(board, User.currentUser)" ng-click="onClickRequest(board, user)">Request</button>
+                                <button type="button" class="btn btn-primary btn-xs center-block" ng-show="!Board.isReadableTo(board, User.currentUser) && Board.hasRequestor(board, User.currentUser)" ng-click="onClickRequest(board, user)" disabled="disabled">Request has been sent</button>
+
                             </div>
                         </div>
 

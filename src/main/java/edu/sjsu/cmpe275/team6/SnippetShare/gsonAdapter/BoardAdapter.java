@@ -15,6 +15,7 @@ public class BoardAdapter implements JsonSerializer<Board> {
 
         JsonObject boardObj = new JsonObject();
         boardObj.addProperty("bid",board.getBid());
+        boardObj.addProperty("ownerId",board.getOwner().getUserid());
         boardObj.addProperty("title",board.getTitle());
         boardObj.addProperty("category",board.getCategory());
         boardObj.addProperty("isPublic",board.getIsPublic());

@@ -31,7 +31,7 @@
             <tabset>
 
                 <tab ng-repeat="category in categories" heading="{{category}}">
-                    <div class="jumbotron board-list">
+                    <div class="jumbotron board-list" ng-show="User.currentUser.userid === user.userid">
                         <!--ng-click event for create a new board-->
                         <a class="btn btn-warning" href="#/users/{{user.userid}}/createboards">New Board</a>
                     </div>
@@ -53,12 +53,12 @@
                         <div class="align-bottom">
                             <div class="col-xs-6">
                                 <h6 class="text-info">
-                                    Snippets <span class="badge badge-info">{{board.numOfSnippets}}</span>
+                                    Snippets <span class="badge badge-info">{{board.numOfSnippets && numOfSnippets || "0"}}</span>
                                 </h6>
                             </div>
                             <div class="col-xs-6">
-                                <h6 class="text-danger pull-right" ng-show="board.requestors.length !=0">
-                                    Requests <span class="badge badge-danger">{{board.requestors.length}}</span>
+                                <h6 class="text-danger pull-right">
+                                    Requests <span class="badge badge-danger">{{board.requestorIds.length && board.requestorIds.length || "0"}}</span>
                                 </h6>
                             </div>
                         </div>

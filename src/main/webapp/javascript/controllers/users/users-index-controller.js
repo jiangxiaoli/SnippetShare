@@ -208,10 +208,10 @@ angular.module("snippetShare")
                 controller: 'BoardAccessRequestCtrl',
                 size: "sm",
                 resolve: {
-                    items: function () {
+                    board: function() {
                         return board;
                     },
-                    user: function () {
+                    user: function() {
                         return user;
                     }
                 }
@@ -219,6 +219,12 @@ angular.module("snippetShare")
 
             modalInstance.result.then(function (res) {
                 console.log("modal closed. res:", res);
+                if(res) {
+                    Board.addRequestor(board, User.currentUser)
+                        .then(function success(updatedBoard) {
+                            board = updatedBoard;
+                        });
+                }
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
             });
