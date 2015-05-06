@@ -44,7 +44,7 @@ public class Board {
 
     //added to retrieve snippets
     @Column(name = "snippet")
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade=CascadeType.REMOVE)
     private List<Snippet> snippets;
 
     //when board is deleted delete the access and requests related with the baord,cascadeType = remove

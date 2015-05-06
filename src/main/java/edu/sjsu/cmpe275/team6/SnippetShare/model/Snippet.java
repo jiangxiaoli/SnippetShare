@@ -47,7 +47,7 @@ public class Snippet {
     private Board board;
 
     @Column(name = "comments")
-    @OneToMany(mappedBy = "snippet")
+    @OneToMany(mappedBy = "snippet", cascade=CascadeType.REMOVE)
     private List<Comment> comments;
     
     @Column(name = "tags")
