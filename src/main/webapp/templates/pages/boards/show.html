@@ -1,5 +1,8 @@
-<div class="container-fluid">
-    <h4>Board Details</h4>
+<div class="container-fluid" ng-hide="!board">
+    <ol class="breadcrumb">
+        <li><a ng-href="#/users/{{board.ownerId}}">{{board.owner.username}}'s Boards</a></li>
+        <li class="active">Board Details</li>
+    </ol>
 
     <div class="well">
         <div class="row">

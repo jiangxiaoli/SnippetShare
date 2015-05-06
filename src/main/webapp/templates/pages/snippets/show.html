@@ -1,5 +1,9 @@
-<div class="container-fluid">
-    <h4>Snippet Details</h4>
+<div class="container-fluid" ng-hide="!snippet">
+    <ol class="breadcrumb">
+        <li><a ng-href="#/users/{{snippet.board.ownerId}}">{{snippet.board.owner.username}}'s boards</a></li>
+        <li><a ng-href="#/users/{{snippet.board.ownerId}}/boards/{{snippet.board.bid}}">{{snippet.board.title}}</a></li>
+        <li class="active">Snippet Details</li>
+    </ol>
 
     <div class="well">
         <div class="row">
