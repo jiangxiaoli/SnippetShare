@@ -20,7 +20,7 @@ angular.module("snippetShare")
                 return $http({method: "GET", url:rootUrl + "/"+sid+"/comments/" + id});
             },
             remove: function (sid, id) {
-                return $http({method: "DELETE", url:rootUrl + "/"+sid+"/comment/"+ id});
+                return $http({method: "DELETE", url:rootUrl + "/"+sid+"/comments/"+ id});
             },
             isWritableTo: function(comment, user) {
                 if (!user) {

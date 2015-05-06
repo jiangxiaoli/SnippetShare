@@ -97,7 +97,7 @@ angular.module("snippetShare")
                 if(confirm) {
                     Comment.remove($scope.snippet.sid,comment.cid).then(function() {
                         $scope.snippet.comments = _.reject($scope.snippet.comments, function(c){
-                            c.cid = comment.cid;
+                            return c.cid === comment.cid;
                         });
                     })
                 }
