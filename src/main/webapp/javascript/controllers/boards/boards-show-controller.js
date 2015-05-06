@@ -4,6 +4,7 @@ angular.module("snippetShare")
     .controller("BoardsShowController", function ($scope, Board, $routeParams, $modal, $location,User, Snippet) {
 
         $scope.Snippet = Snippet;
+        $scope.Board = Board;
         $scope.User = User;
 
         $scope.isDeleting = false;
