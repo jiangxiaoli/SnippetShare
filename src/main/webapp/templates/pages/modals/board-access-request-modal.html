@@ -2,7 +2,7 @@
     <h3 class="modal-title">Requests</h3>
 </div>
 <div class="modal-body">
-    <p>This private board belongs to <span class="text-primary">{{user.username}}</span>. Do you want to send a request to access this board?</p>
+    <p>This private board belongs to <span class="text-primary">{{board.owner.username}}</span>. Do you want to send a request to access this board?</p>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="ok()">Send Request</button>
