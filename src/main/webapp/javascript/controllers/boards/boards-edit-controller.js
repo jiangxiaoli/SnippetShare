@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("BoardsEditController", function ($scope, Board, User, $routeParams, $location) {
+    .controller("BoardsEditController", function ($scope, Board, User, $routeParams, $location, categories) {
 
         //request GET the current board from server
         Board.find($routeParams.userid, $routeParams.bid)
@@ -12,7 +12,9 @@ angular.module("snippetShare")
                 $scope.board = data;
             });
 
-        $scope.categories = [' ', 'cat1', 'cat2', 'cat3', 'cat4'];
+        $scope.Board = Board;
+        $scope.User = User;
+        $scope.categories = categories;
 
         $scope.isSubmitting = false;
 

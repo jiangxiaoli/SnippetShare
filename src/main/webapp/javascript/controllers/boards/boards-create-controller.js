@@ -3,6 +3,7 @@
 angular.module("snippetShare")
     .controller("BoardsCreateController", function ($scope, Board, $location, $routeParams, categories) {
         $scope.isSubmitting = false;
+        $scope.Board = Board;
         $scope.categories = categories;
 
         $scope.saveBoard = function (board) {

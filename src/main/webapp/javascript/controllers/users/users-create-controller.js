@@ -2,6 +2,7 @@
 
 angular.module("snippetShare")
     .controller("UsersCreateController", function ($scope, User, $location) {
+        $scope.User = User;
         $scope.isSubmitting = false;
         $scope.user = {};
 
@@ -47,6 +48,7 @@ angular.module("snippetShare")
                     console.log("in error");
                     console.log(data);
                     console.log(status);
+                    $scope.errMsg = data + ". HTTP response code:" + status;
                 }).finally(function () {
                     $scope.isSubmitting = false;
                 });

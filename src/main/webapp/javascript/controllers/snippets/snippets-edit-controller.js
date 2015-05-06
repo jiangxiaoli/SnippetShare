@@ -2,6 +2,7 @@
 
 angular.module("snippetShare")
     .controller("SnippetsEditController", function ($scope, Snippet, $location, $routeParams, User) {
+        $scope.User = User;
         $scope.isSubmitting = false;
 
         //request GET the current board from server

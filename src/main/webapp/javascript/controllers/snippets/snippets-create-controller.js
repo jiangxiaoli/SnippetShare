@@ -3,6 +3,8 @@
 angular.module("snippetShare")
     .controller("SnippetsCreateController", function ($scope, Snippet, $location, $routeParams,User) {
         $scope.isSubmitting = false;
+        $scope.User = User;
+        $scope.Snippet = Snippet;
         
         $scope.saveSnippet = function (snippet) {
             $scope.isSubmitting = true;
