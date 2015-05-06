@@ -24,7 +24,7 @@
                             <div class="col-xs-3">
 
                                 <!--select language here-->
-                                Language: <select class="form-control height25" ng-model="snippet.language" ng-options="m for m in modes" ng-change="modeChanged()"></select>
+                                Language: <select class="form-control height25" ng-model="$parent.snippet.language" ng-options="m for m in modes" ng-change="modeChanged()"></select>
 
                             </div>
                             <div class="col-xs-3">
@@ -37,7 +37,7 @@
                         <!--<div ui-ace="aceOption" readonly>{{snippet.content}}</div>-->
                         <!--<div ui-ace="aceOption" ng-model="snippet.content"></div>-->
 
-                        <input ui-ace="aceOption" class="form-control" type="text" name="content" ng-model="snippet.content" required/>
+                        <input ui-ace="aceOption" class="form-control" type="text" name="content" ng-model="$parent.snippet.content" required/>
                     </section>
 
                 </fieldset>
