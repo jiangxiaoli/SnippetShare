@@ -7,6 +7,10 @@
  - Field: Web Development
  - Title: SnippetShare
 
+Live Demo
+-----------
+Deployed on Heroku http://cmpe275-snippetshare.herokuapp.com/
+
 Directory
 -----------
  - dbscript: database sql
@@ -23,11 +27,20 @@ This work uses a number of open source projects to work properly:
 * [Angular] - AngularJS is an open-source web application JavaScript framework for developing single page application (SPA).
 * [jQuery] - Jquery is the Write Less, Do More, JavaScript Library.
 * [bootstrap] - The most popular front-end framework for developing responsive, mobile first projects on the web.
+* [UI.Ace] - Add ACE editor elements to Angular application.
+
+
+How to run it
+-----------
+1. import project using pom.xml as a maven project
+2. Maven ``` clean install ``` all the packages needed
+3. configure tomcat: build snippetshare.war artifacts
+4. run app on localhost:8080
 
 Notes
 -----------
 To use ACE editor properly, please go to:
-``` /src/main/webapp ``
+``` /src/main/webapp ```
 
 then install ace:
 ``` bower install angular-ui-ace\#bower ```
@@ -51,3 +64,4 @@ MIT
 [jQuery]:http://jquery.com
 [bootstrap]:http://getbootstrap.com/
 [jUnit]: http://junit.org/
+[UI.Ace]: https://github.com/angular-ui/ui-ace
