@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("BoardsCreateController", function ($scope, Board, $location, $routeParams) {
+    .controller("BoardsCreateController", function ($scope, Board, $location, $routeParams, categories) {
         $scope.isSubmitting = false;
-
-        $scope.categories = [' ', 'cat1', 'cat2', 'cat3', 'cat4'];
+        $scope.categories = categories;
 
         $scope.saveBoard = function (board) {
             $scope.isSubmitting = true;

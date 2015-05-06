@@ -22,3 +22,4 @@ angular.module('snippetShare')
     }]);
 
 }])
+.value("categories", ["Web", "Mobile", "Algorithms", "Tools", "Others"]);

@@ -19,6 +19,7 @@
 
                                 <h5 class="board-info">
                                     <span class="label label-warning pull-right">{{board.category}}</span>
+                                    <span ng-show="!board.isPublic && Board.isReadableTo(board, User.currentUser)" class="glyphicon glyphicon-eye-open pull-right" aria-hidden="true"></span>
                                     <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
                                 </h5>
 
@@ -29,8 +30,8 @@
                                 <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->
                                 <h5 class="board-desc">{{board.description | limitChar:15}}</h5>
 
-                                <button type="button" class="btn btn-primary btn-xs center-block request-btn" ng-show="board.showDesc && !Board.isReadableTo(board, User.currentUser) && !Board.hasRequestor(board, User.currentUser)" ng-click="onClickRequest(board, user)">Request Access</button>
-                                <button type="button" class="btn btn-primary btn-xs center-block request-btn" ng-show="!Board.isReadableTo(board, User.currentUser) && Board.hasRequestor(board, User.currentUser)" disabled="disabled">Request has been sent</button>
+                                <button type="button" class="btn btn-primary btn-xs center-block request-btn" ng-show="User.currentUser && board.showDesc && !Board.isReadableTo(board, User.currentUser) && !Board.hasRequestor(board, User.currentUser)" ng-click="onClickRequest(board, user)">Request Access</button>
+                                <button type="button" class="btn btn-primary btn-xs center-block request-btn" ng-show="User.currentUser && !Board.isReadableTo(board, User.currentUser) && Board.hasRequestor(board, User.currentUser)" disabled="disabled">Request has been sent</button>
 
                             </div>
                         </div>

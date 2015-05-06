@@ -16,6 +16,8 @@ angular.module("snippetShare")
                 return;
             }
 
+            user.userAvatarId = user.userAvatarId || Math.floor(Math.random() * 15) + 1;
+
             $scope.isSubmitting = true;
 
             User.create(user)

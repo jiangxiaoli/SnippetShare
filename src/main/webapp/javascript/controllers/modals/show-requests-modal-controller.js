@@ -4,6 +4,7 @@ angular.module("snippetShare").controller("ShowRequestsModalCtrl", function ($sc
 
     console.log("ShowRequestsModal is open. board/requestors", board, requestors);
     $scope.requestors = requestors;
+    $scope.board = board;
 
     $scope.approveRequest = function(requestor) {
         Board.approveRequest(board, requestor)

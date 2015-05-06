@@ -4,6 +4,7 @@ angular.module("snippetShare").controller("ShowMembersModalCtrl", function ($sco
 
     console.log("ShowRequestsModal is open. board/members", board, members);
     $scope.members = members;
+    $scope.board = board;
 
     $scope.cancel = function () {
         $modalInstance.dismiss("cancel");

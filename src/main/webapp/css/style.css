@@ -197,8 +197,14 @@ blockquote {
     padding: 10px;
 }
 
+.comment-container {
+    position: relative;
+}
+
 .comment-delete-btn {
-    margin: 0px 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 .snippet-card:hover {
@@ -237,12 +243,15 @@ blockquote {
     overflow-y: auto;
 }
 
-.modal-list li{
+.model-list-item {
     width: 100%;
+    margin-bottom: 5px;
 }
 
-.modal-list li .btn{
+.model-list-item .btn{
     margin: 0px 8px;
 }
+
+
 
 

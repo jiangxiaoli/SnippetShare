@@ -90,9 +90,9 @@ angular.module("snippetShare")
             modalInstance.result.then(function (res) {
                 console.log("modal closed. res:", res);
                 if(res) {
-                    Board.addRequestor(board, User.currentUser)
+                    Board.addRequestor( $scope.board, User.currentUser)
                         .then(function success(updatedBoard) {
-                            board = updatedBoard;
+                            $scope.board = updatedBoard;
                         });
                 }
             }, function () {

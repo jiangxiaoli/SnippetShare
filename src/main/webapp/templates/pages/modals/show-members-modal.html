@@ -1,17 +1,15 @@
 <div class="modal-header">
-    <h3 class="modal-title">Members</h3>
+    <h3 class="modal-title">Board members</h3>
 </div>
 <div class="modal-body">
-    <p ng-show="requestors.length === 0">This board has no pending requests.</p>
+    <p ng-show="members.length === 0">This board has no member at this moment.</p>
     <ul class="list-unstyled modal-list">
-        <li ng-repeat="requestor in requestors">
-            <a ng-href="#/users/{{requestor.userid}}">{{requestor.username}}</a>
-            <button class="btn btn-danger btn-xs pull-right" ng-click="denyRequest(requestor)">Deny</button>
-            <button class="btn btn-primary btn-xs pull-right" ng-click="approveRequest(requestor)">Accept</button>
+        <li class="model-list-item" ng-repeat="member in members">
+            <img src="/images/user-avatar/{{member.userAvatarId}}.png" alt="user avatar" height="40px"/>
+            <a ng-href="#/users/{{member.userid}}">{{member.username}}</a>
         </li>
     </ul>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="save()">Save</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-warning" ng-click="cancel()">OK</button>
 </div>

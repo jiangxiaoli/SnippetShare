@@ -4,10 +4,11 @@
 <div class="modal-body">
     <p ng-show="requestors.length === 0">This board has no pending requests.</p>
     <ul class="list-unstyled modal-list">
-        <li ng-repeat="requestor in requestors">
+        <li class="model-list-item" ng-repeat="requestor in requestors">
+            <img src="/images/user-avatar/{{requestor.userAvatarId}}.png" alt="user avatar" height="40px"/>
             <a ng-href="#/users/{{requestor.userid}}">{{requestor.username}}</a>
-            <button class="btn btn-danger btn-xs pull-right" ng-click="denyRequest(requestor)">Deny</button>
-            <button class="btn btn-primary btn-xs pull-right" ng-click="approveRequest(requestor)">Accept</button>
+            <button class="btn btn-danger btn-sm pull-right" ng-click="denyRequest(requestor)">Deny</button>
+            <button class="btn btn-primary btn-sm pull-right" ng-click="approveRequest(requestor)">Accept</button>
         </li>
     </ul>
 </div>

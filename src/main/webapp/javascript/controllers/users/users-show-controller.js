@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("UsersShowController", function ($routeParams, User, $scope) {
-
-        //define categories
-        $scope.categories = ['All', 'cat1', 'cat2', 'cat3', 'cat4'];
+    .controller("UsersShowController", function ($routeParams, User, Board, $scope, categories) {
 
         $scope.User = User;
+        $scope.Baord = Board;
+        //define categories
+        console.log("categories", categories);
+        $scope.categories = categories.slice();
+        $scope.categories.unshift("All");
 
         //test data for user with :id
         //$scope.user = {

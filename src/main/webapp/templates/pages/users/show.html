@@ -31,8 +31,7 @@
             <tabset>
 
                 <tab ng-repeat="category in categories" heading="{{category}}">
-                    <div class="jumbotron board-list" ng-show="User.currentUser.userid === user.userid">
-                        <!--ng-click event for create a new board-->
+                    <div class="jumbotron board-list" ng-show="User.currentUser && User.currentUser.userid === user.userid"> <!--ng-click event for create a new board-->
                         <a class="btn btn-warning" href="#/users/{{user.userid}}/createboards">New Board</a>
                     </div>
                     <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
@@ -40,7 +39,10 @@
 
                         <h5 class="pull-right board-info">
                             <span class="label label-warning pull-right">{{board.category}}</span>
+                            <span ng-show="!board.isPublic && Board.isReadableTo(board, User.currentUser)" class="glyphicon glyphicon-eye-open pull-right" aria-hidden="true"></span>
                             <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
+
+
                         </h5>
 
                         <!--if board is private , don't show link, show request botton when hover-->
@@ -53,16 +55,15 @@
                         <div class="align-bottom">
                             <div class="col-xs-6">
                                 <h6 class="text-info">
-                                    Snippets <span class="badge badge-info">{{board.numOfSnippets && numOfSnippets || "0"}}</span>
+                                    Snippets <span class="badge badge-info">{{board.numOfSnippets && board.numOfSnippets || "0"}}</span>
                                 </h6>
                             </div>
                             <div class="col-xs-6">
-                                <h6 class="text-danger pull-right">
+                                <h6 class="text-danger pull-right" ng-show="board.ownerId === User.currentUser.userid">
                                     Requests <span class="badge badge-danger">{{board.requestors.length && board.requestors.length || "0"}}</span>
                                 </h6>
                             </div>
                         </div>
-
                     </div>
                 </tab>
             </tabset>
