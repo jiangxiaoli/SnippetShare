@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("BoardsShowController", function ($scope, Board, $routeParams, $modal, $location,User) {
+    .controller("BoardsShowController", function ($scope, Board, $routeParams, $modal, $location,User, Snippet) {
+
+        $scope.Snippet = Snippet;
+        $scope.User = User;
 
         $scope.isDeleting = false;
         //request GET a board from server
@@ -45,15 +48,19 @@ angular.module("snippetShare")
                     }
                 }
             });
-        }
+        };
 
         $scope.onClickDeleteBoard = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'templates/pages/modals/board-delete-conf-modal.html',
                 controller: 'DeleteBoardConfModalCtrl',
                 resolve: {
-                    board: function() {
+                    entity: function() {
                         return $scope.board;
+                    },
+
+                    entityName: function() {
+                        return "board";
                     }
                 }
             });
@@ -63,7 +70,35 @@ angular.module("snippetShare")
                     $scope.deleteBoard();
                 }
             })
-        }
+        };
+
+        $scope.onClickRequest = function() {
+            console.log("click request. board/user:", $scope.board, User.currentUser);
+            var modalInstance = $modal.open({
+                templateUrl: 'templates/pages/modals/board-access-request-modal.html',
+                controller: 'BoardAccessRequestCtrl',
+                resolve: {
+                    board: function() {
+                        return $scope.board;
+                    },
+                    user: function() {
+                        return User.currentUser;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (res) {
+                console.log("modal closed. res:", res);
+                if(res) {
+                    Board.addRequestor(board, User.currentUser)
+                        .then(function success(updatedBoard) {
+                            board = updatedBoard;
+                        });
+                }
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.deleteBoard = function(){
             $scope.isDeleting = true;

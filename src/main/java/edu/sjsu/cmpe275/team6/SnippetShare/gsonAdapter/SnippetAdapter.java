@@ -9,9 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import edu.sjsu.cmpe275.team6.SnippetShare.model.Comment;
-import edu.sjsu.cmpe275.team6.SnippetShare.model.Snippet;
-import edu.sjsu.cmpe275.team6.SnippetShare.model.Tag;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.*;
 
 public class SnippetAdapter implements JsonSerializer<Snippet> {
 
@@ -40,11 +38,41 @@ public class SnippetAdapter implements JsonSerializer<Snippet> {
 		
         //map for board
 		if(snippet.getBoard()!=null){
-        JsonObject boardObj = new JsonObject();
-	        boardObj.addProperty("bid",snippet.getBoard().getBid());
-	        boardObj.addProperty("title",snippet.getBoard().getTitle());
-	        boardObj.addProperty("category",snippet.getBoard().getCategory());
-	        boardObj.addProperty("description",snippet.getBoard().getDescription());
+			Board board = snippet.getBoard();
+        	JsonObject boardObj = new JsonObject();
+	        boardObj.addProperty("bid", board.getBid());
+			boardObj.addProperty("ownerId",board.getOwner().getUserid());
+			boardObj.addProperty("title",board.getTitle());
+	        boardObj.addProperty("category",board.getCategory());
+	        boardObj.addProperty("description",board.getDescription());
+
+			//mapping members list
+			List<User> memebers = board.getMembers();
+			if(memebers != null) {
+				JsonArray membersList = new JsonArray();
+				for (User user : memebers) {
+					JsonObject userItemObj = new JsonObject();
+					userItemObj.addProperty("userid", user.getUserid());
+					userItemObj.addProperty("username", user.getUsername());
+					userItemObj.addProperty("userAvatarId", user.getUserAvatarId());
+					membersList.add(userItemObj); //add each user to memeber array
+				}
+				boardObj.add("members", membersList); //add members array to board obj
+			}
+
+			//mapping requestors list
+			List<User> requestors = board.getRequestors();
+			if(requestors != null) {
+				JsonArray requestorsList = new JsonArray();
+				for (User user : requestors) {
+					JsonObject userItemObj = new JsonObject();
+					userItemObj.addProperty("userid", user.getUserid());
+					userItemObj.addProperty("username", user.getUsername());
+					userItemObj.addProperty("userAvatarId", user.getUserAvatarId());
+					requestorsList.add(userItemObj); //add each user to requestors array
+				}
+				boardObj.add("requestors", requestorsList); //add requestors array to board obj
+			}
 	        snippetObj.add("board",boardObj);
 		}
         

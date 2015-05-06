@@ -38,13 +38,13 @@
                     <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
                          ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
 
-                        <h4 class="pull-right">
+                        <h5 class="pull-right board-info">
                             <span class="label label-warning pull-right">{{board.category}}</span>
                             <span ng-show="!board.isPublic" class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
-                        </h4>
+                        </h5>
 
                         <!--if board is private , don't show link, show request botton when hover-->
-                        <a ng-href="#/users/{{user.userid}}/boards/{{board.bid}}"><h3>{{board.title}}</h3></a>
+                        <a ng-href="#/users/{{user.userid}}/boards/{{board.bid}}"><h4>{{board.title}}</h4></a>
 
                         <!--hover to show description-->
                         <!--<h5 ng-show="board.showDesc">{{board.description}}</h5>-->

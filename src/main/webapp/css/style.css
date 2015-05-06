@@ -59,7 +59,7 @@ body {
 }
 
 .height25 {
-    height: 25px;
+    /*height: 25px;*/
 }
 
 /*********** navbar styling ***********/
@@ -213,8 +213,17 @@ blockquote {
 
 .board-info {
     position: absolute;
-    top: 5px;
+    top: -2px;
     right: 5px;
+}
+
+.board-info span{
+    margin: 0px 5px;
+}
+
+.request-btn {
+    position: relative;
+    bottom: -8px;
 }
 
 

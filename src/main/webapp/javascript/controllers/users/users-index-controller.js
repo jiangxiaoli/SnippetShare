@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("UsersIndexController", function ($scope, User, Board, $modal) {
+    .controller("UsersIndexController", function ($scope, User, Board, $modal, $location) {
         $scope.User = User;
         $scope.Board = Board;
         $scope.categories = ['All', 'cat1', 'cat2', 'cat3', 'cat4'];
+
+        if (!User.currentUser) {
+            $location.url("/login");
+        }
 
         //$scope.users = [
         //    {

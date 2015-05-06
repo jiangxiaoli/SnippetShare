@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module("snippetShare")
-    .controller("SnippetsCreateController", function ($scope, Snippet, $location, $routeParams) {
+    .controller("SnippetsCreateController", function ($scope, Snippet, $location, $routeParams,User) {
         $scope.isSubmitting = false;
         
         $scope.saveSnippet = function (snippet) {
             $scope.isSubmitting = true;
 
+            snippet.userid = snippet.userid || User.currentUser.userid;
             console.log(snippet);
 
             Snippet.create($routeParams.bid, snippet)

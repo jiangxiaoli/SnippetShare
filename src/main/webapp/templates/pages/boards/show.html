@@ -54,8 +54,8 @@
                 </buton>
 
                 <!--show only when current user is the NOT member of the borad -->
-                <a class="btn btn-danger btn-sm" ng-href="#/request" ng-show="!Board.isReadableTo(board,User.currentUser)">Send Request</a>
-
+                <a class="btn btn-danger btn-sm" ng-show="!Board.isReadableTo(board,User.currentUser) && !Board.hasRequestor(board, User.currentUser)" ng-click="onClickRequest()">Send Request</a>
+                <a class="btn btn-danger btn-sm" ng-show="!Board.isReadableTo(board, User.currentUser) && Board.hasRequestor(board, User.currentUser)" disabled="disabled">Request has been sent</a>
 
                 <h5>Created At: {{board.createdAt | date: "medium"}}</h5>
                 <h5>Update At: {{board.updateAt| date: "medium"}}</h5>
@@ -100,8 +100,9 @@
 
                         </h5>
                         <h4 class="contenct-inline">
-                            <a ng-href="#/boards/{{board.bid}}/snippets/{{snippet.sid}}">{{snippet.title}}</a>
-                               <a ng-show="snippet.url != ''" ng-href="{{snippet.url}}" class="glyphicon glyphicon-save" aria-hidden="true"></a>
+                            <a ng-href="#/boards/{{board.bid}}/snippets/{{snippet.sid}}" ng-show="Snippet.isReadableTo(snippet, User.currentUser)">{{snippet.title}}</a>
+                            <a ng-hide="Snippet.isReadableTo(snippet, User.currentUser)">{{snippet.title}}</a>
+                            <a ng-show="snippet.url" ng-href="{{snippet.url}}" class="glyphicon glyphicon-save" aria-hidden="true"></a>
                         </h4>
 
                         <div class="snippet-content">

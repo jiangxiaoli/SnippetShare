@@ -30,6 +30,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/login" ng-hide="user">Login </a></li>
                 <li><a href="#/signup" ng-hide="user">Sign Up </a></li>
+                <li><a ng-href="#/users/{{user.userid}}" ng-show="user">My boards</a></li>
                 <li><a ng-click="logoutUser(user)" ng-show="user">logout</a></li>
             </ul>
         </div>

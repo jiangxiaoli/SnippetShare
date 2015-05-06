@@ -35,11 +35,17 @@ angular.module("snippetShare")
                 if (board.isPublic) {
                     return true;
                 }
+                if (!user) {
+                    return false;
+                }
                 var isOwner = user.userid === board.ownerId;
                 var isMember = _.findWhere(board.members, {"userid":user.userid});
                 return isOwner || isMember;
             },
             isWritableTo: function(board, user) {
+                if (!user) {
+                    return false;
+                }
                 var isOwner = user.userid === board.ownerId;
                 var isMember = _.findWhere(board.members, {"userid":user.userid});
                 return isOwner || isMember;

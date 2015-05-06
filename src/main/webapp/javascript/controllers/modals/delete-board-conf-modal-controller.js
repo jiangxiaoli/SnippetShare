@@ -1,9 +1,10 @@
 "use strict";
 
-angular.module("snippetShare").controller("DeleteBoardConfModalCtrl", function ($scope, $modalInstance, board) {
+angular.module("snippetShare").controller("DeleteBoardConfModalCtrl", function ($scope, $modalInstance, entity,entityName) {
 
-    console.log("board delete conf modal is open. board:", board);;
-    $scope.board = board;
+    console.log("board delete conf modal is open. board:", entity);;
+    $scope.entity = entity;
+    $scope.entityName = entityName;
 
     $scope.confirm = function () {
         $modalInstance.close(true);
