@@ -105,7 +105,7 @@
                         <h4 class="contenct-inline">
                             <a ng-href="#/boards/{{board.bid}}/snippets/{{snippet.sid}}" ng-show="Board.isReadableTo(board, User.currentUser)">{{snippet.title}}</a>
                             <a ng-hide="Board.isReadableTo(board,User.currentUser)">{{snippet.title}}</a>
-                            <a ng-show="snippet.url" ng-href="{{snippet.url}}" class="glyphicon glyphicon-save" aria-hidden="true"></a>
+                            <a ng-show="snippet.url" ng-href="{{snippet.url}}" target="_blank" class="glyphicon glyphicon-link" aria-hidden="true"></a>
                         </h4>
 
                         <div class="snippet-content">
