@@ -43,8 +43,8 @@ public class SnippetAdapter implements JsonSerializer<Snippet> {
 	        boardObj.addProperty("bid", board.getBid());
 			boardObj.addProperty("ownerId",board.getOwner().getUserid());
 			boardObj.addProperty("title",board.getTitle());
-	        boardObj.addProperty("category",board.getCategory());
-	        boardObj.addProperty("description",board.getDescription());
+			boardObj.addProperty("category",board.getCategory());
+			boardObj.addProperty("isPublic",board.getIsPublic());
 
 			//mapping members list
 			List<User> memebers = board.getMembers();

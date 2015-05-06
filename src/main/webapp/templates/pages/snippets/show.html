@@ -32,11 +32,8 @@
                 <section ng-controller="AceCtrl">
 
                     <div class="row">
-                        <div class="col-xs-3">
-                            Language: <select class="form-control height25" ng-model="snippet.language" ng-options="m for m in modes" ng-change="modeChanged()" disabled="disabled"></select>
-                        </div>
-                        <div class="col-xs-3">
-                            Theme: <select class="form-control height25" ng-model="theme" ng-options="t for t in themes" ng-change="themeChanged()" disabled="disabled"></select>
+                        <div class="col-xs-6">
+                            Language: <span class="label label-primary">{{snippet.language}}</span>
                         </div>
                     </div>
 
