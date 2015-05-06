@@ -197,6 +197,10 @@ blockquote {
     padding: 10px;
 }
 
+.comment-delete-btn {
+    margin: 0px 10px;
+}
+
 .snippet-card:hover {
     background-color: rgba(0, 188, 140, 0.15);
 }

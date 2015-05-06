@@ -100,8 +100,8 @@
 
                         </h5>
                         <h4 class="contenct-inline">
-                            <a ng-href="#/boards/{{board.bid}}/snippets/{{snippet.sid}}" ng-show="Snippet.isReadableTo(snippet, User.currentUser)">{{snippet.title}}</a>
-                            <a ng-hide="Snippet.isReadableTo(snippet, User.currentUser)">{{snippet.title}}</a>
+                            <a ng-href="#/boards/{{board.bid}}/snippets/{{snippet.sid}}" ng-show="Board.isReadableTo(board, User.currentUser)">{{snippet.title}}</a>
+                            <a ng-hide="Board.isReadableTo(board,User.currentUser)">{{snippet.title}}</a>
                             <a ng-show="snippet.url" ng-href="{{snippet.url}}" class="glyphicon glyphicon-save" aria-hidden="true"></a>
                         </h4>
 

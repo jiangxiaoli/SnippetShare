@@ -82,9 +82,18 @@ public class SnippetAdapter implements JsonSerializer<Snippet> {
         	JsonArray commentsList = new JsonArray();
         	for(Comment c : comments){
         		JsonObject commentItemObj = new JsonObject();
-        		commentItemObj.addProperty("cid", c.getCid());
-        		commentItemObj.addProperty("content", c.getContent());
-        		commentItemObj.addProperty("time", c.getTime().toString());
+				commentItemObj.addProperty("cid", c.getCid());
+				commentItemObj.addProperty("content", c.getContent());
+				commentItemObj.addProperty("createAt", c.getTime().toString());
+
+				//map author information
+				if(c.getUser()!=null){
+					JsonObject userObj = new JsonObject();
+					userObj.addProperty("userid", c.getUser().getUserid());
+					userObj.addProperty("username", c.getUser().getUsername());
+					userObj.addProperty("userAvatarId", c.getUser().getUserAvatarId());
+					commentItemObj.add("user", userObj);
+				}
         		
         		JsonObject commentAuthorObj = new JsonObject();
         		commentAuthorObj.addProperty("userid", c.getUser().getUserid());

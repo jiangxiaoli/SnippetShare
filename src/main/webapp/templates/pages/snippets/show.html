@@ -61,7 +61,7 @@
     <div class="container">
 
         <!--use model for add comment-->
-        <button class="btn btn-info btn-md pull-right">Leave A Comment</button>
+        <button class="btn btn-info btn-md pull-right" ng-click="onClickAddComment()" >Leave A Comment</button>
         <h3>Comments</h3>
 
         <div >
@@ -69,15 +69,17 @@
 
                 <div class="row">
                     <div class="col-xs-2 text-center">
-                        <img src="/images/user-avatar/{{comment.author.userAvatarId}}.png" alt="user avatar" height="40px"/>
-                        <h5 class="margin-top-zero"><a ng-href="#/users/{{comment.author.userid}}">{{comment.author.username}}</a></h5>
+                        <img src="/images/user-avatar/{{comment.user.userAvatarId}}.png" alt="user avatar" height="40px"/>
+                        <h5 class="margin-top-zero"><a ng-href="#/users/{{comment.user.userid}}">{{comment.user.username}}</a></h5>
                     </div>
 
                     <div class="col-xs-10">
                         <div class="pull-right">
-                            <h5><span class="label label-warning">Created At:</span>
-                                {{comment.createdAt | date:'MM-dd-yyyy'}}
-                            </h5>
+                            <span class="label label-warning">Created At: </span> <span>{{comment.createAt}}</span>
+
+                            <button class="btn btn-danger btn-sm comment-delete-btn" ng-show="User.currentUser.userid === snippet.author.userid || User.currentUser.userid === comment.user.userid" ng-click="onClickDeleteComment(comment)">
+                                delete
+                            </button>
                         </div>
                         <div class="">
                             <h5>{{comment.content}}</h5>

@@ -1,56 +1,38 @@
 'use strict';
 
 angular.module("snippetShare")
-    .factory("Snippet", function SnippetFactory($http){
-        var rootUrl ="/boards/";
+    .factory("Comment", function SnippetFactory($http){
+        var rootUrl ="/snippets";
         return {
-            all: function(bid){
-                return $http({method: "GET", url:rootUrl+ "/"+bid+"/snippets/"});
+            all: function(sid){
+                return $http({method: "GET", url:rootUrl+ "/"+sid+"/comments/"});
             },
-            create: function(bid, snippet){
-                return $http.post(rootUrl+"/"+bid+"/snippets/", snippet, {
+            create: function(sid, comment){
+                return $http.post(rootUrl+"/"+sid+"/comments/", comment, {
                     //transfer $http send data format to request param
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                    transformRequest: function(snippet){
-                        return $.param(snippet);
+                    transformRequest: function(comment){
+                        return $.param(comment);
                     }
                 });
             },
-            find: function (bid, id) {
-                return $http({method: "GET", url:rootUrl + "/"+bid+"/snippets/" + id});
+            find: function (sid, id) {
+                return $http({method: "GET", url:rootUrl + "/"+sid+"/comments/" + id});
             },
-            update: function (bid, id, snippet) {
-                return $http.post(rootUrl+"/"+bid+"/snippets/" + id, snippet, {
-                    //transfer $http send data format to request param
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                    transformRequest: function(snippet){
-                        return $.param(snippet);
-                    }
-                });
+            remove: function (sid, id) {
+                return $http({method: "DELETE", url:rootUrl + "/"+sid+"/comment/"+ id});
             },
-            remove: function (bid, id) {
-                return $http({method: "DELETE", url:rootUrl + "/"+bid+"/snippets/"+ id});
-            },
-            isWritableTo: function(snippet, user) {
+            isWritableTo: function(comment, user) {
                 if (!user) {
                     return false;
                 }
-                return snippet.author && snippet.author.userid === user.userid;
+                return comment.user && comment.user.userid === user.userid;
             },
-            isReadableTo: function(snippet, user) {
-                var board = snippet.board;
-                if(!board || !user) {
+            isReadableTo: function(comment, user) {
+                if(!user) {
                     return false;
                 }
-
-                if (board.isPublic) {
-                    return true;
-                }
-
-                var isAuthor = snippet.author && snippet.author.userid === user.userid;
-                var isBoardOwner = user.userid === board.ownerId;
-                var isBoardMember = _.findWhere(board.members, {"userid":user.userid});
-                return isAuthor || isBoardOwner || isBoardMember;
+                return true;
             }
 
         }
