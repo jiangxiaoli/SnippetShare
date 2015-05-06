@@ -6,6 +6,15 @@
 /*warning: #F39C12 */
 /*danger: #E74C3C */
 
+/*
+  Allow angular.js to be loaded in body, hiding cloaked elements until
+  templates compile.  The !important is important given that there may be
+  other selectors that are more specific or come later and might alter display.
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
 /*****************ui.bootstrap justification***********/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
@@ -18,7 +27,7 @@ html {
     min-height: 100%;
 }
 body {
-    padding-top: 60px;
+    padding-top: 70px;
     /* Margin bottom by footer height */
     margin-bottom: 250px;
 }

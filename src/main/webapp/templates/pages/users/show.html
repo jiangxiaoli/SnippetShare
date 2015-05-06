@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-hide="!user">
 
     <div class="well">
         <div class="row">
@@ -55,11 +55,11 @@
                         <div class="align-bottom">
                             <div class="col-xs-6">
                                 <h6 class="text-info">
-                                    Snippets <span class="badge badge-info">{{board.numOfSnippets && board.numOfSnippets || "0"}}</span>
+                                    Snippets <span class="badge badge-info">{{board.numberOfSnippets && board.numberOfSnippets || "0"}}</span>
                                 </h6>
                             </div>
                             <div class="col-xs-6">
-                                <h6 class="text-danger pull-right" ng-show="board.ownerId === User.currentUser.userid">
+                                <h6 class="text-danger pull-right" ng-show="!board.isPublic && board.ownerId === User.currentUser.userid">
                                     Requests <span class="badge badge-danger">{{board.requestors.length && board.requestors.length || "0"}}</span>
                                 </h6>
                             </div>
