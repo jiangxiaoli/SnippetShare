@@ -12,6 +12,7 @@
   "dependencies": {
     "ace": "~1.1.9",
     "angular-ui-ace": "~0.2.3",
-    "lodash": "~3.8.0"
+    "lodash": "~3.8.0",
+    "fox-angular-scrollReveal.js": "~1.0.0"
   }
 }

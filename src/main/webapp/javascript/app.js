@@ -2,7 +2,7 @@
 
 
 //include ngRoute in app module, whole app get access to this service
-angular.module('snippetShare', ['ngRoute', 'ui.bootstrap', 'ui.ace']);
+angular.module('snippetShare', ['ngRoute', 'ui.bootstrap', 'ui.ace','fox.scrollReveal']);
 
 // intercept unauthorized response and redirect to login page
 angular.module('snippetShare')
@@ -21,4 +21,4 @@ angular.module('snippetShare')
         };
     }]);
 
-}])
+}]);
