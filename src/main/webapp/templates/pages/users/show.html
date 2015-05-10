@@ -28,13 +28,27 @@
         <div>
             <h3>My Boards</h3>
 
+            <div class="container">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="searchTitle" class="form-control-static">Search Board:</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="title"  id="searchTitle" placeholder="Board Title" ng-model="filterParams.title" />
+                    </div>
+                </form>
+            </div>
+
+            <br/>
+            <br/>
+
             <tabset>
 
                 <tab ng-repeat="category in categories" heading="{{category}}">
                     <div class="jumbotron board-list" ng-show="User.currentUser && User.currentUser.userid === user.userid"> <!--ng-click event for create a new board-->
                         <a class="btn btn-warning" href="#/users/{{user.userid}}/createboards">New Board</a>
                     </div>
-                    <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | orderBy: 'board.createdAt'"
+                    <div class="well board-list" ng-repeat="board in user.boards | filterByCategory:category | filterBoardByTitle: filterParams.title | orderBy: 'board.createdAt'"
                          ng-mouseenter="hover(board)" ng-mouseleave="hover(board)">
 
                         <h5 class="pull-right board-info">
