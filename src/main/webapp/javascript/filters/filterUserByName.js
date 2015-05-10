@@ -13,7 +13,7 @@ angular.module("snippetShare")
 
             var filtered = [];
             for(var i = 0; i< users.length; i++){
-                if(users[i].username.indexOf(username.toLowerCase()) != -1){
+                if(users[i].username.toLowerCase().indexOf(username.toLowerCase()) != -1){
                     filtered.push(users[i]);
                 }
             }
