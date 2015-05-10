@@ -84,7 +84,22 @@
         <h3>Snippets</h3>
         <p ng-hide="Board.isReadableTo(board, User.currentUser)">You don't have access to this private board.</p>
         <div ng-show="Board.isReadableTo(board, User.currentUser)">
-            <div class="well snippet-card" ng-repeat="snippet in board.snippets">
+
+            <div class="container">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="searchTitle" class="form-control-static">Search Snippet:</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="title"  id="searchTitle" placeholder="Snippet Title" ng-model="filterParams.title" />
+                    </div>
+                </form>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="well snippet-card" ng-repeat="snippet in board.snippets | filterBoardByTitle: filterParams.title">
 
                 <div class="row">
                     <div class="col-xs-10">
