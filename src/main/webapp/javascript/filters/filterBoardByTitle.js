@@ -13,7 +13,7 @@ angular.module("snippetShare")
 
             var filtered = [];
             for(var i = 0; i< boards.length; i++){
-                if(boards[i].title.indexOf(title.toLowerCase()) != -1){
+                if(boards[i].title.toLowerCase().indexOf(title.toLowerCase()) != -1){
                     filtered.push(boards[i]);
                 }
             }
