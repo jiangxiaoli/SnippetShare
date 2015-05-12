@@ -1,0 +1,13 @@
+<ul class="list-inline">
+    <li ng-hide="snippet.tags && snippet.tags.length"><span>No tags</span></li>
+    <li ng-repeat="tag in snippet.tags" class="tag-item" >
+        <span class="label label-primary">{{tag.content}} <a href=""><span class="glyphicon glyphicon-remove" ng-hide="!editable" ng-click="removeTag(tag)"></span></a> </span>
+    </li>
+</ul>
+<div class="form-inline" ng-hide="!editable" >
+    <div class="form-group">
+        <input type="text" class="form-control tag-input" ng-model="viewModel.tagInput" ng-disabled="viewModel.httpBusy"/>
+    </div>
+    <button type="submit" class="btn btn-danger" ng-disabled="viewModel.httpBusy" ng-click="addTag()">{{ viewModel.httpBusy ? "Submitting..." : "Add"}}</button>
+</div>
+<p class="text-danger" ng-show="editable && viewModel.errMsg">{{viewModel.errMsg}}</p>
