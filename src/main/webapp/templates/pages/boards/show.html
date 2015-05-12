@@ -111,9 +111,9 @@
             <br/>
             <br/>
 
-            <div class="well snippet-card" ng-repeat="snippet in board.snippets | filterBoardByTitle: filterParams.title">
+            <div class="well snippet-card" ng-repeat="snippet in board.snippets | filterBoardByTitle: filterParams.title | filterSnippetByTags: filterParams.tag">
 
-                <div class="row">
+                <div class="row form-group">
                     <div class="col-xs-10">
                         <div class="pull-right">
                             <h5><span class="label label-info">Created At:</span>
@@ -145,10 +145,10 @@
                         <img src="/images/user-avatar/{{snippet.author.userAvatarId}}.png" alt="user avatar" height="40px"/>
                         <h5 class="margin-top-zero"><a ng-href="#/users/{{snippet.author.userid}}">{{snippet.author.username}}</a></h5>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            Tags: <tag-editor editable="false" snippet="snippet" style="display:inline-block"></tag-editor>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Tags: <tag-editor editable="false" snippet="snippet" style="display:inline-block"></tag-editor>
                     </div>
                 </div>
 
