@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.team6.SnippetShare.gsonAdapter;
 import com.google.gson.*;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Board;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.Snippet;
+import edu.sjsu.cmpe275.team6.SnippetShare.model.Tag;
 import edu.sjsu.cmpe275.team6.SnippetShare.model.User;
 
 import java.lang.reflect.Type;
@@ -80,6 +81,19 @@ public class BoardAdapter implements JsonSerializer<Board> {
                 authorObj.addProperty("username", snippet.getAuthor().getUsername());
                 authorObj.addProperty("userAvatarId", snippet.getAuthor().getUserAvatarId());
                 snippetObj.add("author", authorObj);
+
+                //map for tags
+                List<Tag> tags = snippet.getTags();
+                if(tags!=null){
+                    JsonArray tagsList = new JsonArray();
+                    for(Tag t : tags){
+                        JsonObject tagItemObj = new JsonObject();
+                        tagItemObj.addProperty("tid", t.getTid());
+                        tagItemObj.addProperty("content", t.getContent());
+                        tagsList.add(tagItemObj);
+                    }
+                    snippetObj.add("tags", tagsList);
+                }
 
                 snippetsList.add(snippetObj); //add each snippet to snippets array
             }

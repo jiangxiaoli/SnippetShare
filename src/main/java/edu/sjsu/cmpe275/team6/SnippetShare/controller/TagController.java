@@ -95,7 +95,7 @@ public class TagController {
 	
     
     
-  //3. GET get all comment in a snippet
+  //3. GET get all tags in a snippet
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> showComments(@PathVariable int sid) {

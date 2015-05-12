@@ -12,7 +12,7 @@ angular.module("snippetShare")
                 console.log(data);
                 $scope.snippet = data;
 
-                if(!Sinppet.isWritableTo($scope.snippet, User.currentUser)) {
+                if(!Snippet.isWritableTo($scope.snippet, User.currentUser)) {
                     alert("You are trying to edit a snippet that is not accessible to you!");
                     $location.url("/users/"+data.author.userid +"/boards/" + data.board.bid);
                 }

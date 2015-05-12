@@ -4,15 +4,16 @@
     <div class="container-fluid">
 
         <div class="container">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="searchTitle" class="form-control-static">Search Board:</label>
+            <div class="row">
+                <div class="col-md-6 form-inline">
+                    <div class="form-group">
+                        <label for="searchTitle" class="form-control-static">Search Board:</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="title"  id="searchTitle" placeholder="Board Title" ng-model="filterParams.title" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="title"  id="searchTitle" placeholder="Board Title" ng-model="filterParams.title" />
-                </div>
-
-                <div class="pull-right">
+                <div class="col-md-6 form-inline">
                     <div class="form-group">
                         <label for="username" class="form-control-static">Search User:</label>
                     </div>
@@ -20,8 +21,7 @@
                         <input type="text" class="form-control" name="username"  id="username" placeholder="Username" ng-model="filterParams.username" />
                     </div>
                 </div>
-
-            </form>
+            </div>
         </div>
 
         <br/>

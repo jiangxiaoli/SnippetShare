@@ -220,6 +220,15 @@ blockquote {
     background-color: rgba(0, 188, 140, 0.15);
 }
 
+li.tag-item {
+    margin: 0px;
+    padding-right: 0px
+}
+
+.tag-input {
+    width: 200px;
+}
+
 /***************** ACE format ******************/
 .ace_editor { height: 500px; }
 

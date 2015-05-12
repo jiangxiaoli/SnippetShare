@@ -78,30 +78,42 @@
     <div class="container">
 
         <!--show only when current user is member or owner-->
-        <a class="btn btn-success btn-md pull-right" ng-href="#/boards/{{board.bid}}/createSnippet" ng-show="Board.isWritableTo(board, User.currentUser)">
+        <button class="btn btn-success btn-md pull-right" ng-click="onClickCreateSnippet()" ng-show="Board.isWritableTo(board, User.currentUser)">
             Create New Snippet
-        </a>
+        </button>
         <h3>Snippets</h3>
         <p ng-hide="Board.isReadableTo(board, User.currentUser)">You don't have access to this private board.</p>
         <div ng-show="Board.isReadableTo(board, User.currentUser)">
 
             <div class="container">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="searchTitle" class="form-control-static">Search Snippet:</label>
+                <div class="row">
+                    <div class="col-md-6 form-inline">
+                        <div class="form-group">
+                            <label for="searchTitle" class="form-control-static">Search by title:</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title"  id="searchTitle" placeholder="Snippet Title" ng-model="filterParams.title" />
+                        </div>
+
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="title"  id="searchTitle" placeholder="Snippet Title" ng-model="filterParams.title" />
+                    <div class="col-md-6 form-inline">
+                        <div class="form-group">
+                            <label for="searchTitle" class="form-control-static">Search by tags:</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title"  id="searchTag" placeholder="Snippet tags" ng-model="filterParams.tag" />
+                        </div>
                     </div>
-                </form>
+                </div>
+
             </div>
 
             <br/>
             <br/>
 
-            <div class="well snippet-card" ng-repeat="snippet in board.snippets | filterBoardByTitle: filterParams.title">
+            <div class="well snippet-card" ng-repeat="snippet in board.snippets | filterBoardByTitle: filterParams.title | filterSnippetByTags: filterParams.tag">
 
-                <div class="row">
+                <div class="row form-group">
                     <div class="col-xs-10">
                         <div class="pull-right">
                             <h5><span class="label label-info">Created At:</span>
@@ -132,6 +144,11 @@
                         <h5><span class="label label-info">Author</span></h5>
                         <img src="/images/user-avatar/{{snippet.author.userAvatarId}}.png" alt="user avatar" height="40px"/>
                         <h5 class="margin-top-zero"><a ng-href="#/users/{{snippet.author.userid}}">{{snippet.author.username}}</a></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Tags: <tag-editor editable="false" snippet="snippet" style="display:inline-block"></tag-editor>
                     </div>
                 </div>
 
