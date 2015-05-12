@@ -127,7 +127,7 @@ angular.module("snippetShare")
                     console.log("in create snippet success");
                     console.log(data);
                     console.log(status);
-                    $location.path("/boards/"+$routeParams.bid+"/editSnippets/"+data.sid);
+                    $location.path("/boards/"+$routeParams.bid+"/createSnippet/");
                 })
                 .error(function(data, status, headers, config) {
                     console.log("in create snippet error");
