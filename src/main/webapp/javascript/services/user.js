@@ -48,6 +48,9 @@ angular.module("snippetShare")
                         return $.param(user);
                     }
                 });
+            },
+            restore: function() {
+                return $http.post("/restore");
             }
         }
 
